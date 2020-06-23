@@ -883,7 +883,7 @@ if (strlen($_SESSION['alogin']) == "") {
 
         <script>
             //กำหนดให้ textbox ที่มี id เท่ากับ my_date เป็นตัวเลือกแบบ ปฎิทิน
-            picker_date(document.getElementById("dob"), {year_range: "-100:+300"});
+            picker_date(document.getElementById("dob"), {year_range: "-100:+1000"});
             /*{year_range:"-12:+10"} คือ กำหนดตัวเลือกปฎิทินให้ แสดงปี ย้อนหลัง 12 ปี และ ไปข้างหน้า 10 ปี*/
         </script>
 

@@ -2,6 +2,22 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
+
+if (isset($_GET['id'])) {
+    try {
+        $id = $_GET['id'];
+        $sql = "Delete from tblstudents where StudentId=:id";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->execute();
+
+        $msg = "ลบข้อมูลเรียบร้อยแล้ว Delete Dasta Successfully";
+
+    } catch (PDOException $e) {
+        echo "ข้อผิดพลาด : " . $e->getMessage();
+    }
+}
+
 if (strlen($_SESSION['alogin']) == "") {
     header("Location: index.php");
 } else {
@@ -13,7 +29,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Admin Manage Subjects</title>
+        <title>Admin Manage Students</title>
         <link rel="icon" type="image/png" sizes="32x32" href="images/icon/favicon-32x32.png">
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen">
@@ -58,7 +74,7 @@ if (strlen($_SESSION['alogin']) == "") {
                     <div class="container-fluid">
                         <div class="row page-title-div">
                             <div class="col-md-6">
-                                <h2 class="title">ทะเบียน สาขาวิชา/แผนก</h2>
+                                <h2 class="title">จัดการ ข้อมูลทดสอบสมรรถภาพร่างกาย </h2>
 
                             </div>
 
@@ -69,8 +85,8 @@ if (strlen($_SESSION['alogin']) == "") {
                             <div class="col-md-6">
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                                    <li> ทะเบียนหลัก</li>
-                                    <li class="active">ทะเบียน สาขาวิชา/แผนก</li>
+                                    <li> Athlete</li>
+                                    <li class="active">จัดการ ข้อมูลทดสอบสมรรถภาพร่างกาย </li>
                                 </ul>
                             </div>
 
@@ -89,21 +105,19 @@ if (strlen($_SESSION['alogin']) == "") {
                                     <div class="panel">
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                                <h5>View สาขาวิชา/แผนก</h5>
+                                                <h5>View Athlete Info</h5>
                                             </div>
                                         </div>
-                                        <div class="panel-heading">
-                                            <div class="panel-title">
-                                                <a href="create-subject.php"
-                                                   class="btn btn-primary btn-labeled">เพิ่มสาขาวิชา/แผนก<span class="btn-label btn-label-right"><i class="fa fa-check"></i></span></a>
-                                            </div>
-                                        </div>
+
+
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
                                             <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
                                                 <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                             </div>
                                         <?php } ?>
                                         <div class="panel-body p-20">
@@ -113,23 +127,34 @@ if (strlen($_SESSION['alogin']) == "") {
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>สาขาวิชา/แผนก</th>
+                                                    <th>รหัสประจำตัว</th>
+                                                    <th>ชื่อ</th>
+                                                    <th>นามสกุล</th>
                                                     <th>คณะ/หน่วยงาน</th>
-                                                    <th>Create Date</th>
+                                                    <th>ประเภทกีฬา</th>
+                                                    <th>วันเกิด</th>
+                                                    <!--th>Status</th-->
                                                     <th>Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tfoot>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>สาขาวิชา/แผนก</th>
+                                                    <th>รหัสประจำตัว</th>
+                                                    <th>ชื่อ</th>
+                                                    <th>นามสกุล</th>
                                                     <th>คณะ/หน่วยงาน</th>
-                                                    <th>Create Date</th>
+                                                    <th>ประเภทกีฬา</th>
+                                                    <th>วันเกิด</th>
+                                                    <!--th>Status</th-->
                                                     <th>Action</th>
                                                 </tr>
                                                 </tfoot>
                                                 <tbody>
-                                                <?php $sql = "SELECT *,(select tblclasses.ClassName from tblclasses where tblclasses.id = tblsubjects.class_id) as class_name  from tblsubjects";
+                                                <?php $sql = "SELECT tblstudents.FirstName,tblstudents.LastName,tblstudents.RollId,tblstudents.RegDate
+                                                ,tblstudents.StudentId,tblstudents.Status,tblclasses.ClassName,tblclasses.Section,tblstudents.DOB
+					                            ,(select tblsporttype.SportName from tblsporttype where tblsporttype.id = tblstudents.sport_type1) as SportName1
+                                                from tblstudents left join tblclasses on tblclasses.id=tblstudents.ClassId";
                                                 $query = $dbh->prepare($sql);
                                                 $query->execute();
                                                 $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -138,14 +163,20 @@ if (strlen($_SESSION['alogin']) == "") {
                                                     foreach ($results as $result) { ?>
                                                         <tr>
                                                             <td><?php echo htmlentities($cnt); ?></td>
-                                                            <td><?php echo htmlentities($result->SubjectName); ?></td>
-                                                            <td><?php echo htmlentities($result->class_name); ?></td>
-                                                            <td><?php echo htmlentities($result->Creationdate); ?></td>
-                                                            <!--td><?php echo htmlentities($result->UpdationDate); ?></td-->
+                                                            <td><?php echo htmlentities($result->RollId); ?></td>
+                                                            <td><?php echo htmlentities($result->FirstName); ?></td>
+                                                            <td><?php echo htmlentities($result->LastName); ?></td>
+                                                            <td><?php echo htmlentities($result->ClassName); ?>
+                                                                <!--(<?php echo htmlentities($result->Section); ?>)-->
+                                                            </td>
+                                                            <td><?php echo htmlentities($result->SportName1); ?></td>
+                                                            <td><?php echo htmlentities($result->DOB); ?></td>
                                                             <td>
-                                                                <a href="edit-subject.php?subjectid=<?php echo htmlentities($result->id); ?>"><i
-                                                                        class="fa fa-edit" title="Edit Record"></i> </a>
-
+                                                                <a href="add-performance.php?stid=<?php echo htmlentities($result->StudentId); ?>"><i
+                                                                        class="fa fa-file-image-o" title="เพิ่ม (ข้อมูลทดสอบสมรรถภาพร่างกาย)"></i> </a>
+                                                                &nbsp;
+                                                                <a href="manage-edit-files.php?rollid=<?php echo htmlentities($result->RollId); ?>"><i
+                                                                        class="fa fa-edit" title="ดู/แก้ไข (ข้อมูลทดสอบสมรรถภาพร่างกาย)"></i></a>
                                                             </td>
                                                         </tr>
                                                         <?php $cnt = $cnt + 1;
@@ -205,9 +236,30 @@ if (strlen($_SESSION['alogin']) == "") {
 
     <!-- ========== THEME JS ========== -->
     <script src="js/main.js"></script>
+    <script src="vender/myjs/myAction.js"></script>
+
     <script>
         $(function ($) {
-            $('#example').DataTable();
+
+            //$('#example').DataTable();
+
+            //$('#example').dataTable( {
+
+            $('#example').dataTable( {
+                "language": {
+                    "search": "ค้นหาข้อมูล (Search) : ",
+                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                    "lengthMenu": 'แสดง (Display) <select>'+
+                    '<option value="10">10</option>'+
+                    '<option value="25">25</option>'+
+                    '<option value="50">50</option>'+
+                    '<option value="100">100</option>'+
+                    '<option value="-1">All</option>'+
+                    '</select> รายการ (records)'
+
+                }
+            } );
+
 
             $('#example2').DataTable({
                 "scrollY": "300px",
@@ -218,6 +270,22 @@ if (strlen($_SESSION['alogin']) == "") {
             $('#example3').DataTable();
         });
     </script>
+
+    <script type="text/javascript">
+
+        function delete_id(id) {
+            if (id== null) {
+                alert("Error Parameter");
+            }
+            else {
+                if (confirm('ต้องการลบรายการนี้ออกจากระบบ?' + id)) {
+                    window.location.href = 'manage-students.php?id=' + id;
+                }
+            }
+        }
+
+    </script>
+
     </body>
     </html>
 <?php } ?>
