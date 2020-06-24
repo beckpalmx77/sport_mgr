@@ -22,30 +22,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="manage-at-performance.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manage-at-performance.php">
+      <file leaf-file-name="edit-performance.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/edit-performance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="12.853659">
-              <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+            <state vertical-scroll-proportion="6.864762">
+              <caret line="212" column="0" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
               <folding>
-                <marker date="1592900943143" expanded="true" signature="155:198" placeholder="Delete from ..." />
-                <marker date="1592900943143" expanded="true" signature="7334:7837" placeholder="SELECT tblst..tblstudents..." />
-                <marker date="1592900943143" expanded="true" signature="7604:7699" placeholder="select tblsp..tblsporttype..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add-files.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/add-files.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21551724">
-              <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
-              <folding>
-                <marker date="1592901049329" expanded="true" signature="295:367" placeholder="INSERT INTO ..tblattach_file..." />
-                <marker date="1592901049329" expanded="true" signature="1109:1166" placeholder="update tblat..." />
-                <marker date="1592901049329" expanded="true" signature="7016:7062" placeholder="SELECT * fro..tblstudents..." />
-                <marker date="1592901049329" expanded="true" signature="12409:12433" placeholder="SELECT * fro..tbldoctype..." />
+                <marker date="1592965999317" expanded="true" signature="788:1051" placeholder="UPDATE tbl_p..." />
+                <marker date="1592965999317" expanded="true" signature="794:1033" placeholder="INSERT INTO tbl_performance..." />
+                <marker date="1592965999317" expanded="true" signature="794:1051" placeholder="UPDATE tbl_p..." />
+                <marker date="1592965999317" expanded="true" signature="6885:7423" placeholder="SELECT * ,(s..tbl_performance..." />
+                <marker date="1592965999317" expanded="true" signature="6925:7017" placeholder="select tblst..tblstudents..." />
+                <marker date="1592965999317" expanded="true" signature="7063:7154" placeholder="select tblst..tblstudents..." />
+                <marker date="1592965999317" expanded="true" signature="7199:7289" placeholder="select tblst..tblstudents..." />
               </folding>
             </state>
           </provider>
@@ -54,13 +43,26 @@
       <file leaf-file-name="add-performance.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/add-performance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.423077">
-              <caret line="19" column="60" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
+            <state vertical-scroll-proportion="-11.769231">
+              <caret line="279" column="0" selection-start-line="279" selection-start-column="0" selection-end-line="279" selection-end-column="115" />
               <folding>
-                <marker date="1592901049282" expanded="true" signature="295:367" placeholder="INSERT INTO ..tblattach_file..." />
-                <marker date="1592901049282" expanded="true" signature="1109:1166" placeholder="update tblat..." />
-                <marker date="1592901049282" expanded="true" signature="7016:7062" placeholder="SELECT * fro..tblstudents..." />
-                <marker date="1592901049282" expanded="true" signature="12409:12433" placeholder="SELECT * fro..tbldoctype..." />
+                <marker date="1592961883859" expanded="true" signature="729:984" placeholder="INSERT INTO ..tblattach_file..." />
+                <marker date="1592961883859" expanded="true" signature="2513:2570" placeholder="update tblat..." />
+                <marker date="1592961883859" expanded="true" signature="8534:8580" placeholder="SELECT * fro..tblstudents..." />
+                <marker date="1592961883859" expanded="true" signature="13523:13615" placeholder="SELECT * fro..tbl_performance..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit-class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/edit-class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.076923">
+              <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+              <folding>
+                <marker date="1592283756460" expanded="true" signature="388:497" placeholder="update tblcl..." />
+                <marker date="1592283756460" expanded="true" signature="4937:4975" placeholder="SELECT * fro..tblclasses..." />
               </folding>
             </state>
           </provider>
@@ -79,9 +81,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/edit-files.php" />
-        <option value="$PROJECT_DIR$/manage-edit-files.php" />
-        <option value="$PROJECT_DIR$/plugin-wk-mysql.php" />
         <option value="$PROJECT_DIR$/includes/leftbar-db.php" />
         <option value="$PROJECT_DIR$/manage-students.php" />
         <option value="$PROJECT_DIR$/view-student.php" />
@@ -128,8 +127,11 @@
         <option value="$PROJECT_DIR$/logout.php" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/add-students.php" />
-        <option value="$PROJECT_DIR$/manage-at-performance.php" />
         <option value="$PROJECT_DIR$/add-files.php" />
+        <option value="$PROJECT_DIR$/manage-at-performance.php" />
+        <option value="$PROJECT_DIR$/add-performance.php" />
+        <option value="$PROJECT_DIR$/manage-edit-performance.php" />
+        <option value="$PROJECT_DIR$/edit-performance.php" />
       </list>
     </option>
   </component>
@@ -178,6 +180,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -226,8 +230,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -307,7 +309,6 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32018927" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -319,6 +320,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24963397" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32018927" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39905363" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
@@ -339,48 +341,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/includes/leftbar-bak.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="59" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_array.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8689655">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage-classes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.49827588">
-          <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/includes/leftbar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.7">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/submit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage-sporttype.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5568964">
-          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/edit-sporttype.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4275862">
@@ -469,32 +429,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.4327586">
           <caret line="83" column="111" selection-start-line="83" selection-start-column="111" selection-end-line="83" selection-end-column="111" />
-          <folding>
-            <marker date="1592646672747" expanded="true" signature="826:833" placeholder="SELECT * FRO..tblstudents..." />
-            <marker date="1592646672747" expanded="true" signature="826:976" placeholder="SELECT tblst..tblstudents..." />
-            <marker date="1592646672747" expanded="true" signature="849:944" placeholder="select tblsp..tblsporttype..." />
-            <marker date="1592646672747" expanded="true" signature="1161:1183" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="1184:1562" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="1184:1568" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="1184:1863" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="1214:1270" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="1337:1393" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="1491:1547" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="1623:1681" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="1745:1803" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="1949:2047" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="1959:2039" placeholder="{...}" />
-            <marker date="1592646672747" expanded="false" signature="2061:2078" placeholder="..." />
-            <marker date="1592646672747" expanded="false" signature="2150:2206" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="2225:2860" placeholder="..." />
-            <marker date="1592646672747" expanded="false" signature="2242:2276" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="2277:2837" placeholder="..." />
-            <marker date="1592646672747" expanded="false" signature="2299:2357" placeholder="..." />
-            <marker date="1592646672747" expanded="true" signature="2410:2468" placeholder="..." />
-            <marker date="1592646672747" expanded="false" signature="2523:2581" placeholder="..." />
-            <marker date="1592646672747" expanded="false" signature="2635:2693" placeholder="..." />
-            <marker date="1592646672747" expanded="false" signature="2741:2799" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -502,11 +436,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.43965518">
           <caret line="15" column="41" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
-          <folding>
-            <marker date="1592637435741" expanded="true" signature="592:770" placeholder="update menu_..." />
-            <marker date="1592637435741" expanded="true" signature="6835:7099" placeholder="SELECT menu_..menu_sub..." />
-            <marker date="1592637435741" expanded="true" signature="8854:8891" placeholder="SELECT * fro..menu_main..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -517,21 +446,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myfw/myquery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35172415">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/edit-account.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3224138">
           <caret line="173" column="86" selection-start-line="173" selection-start-column="80" selection-end-line="173" selection-end-column="86" />
-          <folding>
-            <marker date="1592815747463" expanded="true" signature="420:518" placeholder="update admin..." />
-            <marker date="1592815747463" expanded="true" signature="4918:4951" placeholder="SELECT * fro..admin..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -546,10 +464,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.29142857">
           <caret line="108" column="104" selection-start-line="108" selection-start-column="104" selection-end-line="108" selection-end-column="104" />
-          <folding>
-            <marker date="1592817100047" expanded="true" signature="295:345" placeholder="update admin..." />
-            <marker date="1592817100047" expanded="true" signature="5125:5158" placeholder="SELECT * fro..admin..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -557,18 +471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3321234">
           <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="108" />
-          <folding>
-            <marker date="1592816183791" expanded="true" signature="594:645" placeholder="SELECT UserN..admin..." />
-            <marker date="1592816183791" expanded="true" signature="1009:1158" placeholder="INSERT INTO ..admin..." />
-            <marker date="1592816183791" expanded="true" signature="1689:1740" placeholder="SELECT UserN..admin..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myfw/mydbs.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17586207">
-          <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -591,11 +493,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9672414">
           <caret line="135" column="46" selection-start-line="135" selection-start-column="46" selection-end-line="135" selection-end-column="46" />
-          <folding>
-            <marker date="1592818666111" expanded="true" signature="156:188" placeholder="select * fro..admin..." />
-            <marker date="1592818666111" expanded="true" signature="641:688" placeholder="Delete from ..." />
-            <marker date="1592818666111" expanded="true" signature="8143:8162" placeholder="SELECT * fro..admin..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -603,7 +500,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="42" selection-start-line="20" selection-start-column="42" selection-end-line="20" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -611,7 +507,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -619,7 +514,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -627,7 +521,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.73275864">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -635,10 +528,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.55689657">
           <caret line="103" column="76" selection-start-line="103" selection-start-column="76" selection-end-line="103" selection-end-column="76" />
-          <folding>
-            <marker date="1592886510026" expanded="true" signature="344:446" placeholder="INSERT INTO ..tblsubjects..." />
-            <marker date="1592886510026" expanded="true" signature="6884:6908" placeholder="SELECT * fro..tblclasses..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -646,21 +535,167 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3810345">
           <caret line="112" column="84" selection-start-line="112" selection-start-column="76" selection-end-line="112" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage-subjects.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35517243">
+          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/includes/topbar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.44310346">
+          <caret line="31" column="57" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/footer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.692307">
+          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7362069">
+          <caret line="94" column="47" selection-start-line="94" selection-start-column="47" selection-end-line="94" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/logout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3810345">
+          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6775862">
+          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage-students.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3810345">
+          <caret line="13" column="54" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/tblstudents.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.89311594">
+          <caret line="59" column="61" selection-start-line="59" selection-start-column="61" selection-end-line="59" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/add-files.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15689655">
+          <caret line="53" column="57" selection-start-line="53" selection-start-column="57" selection-end-line="53" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myfw/mydbs.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5275862">
+          <caret line="39" column="17" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/add-students.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-227.53847">
+          <caret line="348" column="82" selection-start-line="348" selection-start-column="82" selection-end-line="348" selection-end-column="82" />
           <folding>
-            <marker date="1592886296995" expanded="true" signature="386:492" placeholder="update tblsu..." />
-            <marker date="1592886296995" expanded="true" signature="4874:5118" placeholder="SELECT *,(se..tblsubjects..." />
-            <marker date="1592886296995" expanded="true" signature="4874:5132" placeholder="SELECT tblsu..tblsubjects..." />
-            <marker date="1592886296995" expanded="true" signature="4949:5035" placeholder="select tblcl..tblclasses..." />
-            <marker date="1592886296995" expanded="true" signature="5119:5132" placeholder="SELECT * fro..tblsubjects..." />
-            <marker date="1592886296995" expanded="true" signature="8255:8279" placeholder="SELECT * fro..tblclasses..." />
+            <marker date="1592900055199" expanded="true" signature="1322:1910" placeholder="INSERT INTO ..tblstudents..." />
+            <marker date="1592900055199" expanded="true" signature="4428:4489" placeholder="update tblst..." />
+            <marker date="1592900055199" expanded="true" signature="13126:13149" placeholder="SELECT * fro..tbleducat..." />
+            <marker date="1592900055199" expanded="true" signature="14665:14689" placeholder="SELECT * fro..tbledutype..." />
+            <marker date="1592900055199" expanded="true" signature="25951:25977" placeholder="SELECT * fro..tblsporttype..." />
+            <marker date="1592900055199" expanded="true" signature="27777:27803" placeholder="SELECT * fro..tblsporttype..." />
+            <marker date="1592900055199" expanded="true" signature="29602:29628" placeholder="SELECT * fro..tblsporttype..." />
+            <marker date="1592900055199" expanded="true" signature="33977:34001" placeholder="SELECT * fro..tblclasses..." />
+            <marker date="1592900055199" expanded="true" signature="35869:35894" placeholder="SELECT * fro..tblsubjects..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myfw/myquery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.062068965">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="37" selection-end-column="5" />
+          <folding>
+            <marker date="1592801209796" expanded="true" signature="500:592" placeholder="SELECT * fro..menu_sub..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage-file-attach.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9086207">
+          <caret line="164" column="102" selection-start-line="164" selection-start-column="102" selection-end-line="164" selection-end-column="102" />
+          <folding>
+            <marker date="1592368439405" expanded="true" signature="155:198" placeholder="Delete from ..." />
+            <marker date="1592368439405" expanded="true" signature="7314:7817" placeholder="SELECT tblst..tblstudents..." />
+            <marker date="1592368439405" expanded="true" signature="7584:7679" placeholder="select tblsp..tblsporttype..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage-edit-files.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49827588">
+          <caret line="17" column="45" selection-start-line="17" selection-start-column="45" selection-end-line="17" selection-end-column="45" />
+          <folding>
+            <marker date="1592386465051" expanded="true" signature="185:226" placeholder="Select * fro..tblattach_file..." />
+            <marker date="1592386465051" expanded="true" signature="857:896" placeholder="Delete from ..." />
+            <marker date="1592386465051" expanded="true" signature="8458:9130" placeholder="SELECT tblat..tblattach_file..." />
+            <marker date="1592386465051" expanded="true" signature="8517:8608" placeholder="select tblst..tblstudents..." />
+            <marker date="1592386465051" expanded="true" signature="8658:8748" placeholder="select tblst..tblstudents..." />
+            <marker date="1592386465051" expanded="true" signature="8797:8899" placeholder="select tbldo..tbldoctype..." />
+            <marker date="1592386465051" expanded="true" signature="8953:9038" placeholder="select tblst..tblstudents..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edit-performance-bak.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43965518">
+          <caret line="129" column="114" selection-start-line="129" selection-start-column="70" selection-end-line="129" selection-end-column="114" />
+          <folding>
+            <marker date="1592963425749" expanded="true" signature="386:499" placeholder="update tbl_p..." />
+            <marker date="1592963425749" expanded="true" signature="5016:5554" placeholder="SELECT * ,(s..tbl_performance..." />
+            <marker date="1592963425749" expanded="true" signature="5056:5148" placeholder="select tblst..tblstudents..." />
+            <marker date="1592963425749" expanded="true" signature="5194:5285" placeholder="select tblst..tblstudents..." />
+            <marker date="1592963425749" expanded="true" signature="5330:5420" placeholder="select tblst..tblstudents..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage-edit-performance.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.55689657">
+          <caret line="19" column="5" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+          <folding>
+            <marker date="1592962708349" expanded="true" signature="183:223" placeholder="Delete from ..." />
+            <marker date="1592962708349" expanded="true" signature="7806:8197" placeholder="SELECT tbl_p..tbl_performance..." />
+            <marker date="1592962708349" expanded="true" signature="7866:7958" placeholder="select tblst..tblstudents..." />
+            <marker date="1592962708349" expanded="true" signature="8008:8099" placeholder="select tblst..tblstudents..." />
+            <marker date="1592962708349" expanded="true" signature="8180:8197" placeholder="SELECT tblat..tblattach_file..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/edit-student.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17931035">
-          <caret line="656" column="0" selection-start-line="656" selection-start-column="0" selection-end-line="678" selection-end-column="58" />
+        <state vertical-scroll-proportion="-9.389655">
+          <caret line="457" column="69" selection-start-line="457" selection-start-column="69" selection-end-line="457" selection-end-column="69" />
           <folding>
             <marker date="1592819952593" expanded="true" signature="703:764" placeholder="update tblst..." />
             <marker date="1592819952593" expanded="true" signature="2211:2852" placeholder="update tblst..." />
@@ -681,116 +716,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manage-subjects.php">
+    <entry file="file://$PROJECT_DIR$/manage-at-performance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35517243">
-          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.49827588">
+          <caret line="177" column="107" selection-start-line="177" selection-start-column="101" selection-end-line="177" selection-end-column="107" />
           <folding>
-            <marker date="1592885744647" expanded="true" signature="6606:6735" placeholder="SELECT *,(se..tblsubjects..." />
-            <marker date="1592885744647" expanded="true" signature="6616:6702" placeholder="select tblcl..tblclasses..." />
+            <marker date="1592960971895" expanded="true" signature="155:198" placeholder="Delete from ..." />
+            <marker date="1592960971895" expanded="true" signature="7334:7837" placeholder="SELECT tblst..tblstudents..." />
+            <marker date="1592960971895" expanded="true" signature="7604:7699" placeholder="select tblsp..tblsporttype..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/includes/topbar.php">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/standard_0.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44310346">
-          <caret line="31" column="57" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
+        <state vertical-scroll-proportion="0.55344826">
+          <caret line="416" column="7" selection-start-line="416" selection-start-column="7" selection-end-line="416" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/footer.php">
+    <entry file="file://$PROJECT_DIR$/add-performance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.692307">
-          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7362069">
-          <caret line="94" column="47" selection-start-line="94" selection-start-column="47" selection-end-line="94" selection-end-column="47" />
+        <state vertical-scroll-proportion="-11.769231">
+          <caret line="279" column="0" selection-start-line="279" selection-start-column="0" selection-end-line="279" selection-end-column="115" />
           <folding>
-            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#a#0;n#nav#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logout.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3810345">
-          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6775862">
-          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage-students.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3810345">
-          <caret line="13" column="54" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
-          <folding>
-            <marker date="1592462247550" expanded="true" signature="157:202" placeholder="Select * fro..tblstudents..." />
-            <marker date="1592462247550" expanded="true" signature="783:826" placeholder="Delete from ..." />
-            <marker date="1592462247550" expanded="true" signature="1274:1297" placeholder="..." />
-            <marker date="1592462247550" expanded="true" signature="9140:9643" placeholder="SELECT tblst..tblstudents..." />
-            <marker date="1592462247550" expanded="true" signature="9410:9505" placeholder="select tblsp..tblsporttype..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/tblstudents.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89311594">
-          <caret line="59" column="61" selection-start-line="59" selection-start-column="61" selection-end-line="59" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/add-students.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12068965">
-          <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
-          <folding>
-            <marker date="1592900055199" expanded="true" signature="1322:1910" placeholder="INSERT INTO ..tblstudents..." />
-            <marker date="1592900055199" expanded="true" signature="4428:4489" placeholder="update tblst..." />
-            <marker date="1592900055199" expanded="true" signature="13126:13149" placeholder="SELECT * fro..tbleducat..." />
-            <marker date="1592900055199" expanded="true" signature="14665:14689" placeholder="SELECT * fro..tbledutype..." />
-            <marker date="1592900055199" expanded="true" signature="25951:25977" placeholder="SELECT * fro..tblsporttype..." />
-            <marker date="1592900055199" expanded="true" signature="27777:27803" placeholder="SELECT * fro..tblsporttype..." />
-            <marker date="1592900055199" expanded="true" signature="29602:29628" placeholder="SELECT * fro..tblsporttype..." />
-            <marker date="1592900055199" expanded="true" signature="33977:34001" placeholder="SELECT * fro..tblclasses..." />
-            <marker date="1592900055199" expanded="true" signature="35869:35894" placeholder="SELECT * fro..tblsubjects..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage-file-attach.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3224138">
-          <caret line="152" column="31" selection-start-line="0" selection-start-column="0" selection-end-line="292" selection-end-column="0" />
-          <folding>
-            <marker date="1592368439405" expanded="true" signature="155:198" placeholder="Delete from ..." />
-            <marker date="1592368439405" expanded="true" signature="7314:7817" placeholder="SELECT tblst..tblstudents..." />
-            <marker date="1592368439405" expanded="true" signature="7584:7679" placeholder="select tblsp..tblsporttype..." />
+            <marker date="1592961883859" expanded="true" signature="729:984" placeholder="INSERT INTO ..tblattach_file..." />
+            <marker date="1592961883859" expanded="true" signature="2513:2570" placeholder="update tblat..." />
+            <marker date="1592961883859" expanded="true" signature="8534:8580" placeholder="SELECT * fro..tblstudents..." />
+            <marker date="1592961883859" expanded="true" signature="13523:13615" placeholder="SELECT * fro..tbl_performance..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/edit-files.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="-0.41034484">
+          <caret line="10" column="34" selection-start-line="10" selection-start-column="34" selection-end-line="10" selection-end-column="34" />
           <folding>
             <marker date="1592901049229" expanded="true" signature="286:351" placeholder="update tblat..." />
             <marker date="1592901049229" expanded="true" signature="985:1042" placeholder="update tblat..." />
@@ -803,40 +765,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/add-performance.php">
+    <entry file="file://$PROJECT_DIR$/edit-class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
-          <caret line="19" column="60" selection-start-line="19" selection-start-column="60" selection-end-line="19" selection-end-column="60" />
+        <state vertical-scroll-proportion="-13.076923">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
           <folding>
-            <marker date="1592901049282" expanded="true" signature="295:367" placeholder="INSERT INTO ..tblattach_file..." />
-            <marker date="1592901049282" expanded="true" signature="1109:1166" placeholder="update tblat..." />
-            <marker date="1592901049282" expanded="true" signature="7016:7062" placeholder="SELECT * fro..tblstudents..." />
-            <marker date="1592901049282" expanded="true" signature="12409:12433" placeholder="SELECT * fro..tbldoctype..." />
+            <marker date="1592283756460" expanded="true" signature="388:497" placeholder="update tblcl..." />
+            <marker date="1592283756460" expanded="true" signature="4937:4975" placeholder="SELECT * fro..tblclasses..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manage-at-performance.php">
+    <entry file="file://$PROJECT_DIR$/edit-performance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="12.853659">
-          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+        <state vertical-scroll-proportion="6.864762">
+          <caret line="212" column="0" selection-start-line="212" selection-start-column="0" selection-end-line="212" selection-end-column="0" />
           <folding>
-            <marker date="1592900943143" expanded="true" signature="155:198" placeholder="Delete from ..." />
-            <marker date="1592900943143" expanded="true" signature="7334:7837" placeholder="SELECT tblst..tblstudents..." />
-            <marker date="1592900943143" expanded="true" signature="7604:7699" placeholder="select tblsp..tblsporttype..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/add-files.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21551724">
-          <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
-          <folding>
-            <marker date="1592901049329" expanded="true" signature="295:367" placeholder="INSERT INTO ..tblattach_file..." />
-            <marker date="1592901049329" expanded="true" signature="1109:1166" placeholder="update tblat..." />
-            <marker date="1592901049329" expanded="true" signature="7016:7062" placeholder="SELECT * fro..tblstudents..." />
-            <marker date="1592901049329" expanded="true" signature="12409:12433" placeholder="SELECT * fro..tbldoctype..." />
+            <marker date="1592965999317" expanded="true" signature="788:1051" placeholder="UPDATE tbl_p..." />
+            <marker date="1592965999317" expanded="true" signature="794:1033" placeholder="INSERT INTO tbl_performance..." />
+            <marker date="1592965999317" expanded="true" signature="794:1051" placeholder="UPDATE tbl_p..." />
+            <marker date="1592965999317" expanded="true" signature="6885:7423" placeholder="SELECT * ,(s..tbl_performance..." />
+            <marker date="1592965999317" expanded="true" signature="6925:7017" placeholder="select tblst..tblstudents..." />
+            <marker date="1592965999317" expanded="true" signature="7063:7154" placeholder="select tblst..tblstudents..." />
+            <marker date="1592965999317" expanded="true" signature="7199:7289" placeholder="select tblst..tblstudents..." />
           </folding>
         </state>
       </provider>

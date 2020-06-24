@@ -3,19 +3,23 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 
+$rollid = $_GET['rollid'];
+
 if (isset($_GET['id'])) {
     try {
         $id = $_GET['id'];
-        $sql = "Delete from tblstudents where StudentId=:id";
+        $sql = "Delete from tbl_performance where id=:id";
         $query = $dbh->prepare($sql);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
         $query->execute();
 
-        $msg = "ลบข้อมูลเรียบร้อยแล้ว Delete Dasta Successfully";
+        $msg = "ลบข้อมูล " . $delete_success . " เรียบร้อยแล้ว Delete Data Successfully";
 
     } catch (PDOException $e) {
         echo "ข้อผิดพลาด : " . $e->getMessage();
     }
+
+
 }
 
 if (strlen($_SESSION['alogin']) == "") {
@@ -86,7 +90,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                                     <li> Athlete</li>
-                                    <li class="active">จัดการ ข้อมูลทดสอบสมรรถภาพร่างกาย </li>
+                                    <li class="active">จัดการ ข้อมูลทดสอบสมรรถภาพร่างกาย</li>
                                 </ul>
                             </div>
 
@@ -109,19 +113,29 @@ if (strlen($_SESSION['alogin']) == "") {
                                             </div>
                                         </div>
 
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <a href="manage-at-performance.php"
+                                                   class="btn btn-info btn-labeled">BACK<span
+                                                        class="btn-label btn-label-right"><i
+                                                            class="fa fa-check"></i></span></a>
+                                            </div>
+                                        </div>
+
 
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
                                             <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <a href="#" class="close" data-dismiss="alert"
+                                               aria-label="close">&times;</a>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
                                                 <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                <a href="#" class="close" data-dismiss="alert"
+                                                   aria-label="close">&times;</a>
                                             </div>
                                         <?php } ?>
                                         <div class="panel-body p-20">
-
                                             <table id="example" class="display table table-striped table-bordered"
                                                    cellspacing="0" width="100%">
                                                 <thead>
@@ -130,10 +144,8 @@ if (strlen($_SESSION['alogin']) == "") {
                                                     <th>รหัสประจำตัว</th>
                                                     <th>ชื่อ</th>
                                                     <th>นามสกุล</th>
-                                                    <th>คณะ/หน่วยงาน</th>
-                                                    <th>ประเภทกีฬา</th>
-                                                    <th>วันเกิด</th>
-                                                    <!--th>Status</th-->
+                                                    <th>ครั้งที่ทดสอบ</th>
+                                                    <th>วันที่ทดสอบ</th>
                                                     <th>Action</th>
                                                 </tr>
                                                 </thead>
@@ -143,19 +155,19 @@ if (strlen($_SESSION['alogin']) == "") {
                                                     <th>รหัสประจำตัว</th>
                                                     <th>ชื่อ</th>
                                                     <th>นามสกุล</th>
-                                                    <th>คณะ/หน่วยงาน</th>
-                                                    <th>ประเภทกีฬา</th>
-                                                    <th>วันเกิด</th>
-                                                    <!--th>Status</th-->
+                                                    <th>ครั้งที่ทดสอบ</th>
+                                                    <th>วันที่ทดสอบ</th>
                                                     <th>Action</th>
                                                 </tr>
                                                 </tfoot>
                                                 <tbody>
-                                                <?php $sql = "SELECT tblstudents.FirstName,tblstudents.LastName,tblstudents.RollId,tblstudents.RegDate
-                                                ,tblstudents.StudentId,tblstudents.Status,tblclasses.ClassName,tblclasses.Section,tblstudents.DOB
-					                            ,(select tblsporttype.SportName from tblsporttype where tblsporttype.id = tblstudents.sport_type1) as SportName1
-                                                from tblstudents left join tblclasses on tblclasses.id=tblstudents.ClassId";
+
+                                                <?php $sql = "SELECT tbl_performance.*
+					                            ,(select tblstudents.FirstName from tblstudents where tblstudents.RollId = tbl_performance.sid) as FirstName
+					                            ,(select tblstudents.LastName from tblstudents where tblstudents.RollId = tbl_performance.sid) as LastName
+                                                from tbl_performance where sid =:std ";
                                                 $query = $dbh->prepare($sql);
+                                                $query->bindParam(':std', $rollid, PDO::PARAM_STR);
                                                 $query->execute();
                                                 $results = $query->fetchAll(PDO::FETCH_OBJ);
                                                 $cnt = 1;
@@ -163,26 +175,24 @@ if (strlen($_SESSION['alogin']) == "") {
                                                     foreach ($results as $result) { ?>
                                                         <tr>
                                                             <td><?php echo htmlentities($cnt); ?></td>
-                                                            <td><?php echo htmlentities($result->RollId); ?></td>
+                                                            <td><?php echo htmlentities($result->sid); ?></td>
                                                             <td><?php echo htmlentities($result->FirstName); ?></td>
                                                             <td><?php echo htmlentities($result->LastName); ?></td>
-                                                            <td><?php echo htmlentities($result->ClassName); ?>
-                                                                <!--(<?php echo htmlentities($result->Section); ?>)-->
-                                                            </td>
-                                                            <td><?php echo htmlentities($result->SportName1); ?></td>
-                                                            <td><?php echo htmlentities($result->DOB); ?></td>
+                                                            <td><?php echo htmlentities($result->order_test); ?></td>
+                                                            <td><?php echo htmlentities($result->date_test); ?></td>
                                                             <td>
-                                                                <a href="add-performance.php?stid=<?php echo htmlentities($result->StudentId); ?>"><i
-                                                                        class="fa fa-file-image-o" title="เพิ่ม (ข้อมูลทดสอบสมรรถภาพร่างกาย)"></i> </a>
+                                                                <a href="edit-performance.php?id=<?php echo htmlentities($result->id); ?>"><i
+                                                                        class="fa fa-edit"
+                                                                        title="ดู/แก้ไข (เอกสาร/ภาพถ่าย)"></i></a>
                                                                 &nbsp;
-                                                                <a href="manage-edit-performance.php?rollid=<?php echo htmlentities($result->RollId); ?>"><i
-                                                                        class="fa fa-edit" title="ดู/แก้ไข (ข้อมูลทดสอบสมรรถภาพร่างกาย)"></i></a>
+                                                                <a href="javascript: delete_id(<?php echo htmlentities($result->id); ?>)"><i
+                                                                        class="fa fa-times"
+                                                                        title="Delete Record"></i></a>
                                                             </td>
                                                         </tr>
                                                         <?php $cnt = $cnt + 1;
                                                     }
                                                 } ?>
-
 
                                                 </tbody>
                                             </table>
@@ -240,26 +250,7 @@ if (strlen($_SESSION['alogin']) == "") {
 
     <script>
         $(function ($) {
-
-            //$('#example').DataTable();
-
-            //$('#example').dataTable( {
-
-            $('#example').dataTable( {
-                "language": {
-                    "search": "ค้นหาข้อมูล (Search) : ",
-                    "info": "Showing _START_ to _END_ of _TOTAL_ entries",
-                    "lengthMenu": 'แสดง (Display) <select>'+
-                    '<option value="10">10</option>'+
-                    '<option value="25">25</option>'+
-                    '<option value="50">50</option>'+
-                    '<option value="100">100</option>'+
-                    '<option value="-1">All</option>'+
-                    '</select> รายการ (records)'
-
-                }
-            } );
-
+            $('#example').DataTable();
 
             $('#example2').DataTable({
                 "scrollY": "300px",
@@ -272,19 +263,43 @@ if (strlen($_SESSION['alogin']) == "") {
     </script>
 
     <script type="text/javascript">
-
-        function delete_id(id) {
-            if (id== null) {
+/*
+        function delete_id(id, rollid) {
+            if (id == null) {
                 alert("Error Parameter");
             }
             else {
-                if (confirm('ต้องการลบรายการนี้ออกจากระบบ?' + id)) {
-                    window.location.href = 'manage-students.php?id=' + id;
+                if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
+                    window.location.href = 'manage-edit-files.php?id=' + id + ',rollid=' + rollid;
+                }
+            }
+        }
+*/
+
+        function delete_id(id) {
+            if (id == null) {
+                alert("Error Parameter");
+            }
+            else {
+                if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
+                    window.location.href = 'manage-edit-files.php?id=' + id ;
                 }
             }
         }
 
     </script>
+
+    <script>
+        function bigImg(x) {
+            x.style.height = "150%";
+            x.style.width = "150%";
+        }
+        function normalImg(x) {
+            x.style.height = "100px";
+            x.style.width = "100px";
+        }
+    </script>
+
 
     </body>
     </html>

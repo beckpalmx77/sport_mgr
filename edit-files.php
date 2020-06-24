@@ -50,7 +50,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ARMS Admin แก้ไข ถาพถ่าย / เอกสาร</title>
+        <title>ARMS Admin แก้ไข ภาพถ่าย / เอกสาร</title>
         <link rel="icon" type="image/png" sizes="32x32" href="images/icon/favicon-32x32.png">
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen">
@@ -105,7 +105,7 @@ if (strlen($_SESSION['alogin']) == "") {
                     <div class="container-fluid">
                         <div class="row page-title-div">
                             <div class="col-md-6">
-                                <h2 class="title">แก้ไข ถาพถ่าย / เอกสาร</h2>
+                                <h2 class="title">แก้ไข ภาพถ่าย / เอกสาร</h2>
 
                             </div>
 
@@ -117,7 +117,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                                     <li>ทะเบียนนักกีฬา</li>
-                                    <li class="active">แก้ไข ถาพถ่าย / เอกสาร</li>
+                                    <li class="active">แก้ไข ภาพถ่าย / เอกสาร</li>
                                 </ul>
                             </div>
 
@@ -131,7 +131,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                 <div class="panel">
                                     <div class="panel-heading">
                                         <div class="panel-title">
-                                            <h5>แก้ไข ถาพถ่าย / เอกสาร</h5>
+                                            <h5>แก้ไข ภาพถ่าย / เอกสาร</h5>
                                         </div>
                                     </div>
                                     <div class="panel-body">

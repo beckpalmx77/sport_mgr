@@ -8,10 +8,13 @@ if (strlen($_SESSION['alogin']) == "") {
     if (isset($_POST['submit'])) {
         $subjectname = $_POST['subjectname'];
         $subjectcode = $_POST['subjectcode'];
-        $sql = "INSERT INTO  tblsubjects(SubjectName,SubjectCode) VALUES(:subjectname,:subjectcode)";
+        $class_id = $_POST['class_id'];
+
+        $sql = "INSERT INTO  tblsubjects(SubjectName,SubjectCode,class_id) VALUES(:subjectname,:subjectcode,:class_id)";
         $query = $dbh->prepare($sql);
         $query->bindParam(':subjectname', $subjectname, PDO::PARAM_STR);
         $query->bindParam(':subjectcode', $subjectcode, PDO::PARAM_STR);
+        $query->bindParam(':class_id', $class_id, PDO::PARAM_STR);
         $query->execute();
         $lastInsertId = $dbh->lastInsertId();
         if ($lastInsertId) {
@@ -98,7 +101,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                         <form class="form-horizontal" method="post">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <a href="manage-classes.php"
+                                                    <a href="manage-subjects.php"
                                                        class="btn btn-info btn-labeled">BACK<span
                                                             class="btn-label btn-label-right"><i
                                                                 class="fa fa-check"></i></span></a>
@@ -112,14 +115,30 @@ if (strlen($_SESSION['alogin']) == "") {
                                                            id="default" placeholder="" required="required">
                                                 </div>
                                             </div>
-                                            <!--div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">Subject Code</label>
 
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="subjectcode" class="form-control"
-                                                           id="default" placeholder="Subject Code" required="required">
+                                            <div class="form-group">
+                                                <label for="default"
+                                                       class="col-sm-2 control-label">คณะ/หน่วยงาน</label>
+
+                                                <div class="col-sm-6">
+                                                    <select name="class_id" class="form-control" id="class_id">
+                                                        <!--option value="">Select Class</option-->
+                                                        <option
+                                                            value="<?php echo htmlentities($result->ClassId); ?>"
+                                                            selected><?php echo htmlentities($result->ClassName); ?></option>
+                                                        <?php $sql1 = "SELECT * from tblclasses";
+                                                        $query1 = $dbh->prepare($sql1);
+                                                        $query1->execute();
+                                                        $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                        if ($query1->rowCount() > 0) {
+                                                            foreach ($results1 as $result1) { ?>
+                                                                <option
+                                                                    value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->ClassName); ?></option>
+                                                            <?php }
+                                                        } ?>
+                                                    </select>
                                                 </div>
-                                            </div-->
+                                            </div>
 
 
                                             <div class="form-group">
