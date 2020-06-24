@@ -3,12 +3,29 @@ session_start();
 error_reporting(0);
 include('includes/config.php');
 
-$rollid = $_GET['rollid'];
-
 if (isset($_GET['id'])) {
     try {
         $id = $_GET['id'];
-        $sql = "Delete from tbl_performance where id=:id";
+
+        $sqlD = "Select * from tblslide where id=:id";
+        $queryD = $dbh->prepare($sqlD);
+        $queryD->bindParam(':id', $id, PDO::PARAM_STR);
+        $queryD->execute();
+        $resultsD = $queryD->fetchAll(PDO::FETCH_OBJ);
+        if ($queryD->rowCount() > 0) {
+            foreach ($resultsD as $resultD) {
+                $rollid = $resultD->sid;
+                $delete_file = $resultD->file_name;
+                if ($delete_file <> "images/Document-icon.png") {
+                    if (unlink($delete_file))
+                    {
+                        $delete_success = "และไฟล์ภาพ";
+                    }
+                }
+            }
+        }
+
+        $sql = "Delete from tblslide where id=:id";
         $query = $dbh->prepare($sql);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
         $query->execute();
@@ -78,7 +95,7 @@ if (strlen($_SESSION['alogin']) == "") {
                     <div class="container-fluid">
                         <div class="row page-title-div">
                             <div class="col-md-6">
-                                <h2 class="title">จัดการ ข้อมูลทดสอบสมรรถภาพร่างกาย </h2>
+                                <h2 class="title">จัดการ สไลด์ / ประกาศ </h2>
 
                             </div>
 
@@ -90,7 +107,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                                     <li> Athlete</li>
-                                    <li class="active">จัดการ ข้อมูลทดสอบสมรรถภาพร่างกาย</li>
+                                    <li class="active">จัดการ สไลด์ / ประกาศ</li>
                                 </ul>
                             </div>
 
@@ -115,13 +132,12 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                                <a href="manage-at-performance.php"
-                                                   class="btn btn-info btn-labeled">BACK<span
+                                                <a href="add-slide.php"
+                                                   class="btn btn-primary btn-labeled">เพิ่ม สไลด์ / ประกาศ<span
                                                         class="btn-label btn-label-right"><i
                                                             class="fa fa-check"></i></span></a>
                                             </div>
                                         </div>
-
 
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
@@ -141,33 +157,27 @@ if (strlen($_SESSION['alogin']) == "") {
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>รหัสประจำตัว</th>
-                                                    <th>ชื่อ</th>
-                                                    <th>นามสกุล</th>
-                                                    <th>ครั้งที่ทดสอบ</th>
-                                                    <th>วันที่ทดสอบ</th>
+                                                    <th>รหัสสไลด์</th>
+                                                    <th>รูปภาพ สไลด์/ประกาศ</th>
+                                                    <th>ชื่อไฟล์สไลด์/ประกาศ</th>
+                                                    <th>รายละเอียด</th>
                                                     <th>Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tfoot>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>รหัสประจำตัว</th>
-                                                    <th>ชื่อ</th>
-                                                    <th>นามสกุล</th>
-                                                    <th>ครั้งที่ทดสอบ</th>
-                                                    <th>วันที่ทดสอบ</th>
+                                                    <th>รหัสสไลด์</th>
+                                                    <th>รูปภาพ สไลด์/ประกาศ</th>
+                                                    <th>ชื่อไฟล์สไลด์/ประกาศ</th>
+                                                    <th>รายละเอียด</th>
                                                     <th>Action</th>
                                                 </tr>
                                                 </tfoot>
                                                 <tbody>
 
-                                                <?php $sql = "SELECT tbl_performance.*
-					                            ,(select tblstudents.FirstName from tblstudents where tblstudents.RollId = tbl_performance.sid) as FirstName
-					                            ,(select tblstudents.LastName from tblstudents where tblstudents.RollId = tbl_performance.sid) as LastName
-                                                from tbl_performance where sid =:std ";
+                                                <?php $sql = "SELECT tblslide.* from tblslide order by id desc ";
                                                 $query = $dbh->prepare($sql);
-                                                $query->bindParam(':std', $rollid, PDO::PARAM_STR);
                                                 $query->execute();
                                                 $results = $query->fetchAll(PDO::FETCH_OBJ);
                                                 $cnt = 1;
@@ -175,13 +185,33 @@ if (strlen($_SESSION['alogin']) == "") {
                                                     foreach ($results as $result) { ?>
                                                         <tr>
                                                             <td><?php echo htmlentities($cnt); ?></td>
-                                                            <td><?php echo htmlentities($result->sid); ?></td>
-                                                            <td><?php echo htmlentities($result->FirstName); ?></td>
-                                                            <td><?php echo htmlentities($result->LastName); ?></td>
-                                                            <td><?php echo htmlentities($result->order_test); ?></td>
-                                                            <td><?php echo htmlentities($result->date_test); ?></td>
+                                                            <td><?php echo htmlentities($result->slide_id); ?></td>
+
                                                             <td>
-                                                                <a href="edit-performance.php?id=<?php echo htmlentities($result->id); ?>"><i
+
+                                                                <?php
+                                                                if (file_exists($result->file_name)) {
+                                                                    $file = $result->file_name;
+                                                                } else {
+                                                                    $file = "images/Document-icon.png";
+                                                                }
+                                                                ?>
+
+                                                                <img id="picture"
+                                                                     src="<?php echo htmlentities($file) ?>"
+                                                                     width="100" height="100"
+                                                                     class="img-thumbnail"
+                                                                     alt="<?php echo htmlentities($file) ?>"
+                                                                     onmouseover="bigImg(this)"
+                                                                     onmouseout="normalImg(this)"
+                                                                     onclick="window.open(this.src,'_blank')">
+
+                                                            </td>
+
+                                                            <td><?php echo htmlentities($result->file_name); ?></td>
+                                                            <td><?php echo htmlentities($result->filedoc_desc); ?></td>
+                                                            <td>
+                                                                <a href="edit-slide.php?id=<?php echo htmlentities($result->id); ?>"><i
                                                                         class="fa fa-edit"
                                                                         title="ดู/แก้ไข (เอกสาร/ภาพถ่าย)"></i></a>
                                                                 &nbsp;
