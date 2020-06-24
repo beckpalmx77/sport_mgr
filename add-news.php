@@ -8,13 +8,13 @@ if (strlen($_SESSION['alogin']) == "") {
     if (isset($_POST['submit'])) {
 
         $ext_chk = array("png", "jpg");
-        if (!in_array(strtolower(substr(strrchr($_FILES["fileUpload"]["name"], '.'), 1)), $ext_chk)) {
-            $ext_msg = "ไฟล์ต้องเป็น PNG , JPG เท่านั้น";
+        if (!in_array(strtolower(substr(strrchr($_FILES["fileUpload"]["name"],'.'),1)), $ext_chk)) {
+            $ext_msg = "ไฟล์ต้องเป็น PNG , JPG เท่านั้น" ;
         } else {
 
             $slide_id = $_POST['slide_id'];
             $filedoc_desc = $_POST['filedoc_desc'];
-            $sql = "INSERT INTO  tblslide(slide_id,filedoc_desc) VALUES(:slide_id,:filedoc_desc)";
+            $sql = "INSERT INTO  tblnews(slide_id,filedoc_desc) VALUES(:slide_id,:filedoc_desc)";
             $query = $dbh->prepare($sql);
             $query->bindParam(':slide_id', $slide_id, PDO::PARAM_STR);
             $query->bindParam(':filedoc_desc', $filedoc_desc, PDO::PARAM_STR);
@@ -25,7 +25,7 @@ if (strlen($_SESSION['alogin']) == "") {
 
                 if (strlen($_FILES["fileUpload"]["name"]) > 0) {
 
-                    $target_dir = "images/slide/";
+                    $target_dir = "upload/";
 
                     $temp = explode(".", $_FILES["fileUpload"]["name"]);
 
@@ -34,7 +34,7 @@ if (strlen($_SESSION['alogin']) == "") {
                     $picture = $target_file;
 
                     if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
-                        $sql = "update tblslide set file_name=:picture where id=:id ";
+                        $sql = "update tblnews set file_name=:picture where id=:id ";
                         $query = $dbh->prepare($sql);
                         $query->bindParam(':picture', $picture, PDO::PARAM_STR);
                         $query->bindParam(':id', $lastInsertId, PDO::PARAM_STR);
@@ -45,12 +45,11 @@ if (strlen($_SESSION['alogin']) == "") {
                     }
                 }
 
-                $msg = "เพิ่มข้อมูลเรียบร้อยแล้ว info added successfully";
+                $msg = "เพิ่มข้อมูลเรียบร้อยแล้ว info added successfully" . $ext_msg;
 
             } else {
-                $error = "Something went wrong. Please try again " ;
+                $error = "Something went wrong. Please try again " . $ext_msg;
             }
-
         }
         $error = "Something went wrong. Please try again " . $ext_msg;
     }
@@ -61,7 +60,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ARMS Admin เพิ่ม สไลด์ / ประกาศ</title>
+        <title>ARMS Admin เพิ่ม ประกาศ/ข่าวสาร</title>
         <link rel="icon" type="image/png" sizes="16x16" href="images/icon/favicon-16x16.png">
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen">
@@ -116,7 +115,7 @@ if (strlen($_SESSION['alogin']) == "") {
                     <div class="container-fluid">
                         <div class="row page-title-div">
                             <div class="col-md-6">
-                                <h2 class="title">เพิ่ม สไลด์ / ประกาศ</h2>
+                                <h2 class="title">เพิ่ม ประกาศ/ข่าวสาร</h2>
 
                             </div>
 
@@ -128,7 +127,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                                     <li>กำหนดระบบ</li>
-                                    <li class="active">เพิ่ม สไลด์ / ประกาศ</li>
+                                    <li class="active">เพิ่ม ประกาศ/ข่าวสาร</li>
                                 </ul>
                             </div>
 
@@ -142,7 +141,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                 <div class="panel">
                                     <div class="panel-heading">
                                         <div class="panel-title">
-                                            <h5>เพิ่ม สไลด์ / ประกาศ</h5>
+                                            <h5>เพิ่ม ประกาศ/ข่าวสาร</h5>
                                         </div>
                                     </div>
                                     <div class="panel-body">
@@ -157,7 +156,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                         <form class="form-horizontal" method="post" enctype="multipart/form-data">
                                             <div class="panel-heading">
                                                 <div class="panel-title">
-                                                    <a href="manage-slide-page.php"
+                                                    <a href="manage-news-page.php"
                                                        class="btn btn-info btn-labeled">BACK<span
                                                             class="btn-label btn-label-right"><i
                                                                 class="fa fa-check"></i></span></a>
@@ -166,7 +165,7 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                             <?php
                                             $id = intval($_GET['id']);
-                                            $sql = "SELECT * from tblslide order by id desc limit 1 ";
+                                            $sql = "SELECT * from tblnews order by id desc limit 1 ";
                                             $query = $dbh->prepare($sql);
                                             $query->bindParam(':id', $id, PDO::PARAM_STR);
                                             $query->execute();
@@ -179,18 +178,17 @@ if (strlen($_SESSION['alogin']) == "") {
                                                 }
                                             } else {
 
-                                                $slide_id = "S-" . sprintf("%09d", 1);
+                                                    $slide_id = "S-" . sprintf("%09d", 1);
                                             }
 
                                             ?>
 
-                                            <input type="hidden" name="slide_id"
-                                                   value="<?php echo htmlentities($slide_id) ?>">
+                                            <input type="hidden" name="slide_id" value="<?php echo htmlentities($slide_id)?>">
 
 
                                             <div class="form-group">
                                                 <label for="default"
-                                                       class="col-sm-2 control-label">รูปภาพ</label>
+                                                       class="col-sm-2 control-label">รูปภาพ/ไฟล์ pdf</label>
 
                                                 <div class="col-sm-10">
                                                     <img id="picture" src=""
@@ -198,19 +196,17 @@ if (strlen($_SESSION['alogin']) == "") {
                                                          onmouseover="bigImg(this)" onmouseout="normalImg(this)"
                                                          onclick="window.open(this.src,'_blank')">
                                                     <input type='file' name="fileUpload" id="fileUpload"
-                                                           accept="image/*"
                                                            onchange="readURL(this);"/>
                                                     <label class="custom-file-label" for="chooseFile">เลือกไฟล์
                                                         (ไฟล์ .jpg หรือ .png เท่านั้น)(Click
                                                         ที่รูปเพื่อขยาย)</label>
-                                                    <label class="custom-file-label" for="chooseFile">ขนาดไฟล์ภาพ 1600 x
-                                                        430 Pixel</label>
+                                                    <label class="custom-file-label" for="chooseFile">ขนาดไฟล์ภาพ 1600 x 430 Pixel</label>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="default" class="col-sm-2 control-label">รายละเอียด
-                                                    สไลด์ / ประกาศ</label>
+                                                    ประกาศ/ข่าวสาร</label>
 
                                                 <div class="col-sm-10">
                                                     <input type="text" name="filedoc_desc" class="form-control"

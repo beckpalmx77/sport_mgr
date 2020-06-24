@@ -15,6 +15,13 @@ if (is_dir($dir)){
 
 
 
+$name = $_FILES["file"]["name"];
+$ext = end((explode(".", $name))); # extra () to prevent notice
+
+echo $ext;
+
+
+
 $arrContextOptions=array(
     "ssl"=>array(
         "verify_peer"=>false,

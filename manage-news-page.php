@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
     try {
         $id = $_GET['id'];
 
-        $sqlD = "Select * from tblslide where id=:id";
+        $sqlD = "Select * from tblnews where id=:id";
         $queryD = $dbh->prepare($sqlD);
         $queryD->bindParam(':id', $id, PDO::PARAM_STR);
         $queryD->execute();
@@ -25,7 +25,7 @@ if (isset($_GET['id'])) {
             }
         }
 
-        $sql = "Delete from tblslide where id=:id";
+        $sql = "Delete from tblnews where id=:id";
         $query = $dbh->prepare($sql);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
         $query->execute();
@@ -95,7 +95,7 @@ if (strlen($_SESSION['alogin']) == "") {
                     <div class="container-fluid">
                         <div class="row page-title-div">
                             <div class="col-md-6">
-                                <h2 class="title">จัดการ สไลด์ / ประกาศ </h2>
+                                <h2 class="title">จัดการ ประกาศ/ข่าวสาร </h2>
 
                             </div>
 
@@ -107,7 +107,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                                     <li> Athlete</li>
-                                    <li class="active">จัดการ สไลด์ / ประกาศ</li>
+                                    <li class="active">จัดการ ประกาศ/ข่าวสาร</li>
                                 </ul>
                             </div>
 
@@ -132,8 +132,8 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                                <a href="add-slide.php"
-                                                   class="btn btn-primary btn-labeled">เพิ่ม สไลด์ / ประกาศ<span
+                                                <a href="add-news.php"
+                                                   class="btn btn-primary btn-labeled">เพิ่ม ประกาศ/ข่าวสาร<span
                                                         class="btn-label btn-label-right"><i
                                                             class="fa fa-check"></i></span></a>
                                             </div>
@@ -157,9 +157,9 @@ if (strlen($_SESSION['alogin']) == "") {
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>รหัสสไลด์</th>
-                                                    <th>รูปภาพ สไลด์/ประกาศ</th>
-                                                    <th>ชื่อไฟล์สไลด์/ประกาศ</th>
+                                                    <th>รหัสประกาศ</th>
+                                                    <th>รูปภาพ ประกาศ</th>
+                                                    <th>ชื่อไฟล์ประกาศ</th>
                                                     <th>รายละเอียด</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -167,16 +167,16 @@ if (strlen($_SESSION['alogin']) == "") {
                                                 <tfoot>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>รหัสสไลด์</th>
-                                                    <th>รูปภาพ สไลด์/ประกาศ</th>
-                                                    <th>ชื่อไฟล์สไลด์/ประกาศ</th>
+                                                    <th>รหัสประกาศ</th>
+                                                    <th>รูปภาพ ประกาศ</th>
+                                                    <th>ชื่อไฟล์ประกาศ</th>
                                                     <th>รายละเอียด</th>
                                                     <th>Action</th>
                                                 </tr>
                                                 </tfoot>
                                                 <tbody>
 
-                                                <?php $sql = "SELECT tblslide.* from tblslide order by id desc ";
+                                                <?php $sql = "SELECT tblnews.* from tblnews order by id desc ";
                                                 $query = $dbh->prepare($sql);
                                                 $query->execute();
                                                 $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -211,7 +211,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                                             <td><?php echo htmlentities($result->file_name); ?></td>
                                                             <td><?php echo htmlentities($result->filedoc_desc); ?></td>
                                                             <td>
-                                                                <a href="edit-slide.php?id=<?php echo htmlentities($result->id); ?>"><i
+                                                                <a href="edit-news.php?id=<?php echo htmlentities($result->id); ?>"><i
                                                                         class="fa fa-edit"
                                                                         title="ดู/แก้ไข (เอกสาร/ภาพถ่าย)"></i></a>
                                                                 &nbsp;
@@ -312,7 +312,7 @@ if (strlen($_SESSION['alogin']) == "") {
             }
             else {
                 if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
-                    window.location.href = 'manage-slide-page.php?id=' + id ;
+                    window.location.href = 'manage-edit-files.php?id=' + id ;
                 }
             }
         }
