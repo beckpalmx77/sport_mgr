@@ -68,19 +68,24 @@ if (strlen($_SESSION['alogin']) == "") {
                                     <!-- /.dashboard-stat -->
                                 </div>
                                 <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
-                                <?php include("news_page.php");?>
+                                <?php include("get_news.php");?>
+                                <!--?php include("news_page.php");?-->
                             </div>
                         </div>
                         <!-- /.main-page -->
                     </section>
-
                 </div>
                 <!-- /.content-container -->
+
             </div>
             <!-- /.content-wrapper -->
+
         </div>
+
     </div>
     <!-- /.main-wrapper -->
+
+
 
     <!-- ========== COMMON JS FILES ========== -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>

@@ -21,8 +21,8 @@
                         <li class="nav-item active"><a class="nav-link" href="#"> หน้าแรก </a></li>
                         <li class="nav-item"><a class="nav-link" href="index-main.php">
                                 ระบบจัดเก็บข้อมูลกีฬาและนันทนาการ </a></li>
-                        <li class="nav-item"><a class="nav-link" href="index-main.php">
-                                ประกาศ </a></li>
+                        <!--li class="nav-item"><a class="nav-link" href="show-news-page.php">
+                                ประกาศ </a></li-->
                         <li class="nav-item dropdown">
                             <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown"> เกี่ยวกับ </a>
                             <ul class="dropdown-menu dropdown-menu-right">

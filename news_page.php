@@ -37,7 +37,7 @@ $cnt = 1;
             ?>
         <p>
             <i class="fa fa-external-link" aria-hidden="true" style="color:blue"></i>
-            <a href="show-news-page.php?id=<?php echo htmlentities($result->id); ?>" class="ex2" rel="external">อ่าน ข่าว/ประกาศ อื่นๆ</a>
+            <a href="show-news-page.php" class="ex2" rel="external">อ่าน ข่าว/ประกาศ อื่นๆ</a>
         </p>
         <!--/div-->
     </div>
