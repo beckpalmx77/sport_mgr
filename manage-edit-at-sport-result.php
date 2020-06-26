@@ -285,7 +285,7 @@ if (strlen($_SESSION['alogin']) == "") {
             }
             else {
                 if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
-                    window.location.href = 'manage-edit-files.php?id=' + id ;
+                    window.location.href = 'manage-edit-at-sport-result.php?id=' + id ;
                 }
             }
         }
