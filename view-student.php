@@ -269,7 +269,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                                                  onmouseover="bigImg(this)" onmouseout="normalImg(this)"
                                                                  onclick="window.open(this.src,'_blank')">
                                                             <input type='file' name="fileUpload" id="fileUpload"
-                                                                   onchange="readURL(this);"/>
+                                                                   accept="image/png, image/jpeg" onchange="readURL(this);"/>
                                                             <label class="custom-file-label" for="chooseFile">เลือกไฟล์
                                                                 (ไฟล์ .jpg หรือ .png เท่านั้น)(Click
                                                                 ที่รูปเพื่อขยาย)</label>
