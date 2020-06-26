@@ -68,6 +68,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                     <!-- /.dashboard-stat -->
                                 </div>
                                 <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
+                                <?php include("news_page.php");?>
                             </div>
                         </div>
                         <!-- /.main-page -->

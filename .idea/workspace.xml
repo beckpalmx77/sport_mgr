@@ -22,73 +22,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="manage-edit-at-sport-result.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manage-edit-at-sport-result.php">
+      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dashboard.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.3703704">
-              <caret line="177" column="86" selection-start-line="177" selection-start-column="86" selection-end-line="177" selection-end-column="86" />
+            <state vertical-scroll-proportion="-13.730769">
+              <caret line="54" column="61" selection-start-line="54" selection-start-column="61" selection-end-line="54" selection-end-column="61" />
               <folding>
-                <marker date="1593139864576" expanded="true" signature="183:198" placeholder="Delete from ..." />
-                <marker date="1593139864576" expanded="true" signature="183:223" placeholder="Delete from ..." />
-                <marker date="1593139864576" expanded="true" signature="7938:8646" placeholder="SELECT tblsp..tblsport_result..." />
-                <marker date="1593139864576" expanded="true" signature="7998:8091" placeholder="select tblst..tblstudents..." />
-                <marker date="1593139864576" expanded="true" signature="8141:8233" placeholder="select tblst..tblstudents..." />
-                <marker date="1593139864576" expanded="true" signature="8282:8394" placeholder="select tblsp..tblsport_events..." />
-                <marker date="1593139864576" expanded="true" signature="8445:8546" placeholder="select tblsp..tblsporttype..." />
-                <marker date="1593139864576" expanded="true" signature="8629:8646" placeholder="SELECT tbl_p..tbl_performance..." />
+                <marker date="1593151882651" expanded="true" signature="2486:2519" placeholder="SELECT Stude..tblstudents..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit-at-sport-result.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/edit-at-sport-result.php">
+      <file leaf-file-name="news_page.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/news_page.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.0571429">
-              <caret line="336" column="38" selection-start-line="336" selection-start-column="38" selection-end-line="336" selection-end-column="38" />
+            <state vertical-scroll-proportion="4.818182">
+              <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
               <folding>
-                <marker date="1593140544255" expanded="true" signature="585:827" placeholder="UPDATE tblsp..." />
-                <marker date="1593140544255" expanded="true" signature="592:782" placeholder="INSERT INTO ..tblsport_result..." />
-                <marker date="1593140544255" expanded="true" signature="6385:7204" placeholder="SELECT tblsp..tblsport_result..." />
-                <marker date="1593140544255" expanded="true" signature="6441:6534" placeholder="select tblst..tblstudents..." />
-                <marker date="1593140544255" expanded="true" signature="6580:6672" placeholder="select tblst..tblstudents..." />
-                <marker date="1593140544255" expanded="true" signature="6717:6808" placeholder="select tblst..tblstudents..." />
-                <marker date="1593140544255" expanded="true" signature="6852:6964" placeholder="select tblsp..tblsport_events..." />
-                <marker date="1593140544255" expanded="true" signature="7011:7112" placeholder="select tblsp..tblsporttype..." />
-                <marker date="1593140544255" expanded="true" signature="12578:12607" placeholder="SELECT * fro..tblsport_events..." />
-                <marker date="1593140544255" expanded="true" signature="16313:16339" placeholder="SELECT * fro..tblsporttype..." />
+                <element signature="n#style#0;n#img#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#p#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#i#0;n#p#1;n#div#0;n#section#0;n#!!top" expanded="true" />
+                <marker date="1593156957359" expanded="true" signature="391:420" placeholder="SELECT tbl_p..." />
+                <marker date="1593156957359" expanded="true" signature="391:446" placeholder="SELECT tblne..tblnews..." />
+                <marker date="1593156957359" expanded="true" signature="391:448" placeholder="SELECT tbl_p..." />
+                <marker date="1593156957359" expanded="true" signature="391:477" placeholder="SELECT tbl_p..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit-performance.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/edit-performance.php">
+      <file leaf-file-name="show-news-page.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/show-news-page.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.307693">
-              <caret line="402" column="38" selection-start-line="402" selection-start-column="38" selection-end-line="402" selection-end-column="38" />
+            <state vertical-scroll-proportion="-2.0987654">
+              <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
               <folding>
-                <marker date="1593139052906" expanded="true" signature="788:1051" placeholder="UPDATE tbl_p..." />
-                <marker date="1593139052906" expanded="true" signature="6885:7423" placeholder="SELECT * ,(s..tbl_performance..." />
-                <marker date="1593139052906" expanded="true" signature="6925:7017" placeholder="select tblst..tblstudents..." />
-                <marker date="1593139052906" expanded="true" signature="7063:7154" placeholder="select tblst..tblstudents..." />
-                <marker date="1593139052906" expanded="true" signature="7199:7289" placeholder="select tblst..tblstudents..." />
+                <marker date="1593157319069" expanded="true" signature="6274:6320" placeholder="SELECT tblne..tblnews..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="add-at-sport-result.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/add-at-sport-result.php">
+      <file leaf-file-name="read-news.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/read-news.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8846154">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.20517242">
+              <caret line="163" column="65" selection-start-line="163" selection-start-column="65" selection-end-line="163" selection-end-column="65" />
               <folding>
-                <marker date="1593136711617" expanded="true" signature="549:566" placeholder="INSERT INTO ..tbl_performance..." />
-                <marker date="1593136711617" expanded="true" signature="549:772" placeholder="INSERT INTO ..tblsport_result..." />
-                <marker date="1593136711617" expanded="true" signature="7074:7120" placeholder="SELECT * fro..tblstudents..." />
-                <marker date="1593136711617" expanded="true" signature="12568:12597" placeholder="SELECT * fro..tblsport_events..." />
-                <marker date="1593136711617" expanded="true" signature="15669:15695" placeholder="SELECT * fro..tblsporttype..." />
+                <marker date="1593157437329" expanded="true" signature="735:832" placeholder="update tblne..." />
+                <marker date="1593157437329" expanded="true" signature="1692:1742" placeholder="update tblne..." />
+                <marker date="1593157437329" expanded="true" signature="7176:7210" placeholder="SELECT * fro..tblnews..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit-news.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/edit-news.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.423077">
+              <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="173" selection-end-column="50" />
+              <folding>
+                <marker date="1593064688299" expanded="true" signature="735:832" placeholder="update tblne..." />
+                <marker date="1593064688299" expanded="true" signature="1692:1742" placeholder="update tblne..." />
+                <marker date="1593064688299" expanded="true" signature="7517:7551" placeholder="SELECT * fro..tblnews..." />
               </folding>
             </state>
           </provider>
@@ -107,12 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/vender/myjs/check_password.js" />
-        <option value="$PROJECT_DIR$/reset-account-password.php" />
-        <option value="$PROJECT_DIR$/tests/test_arr.php" />
-        <option value="$PROJECT_DIR$/myfw/mydbs.php" />
-        <option value="$PROJECT_DIR$/manage-account.php" />
-        <option value="$PROJECT_DIR$/manage-subjects.php" />
         <option value="$PROJECT_DIR$/edit-subject.php" />
         <option value="$PROJECT_DIR$/create-subject.php" />
         <option value="$PROJECT_DIR$/footer.html" />
@@ -121,7 +113,6 @@
         <option value="$PROJECT_DIR$/add-performance.php" />
         <option value="$PROJECT_DIR$/manage-at-performance.php" />
         <option value="$PROJECT_DIR$/manage-edit-files.php" />
-        <option value="$PROJECT_DIR$/myfw/myquery.php" />
         <option value="$PROJECT_DIR$/ictest.php" />
         <option value="$PROJECT_DIR$/slide_data.php" />
         <option value="$PROJECT_DIR$/slide_show.php" />
@@ -151,13 +142,20 @@
         <option value="$PROJECT_DIR$/add-sport-events.php" />
         <option value="$PROJECT_DIR$/manage-sport-events.php" />
         <option value="$PROJECT_DIR$/edit-sport-events.php" />
-        <option value="$PROJECT_DIR$/add-at-sport-result.php" />
         <option value="$PROJECT_DIR$/manage-edit-at-sport.php" />
-        <option value="$PROJECT_DIR$/manage-edit-performance.php" />
         <option value="$PROJECT_DIR$/edit-performance.php" />
         <option value="$PROJECT_DIR$/manage-at-sport-result.php" />
-        <option value="$PROJECT_DIR$/manage-edit-at-sport-result.php" />
         <option value="$PROJECT_DIR$/edit-at-sport-result.php" />
+        <option value="$PROJECT_DIR$/tests/test_split.php" />
+        <option value="$PROJECT_DIR$/add-at-sport-result.php" />
+        <option value="$PROJECT_DIR$/myfw/myquery-sport-event.php" />
+        <option value="$PROJECT_DIR$/myfw/myquery.php" />
+        <option value="$PROJECT_DIR$/manage-edit-at-sport-result.php" />
+        <option value="$PROJECT_DIR$/manage-edit-performance.php" />
+        <option value="$PROJECT_DIR$/dashboard.php" />
+        <option value="$PROJECT_DIR$/news_page.php" />
+        <option value="$PROJECT_DIR$/show-news-page.php" />
+        <option value="$PROJECT_DIR$/read-news.php" />
       </list>
     </option>
   </component>
@@ -226,6 +224,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sport_mgr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sport_mgr" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -239,6 +251,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\xampp\htdocs\sport_mgr" />
+      <recent name="E:\xampp\htdocs\sport_mgr\myfw" />
       <recent name="E:\xampp\htdocs\sport_mgr\tests" />
       <recent name="E:\xampp\htdocs\sport_mgr\" />
       <recent name="E:\xampp\htdocs\sport_mgr\includes" />
@@ -341,87 +354,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/myfw/myquery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20344828">
-          <caret line="23" column="105" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage-edit-files.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49827588">
-          <caret line="245" column="62" selection-start-line="245" selection-start-column="62" selection-end-line="245" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/footer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2307693">
-          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/slide_data.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35172415">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/slide_show.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05862069">
-          <caret line="2" column="31" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/show_content.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dashboard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35172415">
-          <caret line="54" column="75" selection-start-line="54" selection-start-column="75" selection-end-line="54" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_img.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.43965518">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage-slide-page.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="5.077586">
-          <caret line="311" column="13" selection-start-line="311" selection-start-column="13" selection-end-line="312" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_bf_upload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11724138">
-          <caret line="4" column="41" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/create-sub-menu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-43.884617">
-          <caret line="226" column="0" selection-start-line="226" selection-start-column="0" selection-end-line="226" selection-end-column="0" />
-          <folding>
-            <marker date="1592637460076" expanded="true" signature="480:629" placeholder="INSERT INTO ..menu_sub..." />
-            <marker date="1592637460076" expanded="true" signature="7297:7334" placeholder="SELECT * fro..menu_main..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view-student.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40689656">
@@ -533,30 +465,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/edit-news.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41379312">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding>
-            <marker date="1593064688299" expanded="true" signature="735:832" placeholder="update tblne..." />
-            <marker date="1593064688299" expanded="true" signature="1692:1742" placeholder="update tblne..." />
-            <marker date="1593064688299" expanded="true" signature="7517:7551" placeholder="SELECT * fro..tblnews..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage-news-page.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36711282">
-          <caret line="164" column="53" selection-start-line="164" selection-start-column="53" selection-end-line="164" selection-end-column="53" />
-          <folding>
-            <marker date="1593057144547" expanded="true" signature="157:191" placeholder="Select * fro..tblnews..." />
-            <marker date="1593057144547" expanded="true" signature="822:854" placeholder="Delete from ..." />
-            <marker date="1593057144547" expanded="true" signature="8296:8342" placeholder="SELECT tblne..tblnews..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.9051725">
@@ -616,6 +524,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.8938992">
           <caret line="83" column="0" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding>
+            <marker date="1592986212637" expanded="true" signature="48:95" placeholder="SELECT * fro..tblslide..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -694,6 +605,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3224138">
           <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+          <folding>
+            <marker date="1592885744647" expanded="true" signature="6606:6735" placeholder="SELECT *,(se..tblsubjects..." />
+            <marker date="1592885744647" expanded="true" signature="6616:6702" placeholder="select tblcl..tblclasses..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -701,6 +616,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.61333334">
           <caret line="147" column="131" selection-start-line="147" selection-start-column="131" selection-end-line="147" selection-end-column="131" />
+          <folding>
+            <marker date="1593105893489" expanded="true" signature="6818:6826" placeholder="SELECT *,(se..tblsubjects..." />
+            <marker date="1593105893489" expanded="true" signature="6818:6864" placeholder="SELECT * FRO..tblsport_events..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -794,19 +713,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manage-edit-performance.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5965517">
-          <caret line="185" column="97" selection-start-line="185" selection-start-column="97" selection-end-line="185" selection-end-column="97" />
-          <folding>
-            <marker date="1593138393246" expanded="true" signature="183:223" placeholder="Delete from ..." />
-            <marker date="1593138393246" expanded="true" signature="7804:8195" placeholder="SELECT tbl_p..tbl_performance..." />
-            <marker date="1593138393246" expanded="true" signature="7864:7956" placeholder="select tblst..tblstudents..." />
-            <marker date="1593138393246" expanded="true" signature="8006:8097" placeholder="select tblst..tblstudents..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manage-at-sport-result.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40172413">
@@ -819,9 +725,72 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/create-sub-menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12068965">
+          <caret line="286" column="0" selection-start-line="286" selection-start-column="0" selection-end-line="304" selection-end-column="13" />
+          <folding>
+            <marker date="1592637460076" expanded="true" signature="480:629" placeholder="INSERT INTO ..menu_sub..." />
+            <marker date="1592637460076" expanded="true" signature="7297:7334" placeholder="SELECT * fro..menu_main..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_fn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_split.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5275862">
+          <caret line="18" column="2" selection-start-line="18" selection-start-column="2" selection-end-line="18" selection-end-column="2" />
+          <folding>
+            <element signature="e#6#90#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myfw/myquery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17586207">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <marker date="1593144139864" expanded="true" signature="500:592" placeholder="SELECT * fro..menu_sub..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myfw/myquery-sport-event.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43965518">
+          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
+          <folding>
+            <marker date="1593144109312" expanded="true" signature="508:577" placeholder="SELECT * fro..tblsport_events..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/add-at-sport-result.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6189655">
+          <caret line="388" column="60" selection-start-line="388" selection-start-column="60" selection-end-line="388" selection-end-column="60" />
+          <folding>
+            <marker date="1593143640354" expanded="true" signature="549:566" placeholder="INSERT INTO ..tbl_performance..." />
+            <marker date="1593143640354" expanded="true" signature="549:772" placeholder="INSERT INTO ..tblsport_result..." />
+            <marker date="1593143640354" expanded="true" signature="7074:7120" placeholder="SELECT * fro..tblstudents..." />
+            <marker date="1593143640354" expanded="true" signature="12568:12597" placeholder="SELECT * fro..tblsport_events..." />
+            <marker date="1593143640354" expanded="true" signature="15687:15713" placeholder="SELECT * fro..tblsporttype..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/edit-performance.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.307693">
+        <state vertical-scroll-proportion="0.5965517">
           <caret line="402" column="38" selection-start-line="402" selection-start-column="38" selection-end-line="402" selection-end-column="38" />
           <folding>
             <marker date="1593139052906" expanded="true" signature="788:1051" placeholder="UPDATE tbl_p..." />
@@ -833,41 +802,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/add-at-sport-result.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8846154">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="29" />
-          <folding>
-            <marker date="1593136711617" expanded="true" signature="549:566" placeholder="INSERT INTO ..tbl_performance..." />
-            <marker date="1593136711617" expanded="true" signature="549:772" placeholder="INSERT INTO ..tblsport_result..." />
-            <marker date="1593136711617" expanded="true" signature="7074:7120" placeholder="SELECT * fro..tblstudents..." />
-            <marker date="1593136711617" expanded="true" signature="12568:12597" placeholder="SELECT * fro..tblsport_events..." />
-            <marker date="1593136711617" expanded="true" signature="15669:15695" placeholder="SELECT * fro..tblsporttype..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage-edit-at-sport-result.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.3703704">
-          <caret line="177" column="86" selection-start-line="177" selection-start-column="86" selection-end-line="177" selection-end-column="86" />
-          <folding>
-            <marker date="1593139864576" expanded="true" signature="183:198" placeholder="Delete from ..." />
-            <marker date="1593139864576" expanded="true" signature="183:223" placeholder="Delete from ..." />
-            <marker date="1593139864576" expanded="true" signature="7938:8646" placeholder="SELECT tblsp..tblsport_result..." />
-            <marker date="1593139864576" expanded="true" signature="7998:8091" placeholder="select tblst..tblstudents..." />
-            <marker date="1593139864576" expanded="true" signature="8141:8233" placeholder="select tblst..tblstudents..." />
-            <marker date="1593139864576" expanded="true" signature="8282:8394" placeholder="select tblsp..tblsport_events..." />
-            <marker date="1593139864576" expanded="true" signature="8445:8546" placeholder="select tblsp..tblsporttype..." />
-            <marker date="1593139864576" expanded="true" signature="8629:8646" placeholder="SELECT tbl_p..tbl_performance..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/edit-at-sport-result.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0571429">
-          <caret line="336" column="38" selection-start-line="336" selection-start-column="38" selection-end-line="336" selection-end-column="38" />
+        <state vertical-scroll-proportion="3.1942856">
+          <caret line="312" column="49" selection-start-line="312" selection-start-column="49" selection-end-line="312" selection-end-column="49" />
           <folding>
             <marker date="1593140544255" expanded="true" signature="585:827" placeholder="UPDATE tblsp..." />
             <marker date="1593140544255" expanded="true" signature="592:782" placeholder="INSERT INTO ..tblsport_result..." />
@@ -879,6 +817,129 @@
             <marker date="1593140544255" expanded="true" signature="7011:7112" placeholder="select tblsp..tblsporttype..." />
             <marker date="1593140544255" expanded="true" signature="12578:12607" placeholder="SELECT * fro..tblsport_events..." />
             <marker date="1593140544255" expanded="true" signature="16313:16339" placeholder="SELECT * fro..tblsporttype..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage-students.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61551726">
+          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
+          <folding>
+            <marker date="1592972648682" expanded="true" signature="157:202" placeholder="Select * fro..tblstudents..." />
+            <marker date="1592972648682" expanded="true" signature="783:826" placeholder="Delete from ..." />
+            <marker date="1592972648682" expanded="true" signature="9138:9641" placeholder="SELECT tblst..tblstudents..." />
+            <marker date="1592972648682" expanded="true" signature="9408:9503" placeholder="select tblsp..tblsporttype..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage-edit-at-sport-result.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-187.65384">
+          <caret line="287" column="87" selection-start-line="287" selection-start-column="87" selection-end-line="287" selection-end-column="87" />
+          <folding>
+            <marker date="1593146378198" expanded="true" signature="183:198" placeholder="Delete from ..." />
+            <marker date="1593146378198" expanded="true" signature="183:223" placeholder="Delete from ..." />
+            <marker date="1593146378198" expanded="true" signature="7938:8646" placeholder="SELECT tblsp..tblsport_result..." />
+            <marker date="1593146378198" expanded="true" signature="7998:8091" placeholder="select tblst..tblstudents..." />
+            <marker date="1593146378198" expanded="true" signature="8141:8233" placeholder="select tblst..tblstudents..." />
+            <marker date="1593146378198" expanded="true" signature="8282:8394" placeholder="select tblsp..tblsport_events..." />
+            <marker date="1593146378198" expanded="true" signature="8445:8546" placeholder="select tblsp..tblsporttype..." />
+            <marker date="1593146378198" expanded="true" signature="8629:8646" placeholder="SELECT tbl_p..tbl_performance..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.6145039">
+          <caret line="422" column="94" selection-start-line="422" selection-start-column="89" selection-end-line="422" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage-edit-performance.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2637931">
+          <caret line="159" column="36" selection-start-line="159" selection-start-column="36" selection-end-line="159" selection-end-column="36" />
+          <folding>
+            <marker date="1593146425882" expanded="true" signature="183:223" placeholder="Delete from ..." />
+            <marker date="1593146425882" expanded="true" signature="7804:8195" placeholder="SELECT tbl_p..tbl_performance..." />
+            <marker date="1593146425882" expanded="true" signature="7864:7956" placeholder="select tblst..tblstudents..." />
+            <marker date="1593146425882" expanded="true" signature="8006:8097" placeholder="select tblst..tblstudents..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.730769">
+          <caret line="54" column="61" selection-start-line="54" selection-start-column="61" selection-end-line="54" selection-end-column="61" />
+          <folding>
+            <marker date="1593151882651" expanded="true" signature="2486:2519" placeholder="SELECT Stude..tblstudents..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage-news-page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0034482758">
+          <caret line="186" column="102" selection-start-line="186" selection-start-column="102" selection-end-line="186" selection-end-column="102" />
+          <folding>
+            <marker date="1593057144547" expanded="true" signature="157:191" placeholder="Select * fro..tblnews..." />
+            <marker date="1593057144547" expanded="true" signature="822:854" placeholder="Delete from ..." />
+            <marker date="1593057144547" expanded="true" signature="8296:8342" placeholder="SELECT tblne..tblnews..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edit-news.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.423077">
+          <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="173" selection-end-column="50" />
+          <folding>
+            <marker date="1593064688299" expanded="true" signature="735:832" placeholder="update tblne..." />
+            <marker date="1593064688299" expanded="true" signature="1692:1742" placeholder="update tblne..." />
+            <marker date="1593064688299" expanded="true" signature="7517:7551" placeholder="SELECT * fro..tblnews..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/news_page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.818182">
+          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#p#0;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#i#0;n#p#1;n#div#0;n#section#0;n#!!top" expanded="true" />
+            <marker date="1593156957359" expanded="true" signature="391:420" placeholder="SELECT tbl_p..." />
+            <marker date="1593156957359" expanded="true" signature="391:446" placeholder="SELECT tblne..tblnews..." />
+            <marker date="1593156957359" expanded="true" signature="391:448" placeholder="SELECT tbl_p..." />
+            <marker date="1593156957359" expanded="true" signature="391:477" placeholder="SELECT tbl_p..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/show-news-page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.0987654">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <folding>
+            <marker date="1593157319069" expanded="true" signature="6274:6320" placeholder="SELECT tblne..tblnews..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/read-news.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.20517242">
+          <caret line="163" column="65" selection-start-line="163" selection-start-column="65" selection-end-line="163" selection-end-column="65" />
+          <folding>
+            <marker date="1593157437329" expanded="true" signature="735:832" placeholder="update tblne..." />
+            <marker date="1593157437329" expanded="true" signature="1692:1742" placeholder="update tblne..." />
+            <marker date="1593157437329" expanded="true" signature="7176:7210" placeholder="SELECT * fro..tblnews..." />
           </folding>
         </state>
       </provider>
