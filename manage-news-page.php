@@ -220,7 +220,9 @@ if (strlen($_SESSION['alogin']) == "") {
                                                                      onmouseout="normalImg(this)"
                                                                      onclick="window.open(this.src,'_blank')">
                                                             </td>
-                                                            <td><?php echo htmlentities($result->file_name); ?></td>
+
+                                                            <td><?php echo htmlentities(str_replace("upload/","",$result->file_name)); ?></td>
+
                                                             <td>
                                                                 <a href="edit-news.php?id=<?php echo htmlentities($result->id); ?>"><i
                                                                         class="fa fa-edit"
