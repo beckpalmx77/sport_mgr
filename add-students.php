@@ -570,7 +570,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                                        class="col-sm-2 control-label">สาขาวิชา/แผนก</label>
 
                                                 <div class="col-sm-10">
-                                                    <select name="subject" class="form-control" id="subject">
+                                                    <select name="subject" class="form-control" id="subject" data-live-search="true">
                                                         <option value="">เลือก สาขาวิชา/แผนก</option>
                                                         <?php $sql = "SELECT * from tblsubjects";
                                                         $query = $dbh->prepare($sql);

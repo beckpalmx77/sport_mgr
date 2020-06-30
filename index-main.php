@@ -6,7 +6,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Athlete Record Management System | ARMS</title>
+    <title>ระบบจัดเก็บข้อมูลกีฬาและนันทนาการ - Athlete Record Management System | ARMS</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css" media="screen">
 </head>
 
 <body>
@@ -35,15 +36,16 @@
             <div class="jumbotron">
                 <form role="form" method="post">
                     <fieldset>
-                        <h2>Athlete Record Management System</h2>
+                        <img src="images/logo-name-1.png" alt="Logo" style="width:280px;">
+                        <h2>ระบบจัดเก็บข้อมูลกีฬาและนันทนาการ</h2>
                         <hr class="colorgraph">
                         <div class="form-group">
                             <input type="text" name="username" id="username" class="form-control input-lg"
-                                   placeholder="User Name">
+                                   placeholder="ชื่อผู้ใช้งานระบบ (User Account)">
                         </div>
                         <div class="form-group">
                             <input type="password" name="password" id="password" class="form-control input-lg"
-                                   placeholder="Password">
+                                   placeholder="รหัสผ่าน (Password)">
                         </div>
 
                         <!--span class="button-checkbox">
@@ -57,20 +59,21 @@
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <input type="submit" class="btn btn-lg btn-success btn-block" name="login"
-                                           value="Sign In">
+                                           value="เข้าสู่ระบบ">
                                 </div>
                             </div>
                         </div>
-
-                        <!--div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <a href="find-result.php" class="btn btn-lg btn-primary btn-block">Search Data</a>
-                                </div>
-                            </div>
-                        </div-->
-
                     </fieldset>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <!--a href="find-result.php" class="btn btn-lg btn-primary btn-block">Search Data</a-->
+
+                                <p style="color:lightslategrey;"><i class="fa fa-copyright" aria-hidden="true"></i> กองพัฒนานักศึกษา เลขที่ 340 ถนนสุรนารายณ์
+                                    อำเภอเมือง จังหวัดนครราชสีมา 30000 <br><i class="fa fa-phone" aria-hidden="true"></i> โทรศัพท์ 044-009009 ต่อ 3420</p>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

@@ -6,43 +6,19 @@ include('includes/config.php');
 if (isset($_GET['id'])) {
     try {
         $id = $_GET['id'];
-
-        $sqlD = "Select * from tblnews where id=:id";
-        $queryD = $dbh->prepare($sqlD);
-        $queryD->bindParam(':id', $id, PDO::PARAM_STR);
-        $queryD->execute();
-        $resultsD = $queryD->fetchAll(PDO::FETCH_OBJ);
-        if ($queryD->rowCount() > 0) {
-            foreach ($resultsD as $resultD) {
-                $rollid = $resultD->sid;
-                $delete_file = $resultD->file_name;
-                if ($delete_file <> "images/Document-icon.png") {
-                    if (unlink($delete_file))
-                    {
-                        $delete_success = "และไฟล์ภาพ";
-                    }
-                }
-            }
-        }
-
-        $sql = "Delete from tblnews where id=:id";
+        $sql = "Delete from tblsport_equipment where id=:id";
         $query = $dbh->prepare($sql);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
         $query->execute();
-
-        $msg = "ลบข้อมูล " . $delete_success . " เรียบร้อยแล้ว Delete Data Successfully";
-
+        $msg = "ลบข้อมูลเรียบร้อยแล้ว Delete Dasta Successfully";
     } catch (PDOException $e) {
         echo "ข้อผิดพลาด : " . $e->getMessage();
     }
-
-
 }
 
 if (strlen($_SESSION['alogin']) == "") {
     header("Location: index.php");
 } else {
-
     ?>
     <!DOCTYPE html>
     <html lang="en">
@@ -50,7 +26,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Admin Manage System</title>
+        <title>ทะเบียนอุปกรณ์กีฬา</title>
         <link rel="icon" type="image/png" sizes="32x32" href="images/icon/favicon-32x32.png">
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen">
@@ -95,7 +71,7 @@ if (strlen($_SESSION['alogin']) == "") {
                     <div class="container-fluid">
                         <div class="row page-title-div">
                             <div class="col-md-6">
-                                <h2 class="title">จัดการ ประกาศ/ข่าวสาร </h2>
+                                <h2 class="title">ทะเบียนอุปกรณ์กีฬา</h2>
 
                             </div>
 
@@ -106,8 +82,8 @@ if (strlen($_SESSION['alogin']) == "") {
                             <div class="col-md-6">
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
-                                    <li> Athlete</li>
-                                    <li class="active">จัดการ ประกาศ/ข่าวสาร</li>
+                                    <li><a href="#">ทะเบียนหลัก</a></li>
+                                    <li class="active">อุปกรณ์กีฬา</li>
                                 </ul>
                             </div>
 
@@ -126,29 +102,23 @@ if (strlen($_SESSION['alogin']) == "") {
                                     <div class="panel">
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                                <h5>View Athlete Info</h5>
+                                                <h5>อุปกรณ์กีฬา</h5>
                                             </div>
                                         </div>
-
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                                <a href="add-news.php"
-                                                   class="btn btn-primary btn-labeled">เพิ่ม ประกาศ/ข่าวสาร<span
+                                                <a href="create-sport-equipment.php"
+                                                   class="btn btn-primary btn-labeled">เพิ่มอุปกรณ์กีฬา<span
                                                         class="btn-label btn-label-right"><i
                                                             class="fa fa-check"></i></span></a>
                                             </div>
                                         </div>
-
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
                                             <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            <a href="#" class="close" data-dismiss="alert"
-                                               aria-label="close">&times;</a>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
                                                 <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                                <a href="#" class="close" data-dismiss="alert"
-                                                   aria-label="close">&times;</a>
                                             </div>
                                         <?php } ?>
                                         <div class="panel-body p-20">
@@ -157,26 +127,23 @@ if (strlen($_SESSION['alogin']) == "") {
                                                 <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>รหัสประกาศ</th>
-                                                    <th>หัวข้อประกาศ</th>
-                                                    <th>รูปภาพ ประกาศ</th>
-                                                    <th>ชื่อไฟล์ประกาศ</th>
+                                                    <th>รหัสอุปกรณ์</th>
+                                                    <th>ชื่ออุปกรณ์กีฬา</th>
+                                                    <th>จำนวน</th>
                                                     <th>Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tfoot>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>รหัสประกาศ</th>
-                                                    <th>หัวข้อประกาศ</th>
-                                                    <th>รูปภาพ ประกาศ</th>
-                                                    <th>ชื่อไฟล์ประกาศ</th>
+                                                    <th>รหัสอุปกรณ์</th>
+                                                    <th>ชื่ออุปกรณ์กีฬา</th>
+                                                    <th>จำนวน</th>
                                                     <th>Action</th>
                                                 </tr>
                                                 </tfoot>
                                                 <tbody>
-
-                                                <?php $sql = "SELECT tblnews.* from tblnews order by id desc ";
+                                                <?php $sql = "SELECT * from tblsport_equipment";
                                                 $query = $dbh->prepare($sql);
                                                 $query->execute();
                                                 $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -185,40 +152,23 @@ if (strlen($_SESSION['alogin']) == "") {
                                                     foreach ($results as $result) { ?>
                                                         <tr>
                                                             <td><?php echo htmlentities($cnt); ?></td>
-                                                            <td><?php echo htmlentities($result->news_id); ?></td>
-                                                            <td><?php echo htmlentities($result->topic); ?></td>
+                                                            <td><?php echo htmlentities($result->equipment_id); ?></td>
+                                                            <td><?php echo htmlentities($result->equipment_name); ?></td>
+                                                            <td><?php echo htmlentities($result->quantity); ?></td>
                                                             <td>
-                                                                <?php
-                                                                if (file_exists($result->file_name)) {
-                                                                    $file = $result->file_name;
-                                                                } else {
-                                                                    $file = "images/Document-icon.png";
-                                                                }
-                                                                ?>
-
-                                                                <img id="picture"
-                                                                     src="<?php echo htmlentities($file) ?>"
-                                                                     width="100" height="100"
-                                                                     class="img-thumbnail"
-                                                                     alt="<?php echo htmlentities($file) ?>"
-                                                                     onmouseover="bigImg(this)"
-                                                                     onmouseout="normalImg(this)"
-                                                                     onclick="window.open(this.src,'_blank')">
-                                                            </td>
-                                                            <td><?php echo htmlentities($result->file_name); ?></td>
-                                                            <td>
-                                                                <a href="edit-news.php?id=<?php echo htmlentities($result->id); ?>"><i
-                                                                        class="fa fa-edit"
-                                                                        title="ดู/แก้ไข (เอกสาร/ภาพถ่าย)"></i></a>
+                                                                <a href="edit-sport-equipment.php?id=<?php echo htmlentities($result->id); ?>"><i
+                                                                        class="fa fa-edit" title="Edit Record"></i> </a>
                                                                 &nbsp;
                                                                 <a href="javascript: delete_id(<?php echo htmlentities($result->id); ?>)"><i
                                                                         class="fa fa-times"
                                                                         title="Delete Record"></i></a>
+
                                                             </td>
                                                         </tr>
                                                         <?php $cnt = $cnt + 1;
                                                     }
                                                 } ?>
+
 
                                                 </tbody>
                                             </table>
@@ -289,40 +239,10 @@ if (strlen($_SESSION['alogin']) == "") {
     </script>
 
     <script type="text/javascript">
-/*
-        function delete_id(id, rollid) {
-            if (id == null) {
-                alert("Error Parameter");
-            }
-            else {
-                if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
-                    window.location.href = 'manage-edit-files.php?id=' + id + ',rollid=' + rollid;
-                }
-            }
-        }
-*/
-
         function delete_id(id) {
-            if (id == null) {
-                alert("Error Parameter");
+            if (confirm('ต้องการลบรายการนี้ออกจากระบบ?') + id) {
+                window.location.href = 'manage-sport-equipment.php?id=' + id;
             }
-            else {
-                if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
-                    window.location.href = 'manage-news-page.php?id=' + id ;
-                }
-            }
-        }
-
-    </script>
-
-    <script>
-        function bigImg(x) {
-            x.style.height = "150%";
-            x.style.width = "150%";
-        }
-        function normalImg(x) {
-            x.style.height = "100px";
-            x.style.width = "100px";
         }
     </script>
 

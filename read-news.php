@@ -80,6 +80,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <link rel="stylesheet" href="css/select2/select2.min.css">
         <link rel="stylesheet" href="css/main.css" media="screen">
         <script src="js/modernizr/modernizr.min.js"></script>
+        <script type="text/javascript" src="js/ckeditor/ckeditor.js"></script>
     </head>
     <body class="top-navbar-fixed">
 
@@ -275,6 +276,16 @@ if (strlen($_SESSION['alogin']) == "") {
                     minimumResultsForSearch: Infinity
                 });
             });
+        </script>
+
+        <script>
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            CKEDITOR.replace('topic_desc');
+            function CKupdate() {
+                for (instance in CKEDITOR.instances)
+                    CKEDITOR.instances[instance].updateElement();
+            }
         </script>
     </body>
     </html>

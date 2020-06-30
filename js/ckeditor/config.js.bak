@@ -11,12 +11,13 @@
 
 CKEDITOR.editorConfig = function( config ) {
 	// Define changes to default configuration here. For example:
+	 config.language = 'th';
 	 //config.uiColor = '#AADC6E';
+
 	//config.extraPlugins = 'image';
 	//config.filebrowserUploadUrl = 'ck_upload_files.php';
 	//config.image_removeLinkByEmptyURL= true;
 	//config.image_previewText = CKEDITOR.tools.repeat( 'Preview', 100 );
-	config.language = 'th';
 	config.extraPlugins = 'uploadimage';
 
 };
