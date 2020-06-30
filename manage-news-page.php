@@ -25,11 +25,18 @@ if (isset($_GET['id'])) {
 
             }
 
-            unlink($resultD->file_1);
+            if ($resultD->file_1 != "") unlink($resultD->file_1);
+            if ($resultD->file_2 != "") unlink($resultD->file_2);
+            if ($resultD->file_3 != "") unlink($resultD->file_3);
+            if ($resultD->file_4 != "") unlink($resultD->file_4);
+            if ($resultD->file_5 != "") unlink($resultD->file_5);
+/*
             unlink($resultD->file_2);
             unlink($resultD->file_3);
             unlink($resultD->file_4);
             unlink($resultD->file_5);
+*/
+
 
         }
 
