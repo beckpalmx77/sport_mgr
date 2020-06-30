@@ -7,63 +7,77 @@ if (strlen($_SESSION['alogin']) == "") {
 } else {
     if (isset($_POST['submit'])) {
 
-/*
-        $ext_chk = array("png", "jpg", "pdf");
-        if (!in_array(strtolower(substr(strrchr($_FILES["fileUpload"]["name"],'.'),1)), $ext_chk)) {
-            $ext_msg = "ไฟล์ต้องเป็น PNG , JPG ,PDF เท่านั้น" ;
-        } else {
-*/
+        $news_id = $_POST['news_id'];
+        $topic = $_POST['topic'];
+        $topic_desc = $_POST['topic_desc'];
+        $link = $_POST['link'];
+        $doc_date = $_POST['doc_date'];
 
-            $news_id = $_POST['news_id'];
-            $topic = $_POST['topic'];
-            $topic_desc = $_POST['topic_desc'];
-            $link = $_POST['link'];
-            $doc_date = $_POST['doc_date'];
+        $sql = "INSERT INTO  tblnews(news_id,topic,topic_desc,link,doc_date) VALUES(:news_id,:topic,:topic_desc,:link,:doc_date)";
 
-            $sql = "INSERT INTO  tblnews(news_id,topic,topic_desc,link,doc_date) VALUES(:news_id,:topic,:topic_desc,:link,:doc_date)";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':news_id', $news_id, PDO::PARAM_STR);
+        $query->bindParam(':topic', $topic, PDO::PARAM_STR);
+        $query->bindParam(':topic_desc', $topic_desc, PDO::PARAM_STR);
+        $query->bindParam(':link', $link, PDO::PARAM_STR);
+        $query->bindParam(':doc_date', $doc_date, PDO::PARAM_STR);
+        $query->execute();
+        $lastInsertId = $dbh->lastInsertId();
 
-            $query = $dbh->prepare($sql);
-            $query->bindParam(':news_id', $news_id, PDO::PARAM_STR);
-            $query->bindParam(':topic', $topic, PDO::PARAM_STR);
-            $query->bindParam(':topic_desc', $topic_desc, PDO::PARAM_STR);
-            $query->bindParam(':link', $link, PDO::PARAM_STR);
-            $query->bindParam(':doc_date', $doc_date, PDO::PARAM_STR);
-            $query->execute();
-            $lastInsertId = $dbh->lastInsertId();
+        if ($lastInsertId) {
 
-            if ($lastInsertId) {
+            if (strlen($_FILES["fileUpload"]["name"]) > 0) {
 
-                if (strlen($_FILES["fileUpload"]["name"]) > 0) {
+                $target_dir = "upload/";
 
-                    $target_dir = "upload/";
+                $temp = explode(".", $_FILES["fileUpload"]["name"]);
 
-                    $temp = explode(".", $_FILES["fileUpload"]["name"]);
+                $target_file = $target_dir . strtotime("now") . "-" . round(microtime(true)) . '.' . end($temp);
 
-                    $target_file = $target_dir . strtotime("now") . "-" . round(microtime(true)) . '.' . end($temp);
+                $picture = $target_file;
 
-                    $picture = $target_file;
+                if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
+                    $sql = "update tblnews set file_name=:picture where id=:id ";
+                    $query = $dbh->prepare($sql);
+                    $query->bindParam(':picture', $picture, PDO::PARAM_STR);
+                    $query->bindParam(':id', $lastInsertId, PDO::PARAM_STR);
+                    $query->execute();
+                    $success = "Y";
+                } else {
+                    $success = "N";
+                }
 
-                    if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
-                        $sql = "update tblnews set file_name=:picture where id=:id ";
-                        $query = $dbh->prepare($sql);
-                        $query->bindParam(':picture', $picture, PDO::PARAM_STR);
-                        $query->bindParam(':id', $lastInsertId, PDO::PARAM_STR);
-                        $query->execute();
-                        $success = "Y";
-                    } else {
-                        $success = "N";
+                $loop = 1 ;
+
+                while (list($key, $value) = each($_FILES['upload_file']['name'])) {
+
+                    if (!empty($value)) {   // this will check if any blank field is entered
+                        $filename = rand(1, 100000) . $value;    // filename stores the value
+                        $filename = str_replace(" ", "_", $filename);// Add _ inplace of blank space in file name, you can remove this line
+                        $add = "upload/$filename";   // upload directory path is set
+
+                        copy($_FILES['upload_file']['tmp_name'][$key], $add);
+
+                        $sql2 = "update tblnews set file_" . $loop . " = '" . $target_dir. $filename . "'  where id=:id ";
+                        $query2 = $dbh->prepare($sql2);
+                        $query2->bindParam(':id', $lastInsertId, PDO::PARAM_STR);
+                        $query2->execute();
+                        $sql21 = $sql21 . " | " . $sql2 ;
+                        $loop++;
+
                     }
                 }
 
-                $msg = "เพิ่มข้อมูลเรียบร้อยแล้ว info added successfully" . $ext_msg;
-
-            } else {
-                $error = "Something went wrong. Please try again " . $ext_msg;
             }
-/*
+
+            $msg = "เพิ่มข้อมูลเรียบร้อยแล้ว info added successfully" ;
+
+        } else {
+
+            $error = "Something went wrong. Please try again " ;
+
         }
-        $error = "Something went wrong. Please try again " . $ext_msg;
-*/
+
     }
     ?>
     <!DOCTYPE html>
@@ -191,33 +205,37 @@ if (strlen($_SESSION['alogin']) == "") {
                                                 }
                                             } else {
 
-                                                    $news_id = "N-" . sprintf("%09d", 1);
+                                                $news_id = "N-" . sprintf("%09d", 1);
                                             }
 
                                             ?>
 
-                                            <input type="hidden" name="news_id" value="<?php echo htmlentities($news_id)?>">
+                                            <input type="hidden" name="news_id"
+                                                   value="<?php echo htmlentities($news_id) ?>">
 
 
                                             <div class="form-group">
                                                 <label for="default"
-                                                       class="col-sm-2 control-label">รูปภาพ/ไฟล์ pdf</label>
+                                                       class="col-sm-2 control-label">รูปภาพ</label>
 
                                                 <div class="col-sm-10">
                                                     <img id="picture" src=""
                                                          width="100" height="100" alt=""
                                                          onmouseover="bigImg(this)" onmouseout="normalImg(this)"
                                                          onclick="window.open(this.src,'_blank')">
-                                                    <input type='file' name="fileUpload" id="fileUpload" multiple="multiple"
-                                                           accept="image/png, image/jpeg ,.pdf" onchange="readURL(this);"/>
+                                                    <input type='file' name="fileUpload" id="fileUpload"
+                                                           multiple="multiple"
+                                                           accept="image/png, image/jpeg ,.pdf"
+                                                           onchange="readURL(this);"/>
                                                     <label class="custom-file-label" for="chooseFile">เลือกไฟล์
-                                                        (ไฟล์ .jpg , .png , .pdf เท่านั้น)</label>
+                                                        (ไฟล์ .jpg , .png เท่านั้น)</label>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="default" class="col-sm-2 control-label">หัวข้อ
                                                     ประกาศ/ข่าวสาร</label>
+
                                                 <div class="col-sm-10">
                                                     <input type="text" name="topic" class="form-control"
                                                            id="topic"
@@ -229,20 +247,37 @@ if (strlen($_SESSION['alogin']) == "") {
                                             <div class="form-group">
                                                 <label for="default" class="col-sm-2 control-label">รายละเอียด
                                                     ประกาศ/ข่าวสาร</label>
+
                                                 <div class="col-sm-10">
                                                     <textarea rows="4" cols="50" name="topic_desc" class="form-control"
-                                                           id="topic_desc" value=""required="required" autocomplete="off"></textarea>
+                                                              id="topic_desc" value="" required="required"
+                                                              autocomplete="off"></textarea>
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="default" class="col-sm-2 control-label">Link URL
                                                     ที่เกี่ยวข้อง</label>
+
                                                 <div class="col-sm-10">
                                                     <input type="text" name="link" class="form-control"
                                                            id="link"
                                                            value="" autocomplete="off">
                                                 </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="default" class="col-sm-2 control-label">แนบไฟล์เอกสาร
+                                                    รูปภาพ PNG , JPG , PDF,WORD</label>
+                                                    <?php
+                                                    echo "<div class='col-sm-10'>";
+                                                    $max_no_img=5; // Maximum number of images value to be set here
+                                                    for($i=1; $i<=$max_no_img; $i++){
+                                                        echo "<input type=file name='upload_file[]' class='bginput' accept='.doc,.docx,.pdf,.jpg,.png'>";
+                                                    }
+                                                    echo "</div>";
+                                                    ?>
+
                                             </div>
 
                                             <div class="form-group">
@@ -318,8 +353,6 @@ if (strlen($_SESSION['alogin']) == "") {
             });
 
         </script>
-
-
 
 
     </body>

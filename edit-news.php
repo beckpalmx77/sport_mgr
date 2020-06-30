@@ -16,49 +16,49 @@ if (strlen($_SESSION['alogin']) == "") {
         } else {
 */
 
-            $topic = $_POST['topic'];
-            //$topic_desc = $mysqli -> real_escape_string($_POST['$topic_desc']);
-            $topic_desc = $_POST['topic_desc'];
-            $link = $_POST['link'];
-            $doc_date = $_POST['doc_date'];
+        $topic = $_POST['topic'];
+        //$topic_desc = $mysqli -> real_escape_string($_POST['$topic_desc']);
+        $topic_desc = $_POST['topic_desc'];
+        $link = $_POST['link'];
+        $doc_date = $_POST['doc_date'];
 
-            $sql = "update tblnews set topic=:topic,topic_desc=:topic_desc,link=:link,doc_date=:doc_date where id=:id ";
-            $query = $dbh->prepare($sql);
-            $query->bindParam(':topic', $topic, PDO::PARAM_STR);
-            $query->bindParam(':topic_desc', $topic_desc, PDO::PARAM_STR);
-            $query->bindParam(':link', $link, PDO::PARAM_STR);
-            $query->bindParam(':doc_date', $doc_date, PDO::PARAM_STR);
-            $query->bindParam(':id', $id, PDO::PARAM_STR);
-            $query->execute();
+        $sql = "update tblnews set topic=:topic,topic_desc=:topic_desc,link=:link,doc_date=:doc_date where id=:id ";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':topic', $topic, PDO::PARAM_STR);
+        $query->bindParam(':topic_desc', $topic_desc, PDO::PARAM_STR);
+        $query->bindParam(':link', $link, PDO::PARAM_STR);
+        $query->bindParam(':doc_date', $doc_date, PDO::PARAM_STR);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->execute();
 
-            if (strlen($_FILES["fileUpload"]["name"]) > 0) {
+        if (strlen($_FILES["fileUpload"]["name"]) > 0) {
 
-                $target_dir = "upload/";
+            $target_dir = "upload/";
 
-                $temp = explode(".", $_FILES["fileUpload"]["name"]);
+            $temp = explode(".", $_FILES["fileUpload"]["name"]);
 
-                $target_file = $target_dir . strtotime("now") . "-" . round(microtime(true)) . '.' . end($temp);
+            $target_file = $target_dir . strtotime("now") . "-" . round(microtime(true)) . '.' . end($temp);
 
-                $picture = $target_file;
+            $picture = $target_file;
 
-                if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
-                    $sql = "update tblnews set file_name=:picture where id=:id ";
-                    $query = $dbh->prepare($sql);
-                    $query->bindParam(':picture', $picture, PDO::PARAM_STR);
-                    $query->bindParam(':id', $id, PDO::PARAM_STR);
-                    $query->execute();
-                    $success = "Y";
-                } else {
-                    $success = "N";
-                }
+            if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
+                $sql = "update tblnews set file_name=:picture where id=:id ";
+                $query = $dbh->prepare($sql);
+                $query->bindParam(':picture', $picture, PDO::PARAM_STR);
+                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                $query->execute();
+                $success = "Y";
+            } else {
+                $success = "N";
             }
-
-            $msg = "ปรับปรุงข้อมูลเรียบร้อยแล้ว Update info successfully = " ;
-/*
         }
 
-        $error = "Something went wrong. Please try again " . $ext_msg;
-*/
+        $msg = "ปรับปรุงข้อมูลเรียบร้อยแล้ว Update info successfully = ";
+        /*
+                }
+
+                $error = "Something went wrong. Please try again " . $ext_msg;
+        */
 
     }
 
@@ -228,9 +228,11 @@ if (strlen($_SESSION['alogin']) == "") {
                                                     <div class="form-group">
                                                         <label for="default" class="col-sm-2 control-label">รายละเอียด
                                                             ประกาศ/ข่าวสาร</label>
+
                                                         <div class="col-sm-10">
                                                     <textarea rows="4" cols="50" name="topic_desc" class="form-control"
-                                                              id="topic_desc" required="required" autocomplete="off"><?php echo $result->topic_desc ?></textarea>
+                                                              id="topic_desc" required="required"
+                                                              autocomplete="off"><?php echo $result->topic_desc ?></textarea>
                                                         </div>
                                                     </div>
 
@@ -245,6 +247,42 @@ if (strlen($_SESSION['alogin']) == "") {
                                                                    autocomplete="off">
                                                         </div>
                                                     </div>
+
+                                                    <div class="form-group">
+                                                        <label for="default" class="col-sm-2 control-label">ไฟล์เอกสาร
+                                                            รูปภาพ PNG , JPG , PDF,WORD</label>
+
+                                                        <div class='col-sm-10'>
+                                                            <div class="menu">
+                                                                <a href="<?php echo htmlentities($result->file_1) ?>" target="_blank"><?php if ($result->file_1 != "") echo "CLICK ดูรายละเอียด ไฟล์ที่ 1" ?></a>
+                                                                <br>
+                                                                <a href="<?php echo htmlentities($result->file_2) ?>" target="_blank"><?php if ($result->file_2 != "") echo "CLICK ดูรายละเอียด ไฟล์ที่ 2" ?></a>
+                                                                <br>
+                                                                <a href="<?php echo htmlentities($result->file_3) ?>" target="_blank"><?php if ($result->file_3 != "") echo "CLICK ดูรายละเอียด ไฟล์ที่ 3" ?></a>
+                                                                <br>
+                                                                <a href="<?php echo htmlentities($result->file_4) ?>" target="_blank"><?php if ($result->file_4 != "") echo "CLICK ดูรายละเอียด ไฟล์ที่ 4" ?></a>
+                                                                <br>
+                                                                <a href="<?php echo htmlentities($result->file_5) ?>" target="_blank"><?php if ($result->file_5 != "") echo "CLICK ดูรายละเอียด ไฟล์ที่ 5" ?></a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="default" class="col-sm-2 control-label">แนบไฟล์เอกสาร
+                                                            รูปภาพ PNG , JPG , PDF,WORD</label>
+                                                        <?php
+                                                        echo "<div class='col-sm-10'>";
+                                                        $max_no_img = 5; // Maximum number of images value to be set here
+                                                        for ($i = 1; $i <= $max_no_img; $i++) {
+                                                            echo "ไฟล์ที่ " . $i;
+                                                            echo "<input type=file name='upload_file[]' class='bginput' accept='.doc,.docx,.pdf,.jpg,.png'>";
+                                                        }
+                                                        echo "</div>";
+                                                        ?>
+
+                                                    </div>
+
 
                                                     <div class="form-group">
                                                         <label for="date"
