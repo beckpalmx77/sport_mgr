@@ -51,9 +51,33 @@ if (strlen($_SESSION['alogin']) == "") {
             } else {
                 $success = "N";
             }
+
         }
 
-        $msg = "ปรับปรุงข้อมูลเรียบร้อยแล้ว Update info successfully = ";
+
+        $loop = 1 ;
+
+        while (list($key, $value) = each($_FILES['upload_file']['name'])) {
+
+            if (!empty($value)) {   // this will check if any blank field is entered
+                $filename = rand(1, 100000) . $value;    // filename stores the value
+                $filename = str_replace(" ", "_", $filename);// Add _ inplace of blank space in file name, you can remove this line
+                $add = "upload/$filename";   // upload directory path is set
+
+                copy($_FILES['upload_file']['tmp_name'][$key], $add);
+
+                $sql2 = "update tblnews set file_" . $loop . " = '" . $target_dir. $filename . "'  where id=:id ";
+                $query2 = $dbh->prepare($sql2);
+                $query2->bindParam(':id', $id, PDO::PARAM_STR);
+                $query2->execute();
+                $sql21 = $sql21 . " # " . $sql2 ;
+            }
+
+                $loop++;
+
+        }
+
+        $msg = "ปรับปรุงข้อมูลเรียบร้อยแล้ว Update info successfully = " ;
         /*
                 }
 

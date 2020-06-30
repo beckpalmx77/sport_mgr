@@ -13,16 +13,24 @@ if (isset($_GET['id'])) {
         $queryD->execute();
         $resultsD = $queryD->fetchAll(PDO::FETCH_OBJ);
         if ($queryD->rowCount() > 0) {
+
             foreach ($resultsD as $resultD) {
                 $rollid = $resultD->sid;
                 $delete_file = $resultD->file_name;
                 if ($delete_file <> "images/Document-icon.png") {
-                    if (unlink($delete_file))
-                    {
+                    if (unlink($delete_file)) {
                         $delete_success = "และไฟล์ภาพ";
                     }
                 }
+
             }
+
+            unlink($resultD->file_1);
+            unlink($resultD->file_2);
+            unlink($resultD->file_3);
+            unlink($resultD->file_4);
+            unlink($resultD->file_5);
+
         }
 
         $sql = "Delete from tblnews where id=:id";
@@ -289,18 +297,18 @@ if (strlen($_SESSION['alogin']) == "") {
     </script>
 
     <script type="text/javascript">
-/*
-        function delete_id(id, rollid) {
-            if (id == null) {
-                alert("Error Parameter");
-            }
-            else {
-                if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
-                    window.location.href = 'manage-edit-files.php?id=' + id + ',rollid=' + rollid;
-                }
-            }
-        }
-*/
+        /*
+         function delete_id(id, rollid) {
+         if (id == null) {
+         alert("Error Parameter");
+         }
+         else {
+         if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
+         window.location.href = 'manage-edit-files.php?id=' + id + ',rollid=' + rollid;
+         }
+         }
+         }
+         */
 
         function delete_id(id) {
             if (id == null) {
@@ -308,7 +316,7 @@ if (strlen($_SESSION['alogin']) == "") {
             }
             else {
                 if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
-                    window.location.href = 'manage-news-page.php?id=' + id ;
+                    window.location.href = 'manage-news-page.php?id=' + id;
                 }
             }
         }

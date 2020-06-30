@@ -63,9 +63,8 @@ if (strlen($_SESSION['alogin']) == "") {
                         $query2->bindParam(':id', $lastInsertId, PDO::PARAM_STR);
                         $query2->execute();
                         $sql21 = $sql21 . " | " . $sql2 ;
-                        $loop++;
-
                     }
+                        $loop++;
                 }
 
             }
