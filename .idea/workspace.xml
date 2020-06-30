@@ -28,52 +28,54 @@
       <file leaf-file-name="add-news.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/add-news.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.461538">
-              <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
               <folding>
-                <marker date="1593503780372" expanded="true" signature="401:513" placeholder="INSERT INTO ..tblnews..." />
-                <marker date="1593503780372" expanded="true" signature="1431:1481" placeholder="update tblne..." />
-                <marker date="1593503780372" expanded="true" signature="2483:2507" placeholder="update tblne..." />
-                <marker date="1593503780372" expanded="true" signature="2483:2522" placeholder="update tblne..." />
-                <marker date="1593503780372" expanded="true" signature="2483:2523" placeholder="update tblne..." />
-                <marker date="1593503780372" expanded="true" signature="2483:2569" placeholder="update tblne..." />
-                <marker date="1593503780372" expanded="true" signature="3134:3157" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="4191:4569" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="4225:4556" placeholder="{...}" />
-                <marker date="1593503780372" expanded="true" signature="4274:4546" placeholder="{...}" />
-                <marker date="1593503780372" expanded="true" signature="4368:4476" placeholder="{...}" />
-                <marker date="1593503780372" expanded="true" signature="4583:4642" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="4612:4642" placeholder="{...}" />
-                <marker date="1593503780372" expanded="true" signature="8445:8491" placeholder="SELECT * fro..tblnews..." />
-                <marker date="1593503780372" expanded="true" signature="13855:13944" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="14243:14957" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="14559:14906" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="14670:14851" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="15027:15402" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="15115:15351" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="15228:15296" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="16377:16718" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="16406:16699" placeholder="{...}" />
-                <marker date="1593503780372" expanded="true" signature="16497:16562" placeholder="{&quot;maximumSelectionLength&quot;: 2...}" />
-                <marker date="1593503780372" expanded="true" signature="16610:16683" placeholder="{...}" />
-                <marker date="1593503780372" expanded="true" signature="16736:17032" placeholder="..." />
-                <marker date="1593503780372" expanded="true" signature="16919:17015" placeholder="/*...*/" />
-                <marker date="1593503780372" expanded="true" signature="17064:17204" placeholder="//..." />
+                <marker date="1593508846313" expanded="true" signature="401:513" placeholder="INSERT INTO ..tblnews..." />
+                <marker date="1593508846313" expanded="true" signature="1431:1481" placeholder="update tblne..." />
+                <marker date="1593508846313" expanded="true" signature="2483:2569" placeholder="update tblne..." />
+                <marker date="1593508846313" expanded="true" signature="3133:3156" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit-news.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="edit-news.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/edit-news.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49827588">
-              <caret line="260" column="200" selection-start-line="260" selection-start-column="200" selection-end-line="260" selection-end-column="200" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="280" column="203" selection-start-line="280" selection-start-column="203" selection-end-line="280" selection-end-column="203" />
               <folding>
-                <marker date="1593507128506" expanded="true" signature="711:808" placeholder="update tblne..." />
-                <marker date="1593507128506" expanded="true" signature="1612:1662" placeholder="update tblne..." />
-                <marker date="1593507128506" expanded="true" signature="7576:7610" placeholder="SELECT * fro..tblnews..." />
+                <marker date="1593510883784" expanded="true" signature="711:808" placeholder="update tblne..." />
+                <marker date="1593510883784" expanded="true" signature="1612:1662" placeholder="update tblne..." />
+                <marker date="1593510883784" expanded="true" signature="2570:2656" placeholder="update tblne..." />
+                <marker date="1593510883784" expanded="true" signature="8494:8528" placeholder="SELECT * fro..tblnews..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manage-news-page.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manage-news-page.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-110.5">
+              <caret line="223" column="132" selection-start-line="223" selection-start-column="132" selection-end-line="223" selection-end-column="132" />
+              <folding>
+                <marker date="1593511238369" expanded="true" signature="157:191" placeholder="Select * fro..tblnews..." />
+                <marker date="1593511238369" expanded="true" signature="1295:1327" placeholder="Delete from ..." />
+                <marker date="1593511238369" expanded="true" signature="8769:8815" placeholder="SELECT tblne..tblnews..." />
+                <marker date="1593511238369" expanded="true" signature="11381:11454" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.43965518">
+              <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -137,11 +139,11 @@
         <option value="$PROJECT_DIR$/index-main.php" />
         <option value="$PROJECT_DIR$/create-borrow-doc.php" />
         <option value="$PROJECT_DIR$/includes/topbar.php" />
-        <option value="$PROJECT_DIR$/manage-news-page.php" />
         <option value="$PROJECT_DIR$/tests/test_upload.php" />
         <option value="$PROJECT_DIR$/tests/test_file_upload.php" />
         <option value="$PROJECT_DIR$/add-news.php" />
         <option value="$PROJECT_DIR$/edit-news.php" />
+        <option value="$PROJECT_DIR$/manage-news-page.php" />
       </list>
     </option>
   </component>
@@ -190,6 +192,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -211,7 +214,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -284,7 +286,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -533,23 +535,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="8.587931">
           <caret line="293" column="80" selection-start-line="293" selection-start-column="80" selection-end-line="293" selection-end-column="80" />
-          <folding>
-            <marker date="1593051029810" expanded="true" signature="703:764" placeholder="update tblst..." />
-            <marker date="1593051029810" expanded="true" signature="2211:2852" placeholder="update tblst..." />
-            <marker date="1593051029810" expanded="true" signature="10097:11166" placeholder="SELECT tblst..tblstudents..." />
-            <marker date="1593051029810" expanded="true" signature="10194:10289" placeholder="select tblsp..tblsporttype..." />
-            <marker date="1593051029810" expanded="true" signature="10336:10431" placeholder="select tblsp..tblsporttype..." />
-            <marker date="1593051029810" expanded="true" signature="10478:10573" placeholder="select tblsp..tblsporttype..." />
-            <marker date="1593051029810" expanded="true" signature="10620:10712" placeholder="select tbled..tbledutype..." />
-            <marker date="1593051029810" expanded="true" signature="10762:10847" placeholder="select tbled..tbleducat..." />
-            <marker date="1593051029810" expanded="true" signature="16466:16489" placeholder="SELECT * fro..tbleducat..." />
-            <marker date="1593051029810" expanded="true" signature="18211:18235" placeholder="SELECT * fro..tbledutype..." />
-            <marker date="1593051029810" expanded="true" signature="35535:35561" placeholder="SELECT * fro..tblsporttype..." />
-            <marker date="1593051029810" expanded="true" signature="37589:37615" placeholder="SELECT * fro..tblsporttype..." />
-            <marker date="1593051029810" expanded="true" signature="39642:39668" placeholder="SELECT * fro..tblsporttype..." />
-            <marker date="1593051029810" expanded="true" signature="45874:45898" placeholder="SELECT * fro..tblclasses..." />
-            <marker date="1593051029810" expanded="true" signature="47918:47943" placeholder="SELECT * fro..tblsubjects..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -577,7 +562,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.58965516">
           <caret line="35" column="1" selection-start-line="35" selection-start-column="1" selection-end-line="35" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -606,17 +590,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.181818">
           <caret line="51" column="56" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="56" />
-          <folding>
-            <marker date="1593243157785" expanded="true" signature="1322:1910" placeholder="INSERT INTO ..tblstudents..." />
-            <marker date="1593243157785" expanded="true" signature="4428:4489" placeholder="update tblst..." />
-            <marker date="1593243157785" expanded="true" signature="13157:13180" placeholder="SELECT * fro..tbleducat..." />
-            <marker date="1593243157785" expanded="true" signature="14696:14720" placeholder="SELECT * fro..tbledutype..." />
-            <marker date="1593243157785" expanded="true" signature="25982:26008" placeholder="SELECT * fro..tblsporttype..." />
-            <marker date="1593243157785" expanded="true" signature="27808:27834" placeholder="SELECT * fro..tblsporttype..." />
-            <marker date="1593243157785" expanded="true" signature="29633:29659" placeholder="SELECT * fro..tblsporttype..." />
-            <marker date="1593243157785" expanded="true" signature="34008:34032" placeholder="SELECT * fro..tblclasses..." />
-            <marker date="1593243157785" expanded="true" signature="35924:35949" placeholder="SELECT * fro..tblsubjects..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -627,22 +600,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3224138">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/read-news.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.58965516">
           <caret line="284" column="33" selection-start-line="284" selection-start-column="33" selection-end-line="284" selection-end-column="33" />
-          <folding>
-            <marker date="1593395810707" expanded="true" signature="735:832" placeholder="update tblne..." />
-            <marker date="1593395810707" expanded="true" signature="1692:1742" placeholder="update tblne..." />
-            <marker date="1593395810707" expanded="true" signature="7255:7289" placeholder="SELECT * fro..tblnews..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -657,7 +618,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.81488204">
           <caret line="91" column="9" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -676,23 +636,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manage-news-page.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2896552">
-          <caret line="207" column="115" selection-start-line="207" selection-start-column="115" selection-end-line="207" selection-end-column="115" />
-          <folding>
-            <marker date="1593421833588" expanded="true" signature="157:191" placeholder="Select * fro..tblnews..." />
-            <marker date="1593421833588" expanded="true" signature="822:854" placeholder="Delete from ..." />
-            <marker date="1593421833588" expanded="true" signature="8296:8342" placeholder="SELECT tblne..tblnews..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/includes/topbar.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.44310346">
           <caret line="31" column="151" selection-start-line="31" selection-start-column="151" selection-end-line="31" selection-end-column="151" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -700,12 +647,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.029310346">
           <caret line="288" column="50" selection-start-line="288" selection-start-column="50" selection-end-line="288" selection-end-column="50" />
-          <folding>
-            <marker date="1593417260821" expanded="true" signature="805:821" placeholder="INSERT INTO ..tblsport_equipment..." />
-            <marker date="1593417260821" expanded="true" signature="805:1097" placeholder="INSERT INTO ..tblborrow_doc..." />
-            <marker date="1593417260821" expanded="true" signature="10118:10162" placeholder="SELECT * fro..tblstudents..." />
-            <marker date="1593417260821" expanded="true" signature="11891:11935" placeholder="SELECT * fro..tblsport_equipment..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -713,10 +654,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.58965516">
           <caret line="34" column="41" selection-start-line="34" selection-start-column="41" selection-end-line="34" selection-end-column="41" />
-          <folding>
-            <marker date="1593503386703" expanded="true" signature="571:653" placeholder="..." />
-            <marker date="1593503386703" expanded="true" signature="593:648" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -724,7 +661,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20517242">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -732,56 +668,53 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.762069">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/add-news.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.461538">
-          <caret line="46" column="35" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding>
-            <marker date="1593503780372" expanded="true" signature="401:513" placeholder="INSERT INTO ..tblnews..." />
-            <marker date="1593503780372" expanded="true" signature="1431:1481" placeholder="update tblne..." />
-            <marker date="1593503780372" expanded="true" signature="2483:2507" placeholder="update tblne..." />
-            <marker date="1593503780372" expanded="true" signature="2483:2522" placeholder="update tblne..." />
-            <marker date="1593503780372" expanded="true" signature="2483:2523" placeholder="update tblne..." />
-            <marker date="1593503780372" expanded="true" signature="2483:2569" placeholder="update tblne..." />
-            <marker date="1593503780372" expanded="true" signature="3134:3157" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="4191:4569" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="4225:4556" placeholder="{...}" />
-            <marker date="1593503780372" expanded="true" signature="4274:4546" placeholder="{...}" />
-            <marker date="1593503780372" expanded="true" signature="4368:4476" placeholder="{...}" />
-            <marker date="1593503780372" expanded="true" signature="4583:4642" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="4612:4642" placeholder="{...}" />
-            <marker date="1593503780372" expanded="true" signature="8445:8491" placeholder="SELECT * fro..tblnews..." />
-            <marker date="1593503780372" expanded="true" signature="13855:13944" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="14243:14957" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="14559:14906" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="14670:14851" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="15027:15402" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="15115:15351" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="15228:15296" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="16377:16718" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="16406:16699" placeholder="{...}" />
-            <marker date="1593503780372" expanded="true" signature="16497:16562" placeholder="{&quot;maximumSelectionLength&quot;: 2...}" />
-            <marker date="1593503780372" expanded="true" signature="16610:16683" placeholder="{...}" />
-            <marker date="1593503780372" expanded="true" signature="16736:17032" placeholder="..." />
-            <marker date="1593503780372" expanded="true" signature="16919:17015" placeholder="/*...*/" />
-            <marker date="1593503780372" expanded="true" signature="17064:17204" placeholder="//..." />
+            <marker date="1593508846313" expanded="true" signature="401:513" placeholder="INSERT INTO ..tblnews..." />
+            <marker date="1593508846313" expanded="true" signature="1431:1481" placeholder="update tblne..." />
+            <marker date="1593508846313" expanded="true" signature="2483:2569" placeholder="update tblne..." />
+            <marker date="1593508846313" expanded="true" signature="3133:3156" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/edit-news.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49827588">
-          <caret line="260" column="200" selection-start-line="260" selection-start-column="200" selection-end-line="260" selection-end-column="200" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="280" column="203" selection-start-line="280" selection-start-column="203" selection-end-line="280" selection-end-column="203" />
           <folding>
-            <marker date="1593507128506" expanded="true" signature="711:808" placeholder="update tblne..." />
-            <marker date="1593507128506" expanded="true" signature="1612:1662" placeholder="update tblne..." />
-            <marker date="1593507128506" expanded="true" signature="7576:7610" placeholder="SELECT * fro..tblnews..." />
+            <marker date="1593510883784" expanded="true" signature="711:808" placeholder="update tblne..." />
+            <marker date="1593510883784" expanded="true" signature="1612:1662" placeholder="update tblne..." />
+            <marker date="1593510883784" expanded="true" signature="2570:2656" placeholder="update tblne..." />
+            <marker date="1593510883784" expanded="true" signature="8494:8528" placeholder="SELECT * fro..tblnews..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage-news-page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-110.5">
+          <caret line="223" column="132" selection-start-line="223" selection-start-column="132" selection-end-line="223" selection-end-column="132" />
+          <folding>
+            <marker date="1593511238369" expanded="true" signature="157:191" placeholder="Select * fro..tblnews..." />
+            <marker date="1593511238369" expanded="true" signature="1295:1327" placeholder="Delete from ..." />
+            <marker date="1593511238369" expanded="true" signature="8769:8815" placeholder="SELECT tblne..tblnews..." />
+            <marker date="1593511238369" expanded="true" signature="11381:11454" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43965518">
+          <caret line="15" column="57" selection-start-line="15" selection-start-column="57" selection-end-line="15" selection-end-column="57" />
+          <folding />
         </state>
       </provider>
     </entry>
