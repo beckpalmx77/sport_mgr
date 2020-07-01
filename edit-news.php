@@ -68,8 +68,9 @@ if (strlen($_SESSION['alogin']) == "") {
 
                 copy($_FILES['upload_file']['tmp_name'][$key], $add);
 
-                $sql2 = "update tblnews set file_" . $loop . " = '" . $target_dir . $filename . "'  where id=:id ";
+                $sql2 = "update tblnews set file_" . $loop . " =:filesave  where id=:id ";
                 $query2 = $dbh->prepare($sql2);
+                $query2->bindParam(':filesave', $add, PDO::PARAM_STR);
                 $query2->bindParam(':id', $id, PDO::PARAM_STR);
                 $query2->execute();
                 $sql21 = $sql21 . " # " . $sql2;
@@ -79,7 +80,7 @@ if (strlen($_SESSION['alogin']) == "") {
 
         }
 
-        $msg = "ปรับปรุงข้อมูลเรียบร้อยแล้ว Update info successfully = ";
+        $msg = "ปรับปรุงข้อมูลเรียบร้อยแล้ว Update info successfully " . $add;
         /*
                 }
 
@@ -294,7 +295,9 @@ if (strlen($_SESSION['alogin']) == "") {
                                                                     if (${"file_" . $i} != "") { ?>
                                                                         <a href="<?php echo htmlentities(${"file_" . $i}) ?>"
                                                                            target="_blank">CLICK ดูรายละเอียด ไฟล์ที่ <?php echo $i ?>
-                                                                            <img src="<?php echo GetIconPNG(${"file_" . $i}) ?>" width="30" height="30"></a>
+                                                                            <img src="<?php echo GetIconPNG(${"file_" . $i}) ?>" width="30" height="30">
+                                                                            <?php echo str_replace("upload/","",htmlentities(${"file_" . $i})) ?>
+                                                                            </a>
                                                                         <?php
                                                                         echo "<br><br>";
                                                                     }

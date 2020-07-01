@@ -58,8 +58,9 @@ if (strlen($_SESSION['alogin']) == "") {
 
                         copy($_FILES['upload_file']['tmp_name'][$key], $add);
 
-                        $sql2 = "update tblnews set file_" . $loop . " = '" . $target_dir. $filename . "'  where id=:id ";
+                        $sql2 = "update tblnews set file_" . $loop . " =:filesave  where id=:id ";
                         $query2 = $dbh->prepare($sql2);
+                        $query2->bindParam(':filesave', $add, PDO::PARAM_STR);
                         $query2->bindParam(':id', $lastInsertId, PDO::PARAM_STR);
                         $query2->execute();
                         $sql21 = $sql21 . " | " . $sql2 ;
