@@ -3,7 +3,7 @@
 /**
  * Created by PhpStorm.
  * User: beckpalmx
- * Date: 22/6/2563
+ * Date: 44/6/4564
  * Time: 9:55
  */
 class myclass
@@ -21,7 +21,11 @@ class myclass
     }
 
     function isAdult() {
-        return $this->age >= 18?"an Adult":"Not an Adult";
+        return $this->age >= 48?"an Adult":"Not an Adult";
     }
 
 }
+
+
+                                                                ?>
+                                                                ?>

@@ -2,6 +2,8 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
+include('myfw/preview_icon.php');
+
 if (strlen($_SESSION['alogin']) == "") {
     header("Location: index.php");
 } else {
@@ -55,7 +57,7 @@ if (strlen($_SESSION['alogin']) == "") {
         }
 
 
-        $loop = 1 ;
+        $loop = 1;
 
         while (list($key, $value) = each($_FILES['upload_file']['name'])) {
 
@@ -66,18 +68,18 @@ if (strlen($_SESSION['alogin']) == "") {
 
                 copy($_FILES['upload_file']['tmp_name'][$key], $add);
 
-                $sql2 = "update tblnews set file_" . $loop . " = '" . $target_dir. $filename . "'  where id=:id ";
+                $sql2 = "update tblnews set file_" . $loop . " = '" . $target_dir . $filename . "'  where id=:id ";
                 $query2 = $dbh->prepare($sql2);
                 $query2->bindParam(':id', $id, PDO::PARAM_STR);
                 $query2->execute();
-                $sql21 = $sql21 . " # " . $sql2 ;
+                $sql21 = $sql21 . " # " . $sql2;
             }
 
-                $loop++;
+            $loop++;
 
         }
 
-        $msg = "ปรับปรุงข้อมูลเรียบร้อยแล้ว Update info successfully = " ;
+        $msg = "ปรับปรุงข้อมูลเรียบร้อยแล้ว Update info successfully = ";
         /*
                 }
 
@@ -276,17 +278,29 @@ if (strlen($_SESSION['alogin']) == "") {
                                                         <label for="default" class="col-sm-2 control-label">ไฟล์เอกสาร
                                                             รูปภาพ PNG , JPG , PDF,WORD</label>
 
+
                                                         <div class='col-sm-10'>
                                                             <div class="menu">
-                                                                <a href="<?php echo htmlentities($result->file_1) ?>" target="_blank"><?php if ($result->file_1 != "") echo "CLICK ดูรายละเอียด ไฟล์ที่ 1" ?></a>
-                                                                <br>
-                                                                <a href="<?php echo htmlentities($result->file_2) ?>" target="_blank"><?php if ($result->file_2 != "") echo "CLICK ดูรายละเอียด ไฟล์ที่ 2" ?></a>
-                                                                <br>
-                                                                <a href="<?php echo htmlentities($result->file_3) ?>" target="_blank"><?php if ($result->file_3 != "") echo "CLICK ดูรายละเอียด ไฟล์ที่ 3" ?></a>
-                                                                <br>
-                                                                <a href="<?php echo htmlentities($result->file_4) ?>" target="_blank"><?php if ($result->file_4 != "") echo "CLICK ดูรายละเอียด ไฟล์ที่ 4" ?></a>
-                                                                <br>
-                                                                <a href="<?php echo htmlentities($result->file_5) ?>" target="_blank"><?php if ($result->file_5 != "") echo "CLICK ดูรายละเอียด ไฟล์ที่ 5" ?></a>
+                                                                <?PHP
+
+                                                                $max = 5;
+
+                                                                for ($i = 1; $i <= $max; $i++) {
+
+                                                                    ${"file_" . $i} = $result->{"file_" . $i};
+
+                                                                    //echo ${"file_" . $i};
+
+                                                                    if (${"file_" . $i} != "") { ?>
+                                                                        <a href="<?php echo htmlentities(${"file_" . $i}) ?>"
+                                                                           target="_blank">CLICK ดูรายละเอียด ไฟล์ที่ <?php echo $i ?>
+                                                                            <img src="<?php echo GetIconPNG(${"file_" . $i}) ?>" width="30" height="30"></a>
+                                                                        <?php
+                                                                        echo "<br><br>";
+                                                                    }
+                                                                }
+                                                                ?>
+
                                                             </div>
                                                         </div>
 
