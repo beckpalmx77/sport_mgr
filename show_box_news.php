@@ -26,10 +26,10 @@ if ($query->rowCount() > 0) {
         <div class="col-sm-6 col-md-12">
             <div class="thumbnail">
                 <div class="caption">
-                    <a href="read-news-other.php?id=<?php echo $result->id; ?>" target="_blank"><p><i
+                    <a href="read-news-other.php?id=<?php echo $result->id; ?>" target="_blank"><p <?php if($cnt == 1) {echo "style='font-family:mitrextralight; color:green'";} else {echo "style='font-family:mitrextralight; color:grey'";} ?>><i
                                 class="fa fa-paper-plane" <?php if($cnt == 1) { echo "style=color:red;" ; } else { echo "style=color:grey;" ; } ?>
                                 aria-hidden="true"></i>
-                            <?php if($cnt == 1) { echo  $result->topic; } else { echo $result->topic; } ?></p></a>
+                            <?php echo  $result->topic; ?></p></a>
                 </div>
             </div>
         </div>

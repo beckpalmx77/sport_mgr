@@ -99,7 +99,28 @@
         <?php include('slide_show.php'); ?>
 
     </section>
+    <!--h3><p class="text-success">ข่าวสาร / ประกาศ</p></h3>
+    <section class="section-content py-12">
 
+        <div class="row">
+            <div class="container-fluid my-class">
+                <div class="container">
+
+
+                </div>
+            </div>
+        </div-->
+
+
+    <!--nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><h3><p class="text-success">ข่าวสาร / ประกาศ</p></h3></li>
+        </ol>
+        <ul class="nav nav-pills nav-stacked">
+            <!--li class="active"><a href="#"> <h3><p class="text-success">ข่าวสาร / ประกาศ</p></h3></a></li-->
+    <!--?php include('show_box_news.php'); ?-->
+    <!--/ul>
+</nav-->
 
     <div class="card">
         <div class="card-header card bg-success text-white"><h3><i class="fa fa-newspaper-o"></i>&nbsp;&nbsp;ข่าวสาร /
@@ -112,7 +133,7 @@
                 &nbsp;&nbsp;อ่าน ข่าว/ประกาศ ทั้งหมด</a>
             </p>
             <?php include('show_box_news.php'); ?>
-            <!--p class="card-text"></p-->
+            <!--p class="card-text">With supporting text below as a natural lead-in to additional content.</p-->
         </div>
     </div>
 </div>
