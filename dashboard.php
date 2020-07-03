@@ -2,6 +2,8 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
+include("includes/lang.php");
+
 if (strlen($_SESSION['alogin']) == "") {
     header("Location: index.php");
 } else {
@@ -13,7 +15,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Athlete Record Management System | Dashboard</title>
+        <title>Sports And Recreation Record System | Dashboard</title>
         <link rel="icon" type="image/png" sizes="16x16" href="images/icon/favicon-16x16.png">
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen">
@@ -26,7 +28,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <link rel="stylesheet" href="css/main.css" media="screen">
         <script src="js/modernizr/modernizr.min.js"></script>
     </head>
-    <body class="top-navbar-fixed">
+    <body class="top-navbar-fixed" >
     <div class="main-wrapper">
         <?php include('includes/topbar.php'); ?>
         <div class="content-wrapper">
@@ -38,54 +40,41 @@ if (strlen($_SESSION['alogin']) == "") {
                     <div class="container-fluid">
                         <div class="row page-title-div">
                             <div class="col-sm-6">
-                                <h2 class="title">Dashboard</h2>
-
+                                <!--h2 class="title">Dashboard</h2-->
+                                <img src="images/logo-name-1.png" alt="Logo" style="width:280px;">
                             </div>
+                            <div class="col-sm-6">
+                                <a href="#" class="text-success"><p style="color:darkgreen;">กองพัฒนานักศึกษา เลขที่ 340 ถ.สุรนารายณ์ อ.เมือง จ.นครราชสีมา 30000 โทรศัพท์ <i class="fa fa-phone"></i> 044-009009 ต่อ 3420</p></a>
+                            </div>
+
                             <!-- /.col-sm-6 -->
-                        </div>
-                        <!-- /.row -->
+                        </div>                        <!-- /.row -->
 
                     </div>
                     <!-- /.container-fluid -->
-
-                    <section class="section">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                                    <a class="dashboard-stat bg-primary" href="manage-students.php">
-                                        <?php
-                                        $sql1 = "SELECT StudentId from tblstudents ";
-                                        $query1 = $dbh->prepare($sql1);
-                                        $query1->execute();
-                                        $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                                        $totalstudents = $query1->rowCount();
-                                        ?>
-
-                                        <span class="number counter"><?php echo htmlentities($totalstudents); ?></span>
-                                        <span class="name">จำนวนนักกีฬาในระบบ</span>
-                                        <span class="bg-icon"><i class="fa fa-users"></i></span>
-                                    </a>
-                                    <!-- /.dashboard-stat -->
+                    <div class="container">
+                        <div class="row my-2">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <?php include("chart_total_ath.php"); ?>
+                                    </div>
                                 </div>
-                                <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
-                                <?php include("get_news.php");?>
-                                <!--?php include("news_page.php");?-->
                             </div>
                         </div>
-                        <!-- /.main-page -->
-                    </section>
+                    </div>
                 </div>
                 <!-- /.content-container -->
 
             </div>
             <!-- /.content-wrapper -->
 
+
+
         </div>
 
     </div>
     <!-- /.main-wrapper -->
-
-
 
     <!-- ========== COMMON JS FILES ========== -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
@@ -112,6 +101,7 @@ if (strlen($_SESSION['alogin']) == "") {
     <script src="js/production-chart.js"></script>
     <script src="js/traffic-chart.js"></script>
     <script src="js/task-list.js"></script>
+
     <script>
         $(function () {
 
@@ -139,7 +129,7 @@ if (strlen($_SESSION['alogin']) == "") {
                 "showMethod": "fadeIn",
                 "hideMethod": "fadeOut"
             }
-            toastr["success"]("Welcome to Athlete Record Management System!");
+            //toastr["success"]("Welcome to Sports And Recreation Record System!");
 
         });
     </script>

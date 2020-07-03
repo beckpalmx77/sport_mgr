@@ -11,7 +11,7 @@
         <div class="sidebar-nav">
             <ul class="side-nav color-gray">
                 <li class="nav-header">
-                    <span class="">Athlete Record Management System</span>
+                    <span class="">Sports And Recreation Record System</span>
                 </li>
                 <li>
                     <a href="dashboard.php"><i class="fa fa-dashboard"></i><span>Dashboard</span> </a>

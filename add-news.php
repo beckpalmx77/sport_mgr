@@ -5,13 +5,17 @@ include('includes/config.php');
 if (strlen($_SESSION['alogin']) == "") {
     header("Location: index.php");
 } else {
-    if (isset($_POST['submit'])) {
 
+    $cur_date = (substr(date("Y-m-d"),8,2)) . "-" . (substr(date("Y-m-d"),5,2)) . "-" . (substr(date("Y-m-d"),0,4) + 543) ;
+
+    if (isset($_POST['submit'])) {
         $news_id = $_POST['news_id'];
         $topic = $_POST['topic'];
         $topic_desc = $_POST['topic_desc'];
         $link = $_POST['link'];
-        $doc_date = $_POST['doc_date'];
+
+        $doc_date = $_POST['doc_date']=="" ? $cur_date : $_POST['doc_date'] ;
+
 
         $sql = "INSERT INTO  tblnews(news_id,topic,topic_desc,link,doc_date) VALUES(:news_id,:topic,:topic_desc,:link,:doc_date)";
 
@@ -52,8 +56,11 @@ if (strlen($_SESSION['alogin']) == "") {
                 while (list($key, $value) = each($_FILES['upload_file']['name'])) {
 
                     if (!empty($value)) {   // this will check if any blank field is entered
-                        $filename = rand(1, 100000) . $value;    // filename stores the value
-                        $filename = str_replace(" ", "_", $filename);// Add _ inplace of blank space in file name, you can remove this line
+
+                        //$filename = rand(1, 100000) . $value;    // filename stores the value
+                        //$filename = str_replace(" ", "_", $filename);// Add _ inplace of blank space in file name, you can remove this line
+
+                        $filename = $value;
                         $add = "upload/$filename";   // upload directory path is set
 
                         copy($_FILES['upload_file']['tmp_name'][$key], $add);
@@ -286,6 +293,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                                 <div class="col-sm-4">
                                                     <input id="doc_date" name="doc_date" class="form-control"
                                                            required="required"
+                                                           value=""
                                                            placeholder="วัน/เดือน/ปี" readonly="true">
                                                 </div>
                                             </div>

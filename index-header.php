@@ -1,8 +1,7 @@
 
     <div class="bg-warning py-3">
         <div class="container">
-            <a href="#" class="text-success">กองพัฒนานักศึกษา เลขที่ 340 ถนนสุรนารายณ์ อำเภอเมือง จังหวัดนครราชสีมา
-                30000 โทรศัพท์ 044-009009 ต่อ 3420</a>
+            <a href="index-main.php" class="text-white"><p style="font-family:kanitextrabold_italic;"><span style="color:darkolivegreen;font-weight:bold;font-size: 130%;"><?php echo $system_name_th . " | " . $system_name_en?></span></p></a>
         </div>
     </div>
 

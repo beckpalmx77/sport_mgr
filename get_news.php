@@ -9,7 +9,7 @@
 
 <?php
 
-include('includes/config.php');
+include_once('includes/config.php');
 
 $sql = "SELECT tblnews.* from tblnews order by id desc limit 10";
 $query = $dbh->prepare($sql);

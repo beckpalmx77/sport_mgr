@@ -1,9 +1,11 @@
-  <nav class="navbar top-navbar bg-white box-shadow">
+<?php include("includes/lang.php"); ?>
+
+  <nav class="navbar top-navbar bg-success box-shadow">
             	<div class="container-fluid">
                     <div class="row">
                         <div class="navbar-header no-padding">
                 			<a class="navbar-brand" href="dashboard.php">
-                			    ARMS | <?php echo $_SESSION['user_name'] ?>
+                			   <?php echo "SARRS | " . $_SESSION['user_name'] ?>
                 			</a>
                             <span class="small-nav-handle hidden-sm hidden-xs"><i class="fa fa-outdent"></i></span>
                 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
@@ -24,12 +26,16 @@
                 				<li class="hidden-xs hidden-xs"><!-- <a href="#">My Tasks</a> --></li>
                                
                 			</ul>
+
+							<a class="navbar-brand" href="dashboard.php">
+								<p style="color: yellow"><?php echo $system_name_th . " | " . $system_name_en?></p>
+							</a>
                             <!-- /.nav navbar-nav -->
 
                 			<ul class="nav navbar-nav navbar-right" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                              
                 				
-                				    <li><a href="logout.php" class="color-danger text-center"><i class="fa fa-sign-out"></i> ออกจากระบบ Logout</a></li>
+                				    <li><a href="logout.php" class="color-white text-center"><i class="fa fa-sign-out"></i> ออกจากระบบ Logout</a></li>
                 					
                 		
                             

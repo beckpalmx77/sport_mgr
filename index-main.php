@@ -1,12 +1,13 @@
 <?php
     include("login.php");
+    include("includes/lang.php");
 ?>
 
 <html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>ระบบจัดเก็บข้อมูลกีฬาและนันทนาการ - Athlete Record Management System | ARMS</title>
+    <title><?php echo $system_name_th . "-" . $system_name_en?></title>
     <link rel="stylesheet" href="css/font-awesome.min.css" media="screen">
 </head>
 

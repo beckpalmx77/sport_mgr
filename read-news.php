@@ -2,6 +2,8 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
+include('myfw/preview_icon.php');
+
 if (strlen($_SESSION['alogin']) == "") {
     header("Location: index.php");
 } else {
@@ -16,49 +18,49 @@ if (strlen($_SESSION['alogin']) == "") {
         } else {
 */
 
-            $topic = $_POST['topic'];
-            //$topic_desc = $mysqli -> real_escape_string($_POST['$topic_desc']);
-            $topic_desc = $_POST['topic_desc'];
-            $link = $_POST['link'];
-            $doc_date = $_POST['doc_date'];
+        $topic = $_POST['topic'];
+        //$topic_desc = $mysqli -> real_escape_string($_POST['$topic_desc']);
+        $topic_desc = $_POST['topic_desc'];
+        $link = $_POST['link'];
+        $doc_date = $_POST['doc_date'];
 
-            $sql = "update tblnews set topic=:topic,topic_desc=:topic_desc,link=:link,doc_date=:doc_date where id=:id ";
-            $query = $dbh->prepare($sql);
-            $query->bindParam(':topic', $topic, PDO::PARAM_STR);
-            $query->bindParam(':topic_desc', $topic_desc, PDO::PARAM_STR);
-            $query->bindParam(':link', $link, PDO::PARAM_STR);
-            $query->bindParam(':doc_date', $doc_date, PDO::PARAM_STR);
-            $query->bindParam(':id', $id, PDO::PARAM_STR);
-            $query->execute();
+        $sql = "update tblnews set topic=:topic,topic_desc=:topic_desc,link=:link,doc_date=:doc_date where id=:id ";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':topic', $topic, PDO::PARAM_STR);
+        $query->bindParam(':topic_desc', $topic_desc, PDO::PARAM_STR);
+        $query->bindParam(':link', $link, PDO::PARAM_STR);
+        $query->bindParam(':doc_date', $doc_date, PDO::PARAM_STR);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->execute();
 
-            if (strlen($_FILES["fileUpload"]["name"]) > 0) {
+        if (strlen($_FILES["fileUpload"]["name"]) > 0) {
 
-                $target_dir = "upload/";
+            $target_dir = "upload/";
 
-                $temp = explode(".", $_FILES["fileUpload"]["name"]);
+            $temp = explode(".", $_FILES["fileUpload"]["name"]);
 
-                $target_file = $target_dir . strtotime("now") . "-" . round(microtime(true)) . '.' . end($temp);
+            $target_file = $target_dir . strtotime("now") . "-" . round(microtime(true)) . '.' . end($temp);
 
-                $picture = $target_file;
+            $picture = $target_file;
 
-                if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
-                    $sql = "update tblnews set file_name=:picture where id=:id ";
-                    $query = $dbh->prepare($sql);
-                    $query->bindParam(':picture', $picture, PDO::PARAM_STR);
-                    $query->bindParam(':id', $id, PDO::PARAM_STR);
-                    $query->execute();
-                    $success = "Y";
-                } else {
-                    $success = "N";
-                }
+            if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file)) {
+                $sql = "update tblnews set file_name=:picture where id=:id ";
+                $query = $dbh->prepare($sql);
+                $query->bindParam(':picture', $picture, PDO::PARAM_STR);
+                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                $query->execute();
+                $success = "Y";
+            } else {
+                $success = "N";
             }
-
-            $msg = "ข้อมูลเรียบร้อยแล้ว Update info successfully = " ;
-/*
         }
 
-        $error = "Something went wrong. Please try again " . $ext_msg;
-*/
+        $msg = "ข้อมูลเรียบร้อยแล้ว Update info successfully = ";
+        /*
+                }
+
+                $error = "Something went wrong. Please try again " . $ext_msg;
+        */
 
     }
 
@@ -70,7 +72,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ARMS Admin  ประกาศ/ข่าวสาร</title>
+        <title>ARMS Admin ประกาศ/ข่าวสาร</title>
         <link rel="icon" type="image/png" sizes="16x16" href="images/icon/favicon-16x16.png">
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen">
@@ -193,7 +195,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                                                class="col-sm-2 control-label"></label>
 
                                                         <div class="col-sm-10">
-                                                            <img id="picture" src="<?php echo htmlentities($file) ?>"
+                                                            <img id="picture" class="rounded" src="<?php echo htmlentities($file) ?>"
                                                                  width="100" height="100" alt=""
                                                                  onmouseover="bigImg(this)" onmouseout="normalImg(this)"
                                                                  onclick="window.open(this.src,'_blank')">
@@ -203,6 +205,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                                     <div class="form-group">
                                                         <label for="default" class="col-sm-2 control-label">หัวข้อ
                                                             ประกาศ/ข่าวสาร</label>
+
                                                         <div class="col-sm-10">
                                                             <input type="text" name="topic" class="form-control"
                                                                    id="topic" readonly="true"
@@ -214,9 +217,46 @@ if (strlen($_SESSION['alogin']) == "") {
                                                     <div class="form-group">
                                                         <label for="default" class="col-sm-2 control-label">รายละเอียด
                                                             ประกาศ/ข่าวสาร</label>
+
                                                         <div class="col-sm-10">
-                                                    <textarea readonly rows="20" cols="50" name="topic_desc" class="form-control"
-                                                              id="topic_desc" required="required" autocomplete="off"><?php echo $result->topic_desc ?></textarea>
+                                                    <textarea readonly rows="20" cols="50" name="topic_desc"
+                                                              class="form-control"
+                                                              id="topic_desc" required="required"
+                                                              autocomplete="off"><?php echo $result->topic_desc ?></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="default" class="col-sm-2 control-label">ไฟล์เอกสาร
+                                                            รูปภาพ PNG , JPG , PDF,WORD</label>
+
+                                                        <div class='col-sm-10'>
+                                                            <div class="menu">
+                                                                <?PHP
+
+                                                                $max = 5;
+
+                                                                for ($i = 1; $i <= $max; $i++) {
+
+                                                                    ${"file_" . $i} = $result->{"file_" . $i};
+
+                                                                    //echo ${"file_" . $i};
+
+                                                                    if (${"file_" . $i} != "") { ?>
+                                                                        <a href="<?php echo htmlentities(${"file_" . $i}) ?>"
+                                                                           target="_blank">CLICK ดูรายละเอียด
+                                                                            ไฟล์ที่ <?php echo $i ?>
+                                                                            <img
+                                                                                src="<?php echo GetIconPNG(${"file_" . $i}) ?>"
+                                                                                width="30" height="30">
+                                                                            <?php echo str_replace("upload/", "", htmlentities(${"file_" . $i})) ?>
+                                                                        </a>
+                                                                        <?php
+                                                                        echo "<br><br>";
+                                                                    }
+                                                                }
+                                                                ?>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -236,13 +276,6 @@ if (strlen($_SESSION['alogin']) == "") {
                                             }
 
                                             ?>
-
-                                            <!--div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit
-                                                    </button>
-                                                </div>
-                                            </div-->
 
                                         </form>
 

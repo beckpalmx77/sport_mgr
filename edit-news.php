@@ -62,8 +62,10 @@ if (strlen($_SESSION['alogin']) == "") {
         while (list($key, $value) = each($_FILES['upload_file']['name'])) {
 
             if (!empty($value)) {   // this will check if any blank field is entered
-                $filename = rand(1, 100000) . $value;    // filename stores the value
-                $filename = str_replace(" ", "_", $filename);// Add _ inplace of blank space in file name, you can remove this line
+
+                //$filename = rand(1, 100000) . $value;    // filename stores the value
+                //$filename = str_replace(" ", "_", $filename);// Add _ inplace of blank space in file name, you can remove this line
+                $filename = $value;
                 $add = "upload/$filename";   // upload directory path is set
 
                 copy($_FILES['upload_file']['tmp_name'][$key], $add);
@@ -279,7 +281,6 @@ if (strlen($_SESSION['alogin']) == "") {
                                                         <label for="default" class="col-sm-2 control-label">ไฟล์เอกสาร
                                                             รูปภาพ PNG , JPG , PDF,WORD</label>
 
-
                                                         <div class='col-sm-10'>
                                                             <div class="menu">
                                                                 <?PHP
@@ -294,19 +295,20 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                                                     if (${"file_" . $i} != "") { ?>
                                                                         <a href="<?php echo htmlentities(${"file_" . $i}) ?>"
-                                                                           target="_blank">CLICK ดูรายละเอียด ไฟล์ที่ <?php echo $i ?>
-                                                                            <img src="<?php echo GetIconPNG(${"file_" . $i}) ?>" width="30" height="30">
-                                                                            <?php echo str_replace("upload/","",htmlentities(${"file_" . $i})) ?>
-                                                                            </a>
+                                                                           target="_blank">CLICK ดูรายละเอียด
+                                                                            ไฟล์ที่ <?php echo $i ?>
+                                                                            <img
+                                                                                src="<?php echo GetIconPNG(${"file_" . $i}) ?>"
+                                                                                width="30" height="30">
+                                                                            <?php echo str_replace("upload/", "", htmlentities(${"file_" . $i})) ?>
+                                                                        </a>
                                                                         <?php
                                                                         echo "<br><br>";
                                                                     }
                                                                 }
                                                                 ?>
-
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                     <div class="form-group">
