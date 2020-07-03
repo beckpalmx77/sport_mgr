@@ -110,8 +110,8 @@
                                                     foreach ($results as $result) { ?>
                                                         <tr>
                                                             <td><?php echo htmlentities($cnt); ?></td>
-                                                            <td><?php echo htmlentities($result->news_id); ?></td>
-                                                            <td><?php echo htmlentities($result->topic); ?></td>
+                                                            <td><a href="read-news-other.php?id=<?php echo htmlentities($result->id); ?>"><?php echo htmlentities($result->news_id); ?></a></td>
+                                                            <td><a href="read-news-other.php?id=<?php echo htmlentities($result->id); ?>"><?php echo htmlentities($result->topic); ?></a></td>
                                                             <td>
                                                                 <?php
                                                                 if (file_exists($result->file_name)) {

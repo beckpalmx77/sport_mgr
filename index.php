@@ -128,7 +128,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title"></h5>
-            <p><a href="show-news-page-other.php" class="ex2" rel="external" target="_blank">
+            <p style="font-family:kanitextrabold; color:green"><a href="show-news-page-other.php" class="ex2" rel="external" target="_blank">
                 <img src="images/icon/synchronize-cloud.gif" hight="30" width="30">
                 &nbsp;&nbsp;อ่าน ข่าว/ประกาศ ทั้งหมด</a>
             </p>
