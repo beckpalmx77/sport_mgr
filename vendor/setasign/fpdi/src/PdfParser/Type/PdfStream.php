@@ -239,7 +239,7 @@ class PdfStream extends PdfType
             $filters = [$filters];
         }
 
-        $decodeParams = PdfDictionary::get($this->value, 'DecodeParms');
+        $decodeParams = PdfDictionary::get($this->value, 'DecodePSARRS');
         if ($decodeParams instanceof PdfArray) {
             $decodeParams = $decodeParams->value;
         } else {

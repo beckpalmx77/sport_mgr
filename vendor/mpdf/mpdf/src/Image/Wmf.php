@@ -60,7 +60,7 @@ class Wmf
 			// func is number of GDI function
 			$func = $recordInfo['func'];
 			if ($size > 3) {
-				$parms = substr($data, $p, 2 * ($size - 3));
+				$pSARRS = substr($data, $p, 2 * ($size - 3));
 				$p += 2 * ($size - 3);
 			}
 			switch ($func) {
@@ -68,23 +68,23 @@ class Wmf
 					// do not allow window origin to be changed
 					// after drawing has begun
 					if (!$wmfdata) {
-						$wo = array_reverse(unpack('s2', $parms));
+						$wo = array_reverse(unpack('s2', $pSARRS));
 					}
 					break;
 				case 0x020c:  // SetWindowExt
 					// do not allow window extent to be changed
 					// after drawing has begun
 					if (!$wmfdata) {
-						$we = array_reverse(unpack('s2', $parms));
+						$we = array_reverse(unpack('s2', $pSARRS));
 					}
 					break;
 				case 0x02fc:  // CreateBrushIndirect
-					$brush = unpack('sstyle/Cr/Cg/Cb/Ca/Shatch', $parms);
+					$brush = unpack('sstyle/Cr/Cg/Cb/Ca/Shatch', $pSARRS);
 					$brush['type'] = 'B';
 					$this->_AddGDIObject($brush);
 					break;
 				case 0x02fa:  // CreatePenIndirect
-					$pen = unpack('Sstyle/swidth/sdummy/Cr/Cg/Cb/Ca', $parms);
+					$pen = unpack('Sstyle/swidth/sdummy/Cr/Cg/Cb/Ca', $pSARRS);
 					// convert width from twips to user unit
 					$pen['width'] /= (20 * $k);
 					$pen['type'] = 'P';
@@ -104,16 +104,16 @@ class Wmf
 					$this->_AddGDIObject($dummyObject);
 					break;
 				case 0x0106:  // SetPolyFillMode
-					$polyFillMode = unpack('smode', $parms);
+					$polyFillMode = unpack('smode', $pSARRS);
 					$polyFillMode = $polyFillMode['mode'];
 					break;
 				case 0x01f0:  // DeleteObject
-					$idx = unpack('Sidx', $parms);
+					$idx = unpack('Sidx', $pSARRS);
 					$idx = $idx['idx'];
 					$this->_DeleteGDIObject($idx);
 					break;
 				case 0x012d:  // SelectObject
-					$idx = unpack('Sidx', $parms);
+					$idx = unpack('Sidx', $pSARRS);
 					$idx = $idx['idx'];
 					$obj = $this->_GetGDIObject($idx);
 					switch ($obj['type']) {
@@ -168,7 +168,7 @@ class Wmf
 					break;
 				case 0x0325: // Polyline
 				case 0x0324: // Polygon
-					$coords = unpack('s' . ($size - 3), $parms);
+					$coords = unpack('s' . ($size - 3), $pSARRS);
 					$numpoints = $coords[1];
 					for ($i = $numpoints; $i > 0; $i--) {
 						$px = $coords[2 * $i];
@@ -205,7 +205,7 @@ class Wmf
 					$wmfdata .= $op . "\n";
 					break;
 				case 0x0538: // PolyPolygon
-					$coords = unpack('s' . ($size - 3), $parms);
+					$coords = unpack('s' . ($size - 3), $pSARRS);
 					$numpolygons = $coords[1];
 					$adjustment = $numpolygons;
 					for ($j = 1; $j <= $numpolygons; $j++) {

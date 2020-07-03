@@ -781,7 +781,7 @@ class ImageProcessor implements \Psr\Log\LoggerAwareInterface
 
 			} else { // PNG image with no need to convert alph channels, bpc <> 8 etc.
 
-				$parms = '/DecodeParms <</Predictor 15 /Colors ' . $channels . ' /BitsPerComponent ' . $bpc . ' /Columns ' . $w . '>>';
+				$pSARRS = '/DecodePSARRS <</Predictor 15 /Colors ' . $channels . ' /BitsPerComponent ' . $bpc . ' /Columns ' . $w . '>>';
 				//Scan chunks looking for palette, transparency and image data
 				$pal = '';
 				$trns = '';
@@ -856,7 +856,7 @@ class ImageProcessor implements \Psr\Log\LoggerAwareInterface
 					$icc = false;
 				} // mPDF 6 cannot have ICC profile and Indexed in a PDF document as both use the colorspace tag.
 
-				$info = ['w' => $w, 'h' => $h, 'cs' => $colspace, 'bpc' => $bpc, 'f' => 'FlateDecode', 'parms' => $parms, 'pal' => $pal, 'trns' => $trns, 'data' => $pngdata, 'ch' => $channels, 'icc' => $icc];
+				$info = ['w' => $w, 'h' => $h, 'cs' => $colspace, 'bpc' => $bpc, 'f' => 'FlateDecode', 'pSARRS' => $pSARRS, 'pal' => $pal, 'trns' => $trns, 'data' => $pngdata, 'ch' => $channels, 'icc' => $icc];
 				$info['type'] = 'png';
 				if ($ppUx) {
 					$info['set-dpi'] = $ppUx;
@@ -1285,14 +1285,14 @@ class ImageProcessor implements \Psr\Log\LoggerAwareInterface
 
 			$imgdata = $this->gzCompress($imgdata);
 			$info = ['w' => $w, 'h' => $h, 'cs' => $targetcs, 'bpc' => 8, 'f' => 'FlateDecode', 'data' => $imgdata, 'type' => 'png',
-				'parms' => '/DecodeParms <</Colors ' . $ncols . ' /BitsPerComponent 8 /Columns ' . $w . '>>'];
+				'pSARRS' => '/DecodePSARRS <</Colors ' . $ncols . ' /BitsPerComponent 8 /Columns ' . $w . '>>'];
 			if ($dpi) {
 				$info['set-dpi'] = $dpi;
 			}
 			if ($mask) {
 				$mimgdata = $this->gzCompress($mimgdata);
 				$minfo = ['w' => $w, 'h' => $h, 'cs' => 'DeviceGray', 'bpc' => 8, 'f' => 'FlateDecode', 'data' => $mimgdata, 'type' => 'png',
-					'parms' => '/DecodeParms <</Colors ' . $ncols . ' /BitsPerComponent 8 /Columns ' . $w . '>>'];
+					'pSARRS' => '/DecodePSARRS <</Colors ' . $ncols . ' /BitsPerComponent 8 /Columns ' . $w . '>>'];
 				if ($dpi) {
 					$minfo['set-dpi'] = $dpi;
 				}

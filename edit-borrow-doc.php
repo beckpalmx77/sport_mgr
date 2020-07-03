@@ -43,7 +43,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ARMS Admin Create Class</title>
+        <title>SARRS Admin Create Class</title>
         <link rel="icon" type="image/png" sizes="16x16" href="images/icon/favicon-16x16.png">
         <link rel="stylesheet" href="css/bootstrap.css" media="screen">
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen">

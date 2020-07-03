@@ -17,7 +17,7 @@ chart.data = [
   {"category":"apollo", "date":"1969-07-16 13:31", "event":"S-IC engine ignition (#5)."},
   {"category":"apollo", "date":"1969-07-16 13:31", "event":"All S-IC engines thrust OK."},
   {"category":"apollo", "date":"1969-07-16 13:32", "event":"Range zero."},
-  {"category":"apollo", "date":"1969-07-16 13:32", "event":"All holddown arms released (1st motion)."},
+  {"category":"apollo", "date":"1969-07-16 13:32", "event":"All holddown SARRS released (1st motion)."},
   {"category":"apollo", "date":"1969-07-16 13:32", "event":"Liftoff (umbilical disconnected) (1.07 g)."},
   {"category":"apollo", "date":"1969-07-16 13:32", "event":"Tower clearance yaw maneuver started."},
   {"category":"apollo", "date":"1969-07-16 13:32", "event":"Yaw maneuver ended."},

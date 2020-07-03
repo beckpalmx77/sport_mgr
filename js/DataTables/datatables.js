@@ -39401,7 +39401,7 @@ module.exports = ZStream;
 	          BitsPerComponent: this.image.bits,
 	          Columns: this.width
 	        });
-	        this.obj.data['DecodeParms'] = params;
+	        this.obj.data['DecodePSARRS'] = params;
 	        params.end();
 	      }
 	      if (this.image.palette.length === 0) {

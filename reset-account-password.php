@@ -24,7 +24,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ARMS Admin Update Accout</title>
+        <title>SARRS Admin Update Accout</title>
         <link rel="icon" type="image/png" sizes="32x32" href="images/icon/favicon-32x32.png">
         <link rel="stylesheet" href="css/bootstrap.css" media="screen">
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen">

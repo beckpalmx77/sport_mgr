@@ -80,8 +80,8 @@ final class ImageWriter
 				$this->writer->write('/Filter /' . $info['f']);
 			}
 
-			if (isset($info['parms'])) {
-				$this->writer->write($info['parms']);
+			if (isset($info['pSARRS'])) {
+				$this->writer->write($info['pSARRS']);
 			}
 
 			if (isset($info['trns']) && is_array($info['trns'])) {

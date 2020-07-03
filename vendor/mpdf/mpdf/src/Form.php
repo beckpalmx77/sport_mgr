@@ -1346,8 +1346,8 @@ class Form
 			$this->writer->write('/Filter /' . $info['f']);
 		}
 
-		if (isset($info['parms'])) {
-			$this->writer->write($info['parms']);
+		if (isset($info['pSARRS'])) {
+			$this->writer->write($info['pSARRS']);
 		}
 
 		$this->writer->write('/Width ' . $info['w']);

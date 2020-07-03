@@ -116,7 +116,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ARMS Admin| Edit Student < </title>
+        <title>SARRS Admin| Edit Student < </title>
         <link rel="icon" type="image/png" sizes="32x32" href="images/icon/favicon-32x32.png">
         <link rel="stylesheet" href="css/bootstrap.min.css" media="screen">
         <link rel="stylesheet" href="css/font-awesome.min.css" media="screen">
@@ -754,7 +754,7 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                                     <div class="form-group">
                                                         <label for="default"
-                                                               class="col-sm-2 control-label">Status</label>
+                                                               class="col-sm-2 control-label">สถานะ</label>
 
                                                         <div class="col-sm-10">
                                                             <?php $stats = $result->Status;
@@ -763,7 +763,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                                                 <input type="radio" name="status" value="1"
                                                                        required="required" checked>ปกติ <input
                                                                     type="radio" name="status" value="0"
-                                                                    required="required">หมดอายุสมาชิก
+                                                                    required="required">หมดอายุสมาชิก/ลาออก/พ้นสภาพ
                                                             <?php } ?>
                                                             <?php
                                                             if ($stats == "0") {

@@ -1893,15 +1893,15 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 		}
 	}
 
-	function AddExtGState($parms)
+	function AddExtGState($pSARRS)
 	{
 		$n = count($this->extgstates);
 		// check if graphics state already exists
 		for ($i = 1; $i <= $n; $i++) {
-			if (count($this->extgstates[$i]['parms']) == count($parms)) {
+			if (count($this->extgstates[$i]['pSARRS']) == count($pSARRS)) {
 				$same = true;
-				foreach ($this->extgstates[$i]['parms'] as $k => $v) {
-					if (!isset($parms[$k]) || $parms[$k] != $v) {
+				foreach ($this->extgstates[$i]['pSARRS'] as $k => $v) {
+					if (!isset($pSARRS[$k]) || $pSARRS[$k] != $v) {
 						$same = false;
 						break;
 					}
@@ -1912,7 +1912,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 			}
 		}
 		$n++;
-		$this->extgstates[$n]['parms'] = $parms;
+		$this->extgstates[$n]['pSARRS'] = $pSARRS;
 		return $n;
 	}
 
@@ -23122,7 +23122,7 @@ class Mpdf implements \Psr\Log\LoggerAwareInterface
 			$this->writer->object();
 			$this->extgstates[$i]['n'] = $this->n;
 			$this->writer->write('<</Type /ExtGState');
-			foreach ($this->extgstates[$i]['parms'] as $k => $v) {
+			foreach ($this->extgstates[$i]['pSARRS'] as $k => $v) {
 				$this->writer->write('/' . $k . ' ' . $v);
 			}
 			$this->writer->write('>>');
