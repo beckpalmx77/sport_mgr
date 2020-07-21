@@ -58,6 +58,7 @@ if (strlen($_SESSION['alogin']) == "") {
         <link rel="stylesheet" type="text/css" href="js/DataTables/datatables.min.css"/>
         <link rel="stylesheet" href="css/main.css" media="screen">
         <script src="js/modernizr/modernizr.min.js"></script>
+
         <style>
             .errorWrap {
                 padding: 10px;
@@ -138,16 +139,18 @@ if (strlen($_SESSION['alogin']) == "") {
                                             </div>
 
                                             <?php if ($msg) { ?>
-                                                <div class="alert alert-success left-icon-alert" role="alert">
-                                                <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+
+                                                <+ขขdiv class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
                                                 <a href="#" class="close" data-dismiss="alert"
                                                    aria-label="close">&times;</a>
                                                 </div><?php } else if ($error) { ?>
                                                 <div class="alert alert-danger left-icon-alert" role="alert">
-                                                    <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                                     <a href="#" class="close" data-dismiss="alert"
                                                        aria-label="close">&times;</a>
                                                 </div>
+
                                             <?php } ?>
                                             <div class="panel-body p-20">
 
@@ -161,8 +164,8 @@ if (strlen($_SESSION['alogin']) == "") {
                                                         <th>นามสกุล</th>
                                                         <th>คณะ/หน่วยงาน</th>
                                                         <th>ประเภทกีฬา</th>
-                                                        <th>วันเกิด</th>
-                                                        <!--th>Status</th-->
+                                                        <!--th>วันเกิด</th-->
+                                                        <th>สถานะภาพ</th>
                                                         <th>Action</th>
                                                     </tr>
                                                     </thead>
@@ -174,14 +177,14 @@ if (strlen($_SESSION['alogin']) == "") {
                                                         <th>นามสกุล</th>
                                                         <th>คณะ/หน่วยงาน</th>
                                                         <th>ประเภทกีฬา</th>
-                                                        <th>วันเกิด</th>
-                                                        <!--th>Status</th-->
+                                                        <!--th>วันเกิด</th-->
+                                                        <th>สถานะภาพ</th>
                                                         <th>Action</th>
                                                     </tr>
                                                     </tfoot>
                                                     <tbody>
                                                     <?php $sql = "SELECT tblstudents.FirstName,tblstudents.LastName,tblstudents.RollId,tblstudents.RegDate
-                                                ,tblstudents.StudentId,tblstudents.Status,tblclasses.ClassName,tblclasses.Section,tblstudents.DOB
+                                                ,tblstudents.StudentId,tblstudents.Status,tblclasses.ClassName,tblclasses.Section,tblstudents.DOB,tblstudents.status
 					                            ,(select tblsporttype.SportName from tblsporttype where tblsporttype.id = tblstudents.sport_type1) as SportName1
                                                 from tblstudents left join tblclasses on tblclasses.id=tblstudents.ClassId";
                                                     $query = $dbh->prepare($sql);
@@ -199,13 +202,13 @@ if (strlen($_SESSION['alogin']) == "") {
                                                                     <!--(<?php echo htmlentities($result->Section); ?>)-->
                                                                 </td>
                                                                 <td><?php echo htmlentities($result->SportName1); ?></td>
-                                                                <td><?php echo htmlentities($result->DOB); ?></td>
-                                                                <!--td><?php if ($result->Status == 1) {
+                                                                <!--td><?php echo htmlentities($result->DOB); ?></td-->
+                                                                <td><?php if ($result->Status == 1) {
                                                                     echo htmlentities('Active');
                                                                 } else {
-                                                                    echo htmlentities('Blocked');
+                                                                    echo htmlentities('Inactive');
                                                                 }
-                                                                ?></td-->
+                                                                ?></td>
                                                                 <td>
                                                                     <a href="edit-student.php?stid=<?php echo htmlentities($result->StudentId); ?>"><i
                                                                             class="fa fa-edit" title="Edit Record"></i>
@@ -276,8 +279,13 @@ if (strlen($_SESSION['alogin']) == "") {
         <script src="js/main.js"></script>
         <script src="vender/myjs/myAction.js"></script>
 
-        <script src="js/sweet-alert/sweetalert2.min.js"></script>
-        <link rel="stylesheet" href="css/sweet-alert/sweetalert2.min.css">
+        <!--script src="js/sweet-alert/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="css/sweet-alert/sweetalert2.min.css"-->
+
+        <script src="vender/alertifyjs/alertify.min.js"></script>
+        <link rel="stylesheet" href="vender/alertifyjs/css/alertify.min.css" />
+        <link rel="stylesheet" href="vender/alertifyjs/css/themes/default.min.css" />
+
 
         <style>
             #myBtn {
@@ -324,11 +332,8 @@ if (strlen($_SESSION['alogin']) == "") {
             }
         </script>
 
-        <script>
+        <!--script>
             $(function ($) {
-
-                //$('#example').DataTable();
-
                 $('#example').dataTable({
                     "language": {
                         "search": "ค้นหาข้อมูล (Search) : ",
@@ -353,7 +358,7 @@ if (strlen($_SESSION['alogin']) == "") {
 
                 $('#example3').DataTable();
             });
-        </script>
+        </script-->
 
 
         <script type="text/javascript">
@@ -364,12 +369,43 @@ if (strlen($_SESSION['alogin']) == "") {
                     swal("", "มีข้อผิดพลาด !!", "Error Parameter");
                 }
                 else {
-                    if (confirm('ต้องการลบรายการนี้ออกจากระบบ?' + id)) {
-                        window.location.href = 'manage-students.php?id=' + id;
-                    }
+
+                    alertify.confirm('Confirm Delete !!!', 'ต้องการลบรายการนี้ออกจากระบบ?', function(){ window.location.href = 'manage-students.php?id=' + id; }
+                        , function(){ alertify.error('Cancel - ยกเลิก')});
+
+                    //if (confirm('ต้องการลบรายการนี้ออกจากระบบ?' + id)) {
+                        //window.location.href = 'manage-students.php?id=' + id;
+                    //}
                 }
             }
 
+        </script>
+
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable( {
+                    initComplete: function () {
+                        this.api().columns().every( function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo( $(column.footer()).empty() )
+                                .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                } );
+
+                            column.data().unique().sort().each( function ( d, j ) {
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            } );
+                        } );
+                    }
+                } );
+            } );
         </script>
 
     </form>

@@ -10,20 +10,22 @@ if (strlen($_SESSION['alogin']) == "") {
         $main_menu_id = $_POST['main_menu_id'];
         $sub_menu_id = $_POST['sub_menu_id'];
         $label = $_POST['label'];
+        $label_en = $_POST['label_en'];
         $link = $_POST['link'];
         $icon = $_POST['icon'];
         $sort = $_POST['sort'];
         $privilege = $_POST['privilege'];
 
-        $value = $sid . "|" . $main_menu_id . "|" . $sub_menu_id . "|" . $label  ;
+        $value = $sid . "|" . $main_menu_id . "|" . $sub_menu_id . "|" . $label;
 
-        $sql = "update  menu_sub set main_menu_id=:main_menu_id,sub_menu_id=:sub_menu_id,label=:label,link=:link
+        $sql = "update  menu_sub set main_menu_id=:main_menu_id,sub_menu_id=:sub_menu_id,label=:label,label_en=:label_en,link=:link
             ,icon=:icon,sort=:sort,privilege=:privilege
             where id=:sid ";
         $query = $dbh->prepare($sql);
         $query->bindParam(':main_menu_id', $main_menu_id, PDO::PARAM_STR);
         $query->bindParam(':sub_menu_id', $sub_menu_id, PDO::PARAM_STR);
         $query->bindParam(':label', $label, PDO::PARAM_STR);
+        $query->bindParam(':label_en', $label_en, PDO::PARAM_STR);
         $query->bindParam(':link', $link, PDO::PARAM_STR);
         $query->bindParam(':icon', $icon, PDO::PARAM_STR);
         $query->bindParam(':sort', $sort, PDO::PARAM_STR);
@@ -134,10 +136,10 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                             </div>
                                         <?php } ?>
 
@@ -174,15 +176,15 @@ if (strlen($_SESSION['alogin']) == "") {
                                                             <option
                                                                 value="<?php echo htmlentities($result->main_menu_id); ?>"><?php echo htmlentities($result->label_main); ?></option>
                                                             <?php $sql1 = "SELECT * from menu_main order by sort";
-                                                                $query1 = $dbh->prepare($sql1);
-                                                                $query1->execute();
-                                                                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                                                                if ($query1->rowCount() > 0) {
+                                                            $query1 = $dbh->prepare($sql1);
+                                                            $query1->execute();
+                                                            $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                            if ($query1->rowCount() > 0) {
                                                                 foreach ($results1 as $result1) { ?>
                                                                     <option
                                                                         value="<?php echo htmlentities($result1->main_menu_id); ?>
                                                             "><?php echo htmlentities($result1->label); ?></option>
-                                                            <?php }
+                                                                <?php }
                                                             } ?>
                                                         </select>
 
@@ -200,12 +202,25 @@ if (strlen($_SESSION['alogin']) == "") {
                                                     </div>
 
                                                     <div class="form-group has-success">
-                                                        <label for="success" class="control-label">ชื่อเมนู</label>
+                                                        <label for="success" class="control-label">ชื่อเมนู ภาษาไทย /
+                                                            THAI MENU NAME</label>
 
                                                         <div class="">
                                                             <input type="text" name="label" class="form-control"
                                                                    value="<?php echo htmlentities($result->label); ?>"
                                                                    required="required" id="label">
+                                                            <span class="help-block"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group has-success">
+                                                        <label for="success" class="control-label">ชื่อเมนู ภาษาอังกฤษ /
+                                                            ENGLISH MENU NAME</label>
+
+                                                        <div class="">
+                                                            <input type="text" name="label_en" class="form-control"
+                                                                   value="<?php echo htmlentities($result->label_en); ?>"
+                                                                   required="required" id="label_en">
                                                             <span class="help-block"></span>
                                                         </div>
                                                     </div>

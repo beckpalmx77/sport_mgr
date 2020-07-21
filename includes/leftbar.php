@@ -1,3 +1,5 @@
+<?php define('WEB_ROOTDIR', realpath(dirname(__FILE__) . '/..')); ?>
+
 <div class="left-sidebar bg-black-300 box-shadow ">
     <div class="sidebar-content">
         <div class="user-info closed">
@@ -14,7 +16,7 @@
                     <span class="">Sports And Recreation Record System</span>
                 </li>
                 <li>
-                    <a href="dashboard.php"><i class="fa fa-dashboard"></i><span>Dashboard</span> </a>
+                    <a href="dashboard.php"><i class="fa fa-dashboard"></i><span>Dashboard <!--?php echo WEB_ROOTDIR ?--> </span> </a>
 
                 </li>
 
@@ -26,10 +28,7 @@
 
                 //privilege 1 = root
 
-                if ($_SESSION['account_type'] == "root") {
-                    $where_condM = "";
-                    $where_condS = "";
-                } else {
+                if ($_SESSION['account_type'] != "root") {
                     $where_condM = " where privilege = '2' ";
                     $where_condS = " and privilege = '2' ";
                 }
@@ -46,7 +45,8 @@
                 ?>
                 <li class="has-children">
                     <a href="<?php echo $result->link ?>"><?php echo "<i class='$result->icon'></i>" ?>
-                        <span><?php echo $result->label ?></span>
+                        <!--span><?php echo $result->label ?></span-->
+                        <span><?php echo $_SESSION['lang'] == "th" ? $result->label : $result->label_en; ?></span>
                     </a>
 
                     <?php
@@ -63,14 +63,15 @@
                             <ul class="child-nav">
                                 <li>
                                     <a href="<?php echo $result1->link ?>"><?php echo "<i class='$result1->icon'></i>" ?>
-                                        <span><?php echo $result1->label ?></span></a>
+                                        <span><?php echo $_SESSION['lang'] == "th" ? $result1->label : $result1->label_en; ?></span>
+                                    </a>
                                 </li>
                             </ul>
                             <?php
-
                         }
 
                     }
+
                     }
 
                     }
@@ -84,4 +85,6 @@
     </div>
     <!-- /.sidebar-content -->
 </div>
+
+
 

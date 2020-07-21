@@ -130,12 +130,12 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                             <?php if ($msg) { ?>
                                                 <div class="alert alert-success left-icon-alert" role="alert">
-                                                <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                                <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
                                                 <a href="#" class="close" data-dismiss="alert"
                                                    aria-label="close">&times;</a>
                                                 </div><?php } else if ($error) { ?>
                                                 <div class="alert alert-danger left-icon-alert" role="alert">
-                                                    <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                                     <a href="#" class="close" data-dismiss="alert"
                                                        aria-label="close">&times;</a>
                                                 </div>
@@ -152,8 +152,8 @@ if (strlen($_SESSION['alogin']) == "") {
                                                         <th>นามสกุล</th>
                                                         <th>คณะ/หน่วยงาน</th>
                                                         <th>ประเภทกีฬา</th>
-                                                        <th>วันเกิด</th>
-                                                        <!--th>Status</th-->
+                                                        <!--th>วันเกิด</th-->
+                                                        <th>สถานะภาพ</th>
                                                         <th>Action</th>
                                                     </tr>
                                                     </thead>
@@ -165,8 +165,8 @@ if (strlen($_SESSION['alogin']) == "") {
                                                         <th>นามสกุล</th>
                                                         <th>คณะ/หน่วยงาน</th>
                                                         <th>ประเภทกีฬา</th>
-                                                        <th>วันเกิด</th>
-                                                        <!--th>Status</th-->
+                                                        <!--th>วันเกิด</th-->
+                                                        <th>สถานะภาพ</th>
                                                         <th>Action</th>
                                                     </tr>
                                                     </tfoot>
@@ -190,13 +190,13 @@ if (strlen($_SESSION['alogin']) == "") {
                                                                     <!--(<?php echo htmlentities($result->Section); ?>)-->
                                                                 </td>
                                                                 <td><?php echo htmlentities($result->SportName1); ?></td>
-                                                                <td><?php echo htmlentities($result->DOB); ?></td>
-                                                                <!--td><?php if ($result->Status == 1) {
-                                                                    echo htmlentities('Active');
-                                                                } else {
-                                                                    echo htmlentities('Blocked');
-                                                                }
-                                                                ?></td-->
+                                                                <!--td><?php echo htmlentities($result->DOB); ?></td-->
+                                                                <td><?php if ($result->Status == 1) {
+                                                                        echo htmlentities('Active');
+                                                                    } else {
+                                                                        echo htmlentities('Inactive');
+                                                                    }
+                                                                    ?></td>
                                                                 <td>
                                                                     <a href="view-student.php?stid=<?php echo htmlentities($result->StudentId); ?>"><i
                                                                             class="fa fa-search-plus" title="Display Record"></i>
@@ -311,7 +311,7 @@ if (strlen($_SESSION['alogin']) == "") {
             }
         </script>
 
-        <script>
+        <!--script>
             $(function ($) {
 
                 //$('#example').DataTable();
@@ -340,6 +340,34 @@ if (strlen($_SESSION['alogin']) == "") {
 
                 $('#example3').DataTable();
             });
+        </script-->
+
+
+        <script>
+            $(document).ready(function() {
+                $('#example').DataTable( {
+                    initComplete: function () {
+                        this.api().columns().every( function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo( $(column.footer()).empty() )
+                                .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search( val ? '^'+val+'$' : '', true, false )
+                                        .draw();
+                                } );
+
+                            column.data().unique().sort().each( function ( d, j ) {
+                                select.append( '<option value="'+d+'">'+d+'</option>' )
+                            } );
+                        } );
+                    }
+                } );
+            } );
         </script>
 
 

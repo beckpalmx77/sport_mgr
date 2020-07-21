@@ -155,148 +155,152 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>เพิ่ม อุปกรณ์กีฬา</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>เพิ่ม อุปกรณ์กีฬา</h5>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        <a href="manage-sport-equipment.php"
+                                                           class="btn btn-info btn-labeled">BACK<span
+                                                                class="btn-label btn-label-right"><i
+                                                                    class="fa fa-check"></i></span></a>
+                                                    </div>
+                                                </div>
+
+                                                <?php
+                                                $id = intval($_GET['id']);
+                                                $sql = "SELECT * from tblsport_equipment order by id desc limit 1 ";
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) {
+
+                                                        $equipment_id = "EQ-" . sprintf("%09d", $result->id + 1);
+                                                    }
+                                                } else {
+
+                                                    $equipment_id = "EQ-" . sprintf("%09d", 1);
+                                                }
+
+                                                ?>
+
+                                                <input type="hidden" name="equipment_id"
+                                                       value="<?php echo htmlentities($equipment_id) ?>">
+
+
+                                                <div class="form-group">
+                                                    <label for="default"
+                                                           class="col-sm-2 control-label">รูปภาพ</label>
+
+                                                    <div class="col-sm-10">
+                                                        <img id="picture" src=""
+                                                             width="100" height="100" alt=""
+                                                             onmouseover="bigImg(this)" onmouseout="normalImg(this)"
+                                                             onclick="window.open(this.src,'_blank')">
+                                                        <input type='file' name="fileUpload" id="fileUpload"
+                                                               multiple="multiple"
+                                                               accept="image/png, image/jpeg"
+                                                               onchange="readURL(this);"/>
+                                                        <label class="custom-file-label" for="chooseFile">เลือกไฟล์
+                                                            (ไฟล์ .jpg , .png เท่านั้น)</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">
+                                                        ชื่ออุปกรณ์กีฬา</label>
+
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="equipment_name" class="form-control"
+                                                               id="equipment_name"
+                                                               value=""
+                                                               required="required" autocomplete="off">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">สถานที่ที่จัดเก็บ
+                                                    </label>
+
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="place" class="form-control"
+                                                               id="place"
+                                                               value=""
+                                                               required="required" autocomplete="off">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">จำนวน</label>
+
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="quantity" class="form-control"
+                                                               id="quantity"
+                                                               value=""
+                                                               required="required" autocomplete="off">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default"
+                                                           class="col-sm-2 control-label">หมายเลขอุปกรณ์</label>
+
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="equipment_no" class="form-control"
+                                                               id="equipment_no"
+                                                               value=""
+                                                               required="required" autocomplete="off">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="date"
+                                                           class="col-sm-2 control-label">วันที่ลงทะเบียนอุปกรณื</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input id="doc_date_from" name="doc_date_from"
+                                                               class="form-control"
+                                                               placeholder="วัน/เดือน/ปี" readonly="true">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="submit" class="btn btn-primary">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
                                         </div>
                                     </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                            </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                            <div class="panel-heading">
-                                                <div class="panel-title">
-                                                    <a href="manage-sport-equipment.php"
-                                                       class="btn btn-info btn-labeled">BACK<span
-                                                            class="btn-label btn-label-right"><i
-                                                                class="fa fa-check"></i></span></a>
-                                                </div>
-                                            </div>
-
-                                            <?php
-                                            $id = intval($_GET['id']);
-                                            $sql = "SELECT * from tblsport_equipment order by id desc limit 1 ";
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':id', $id, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) {
-
-                                                    $equipment_id = "EQ-" . sprintf("%09d", $result->id + 1);
-                                                }
-                                            } else {
-
-                                                $equipment_id = "EQ-" . sprintf("%09d", 1);
-                                            }
-
-                                            ?>
-
-                                            <input type="hidden" name="equipment_id"
-                                                   value="<?php echo htmlentities($equipment_id) ?>">
-
-
-                                            <div class="form-group">
-                                                <label for="default"
-                                                       class="col-sm-2 control-label">รูปภาพ</label>
-
-                                                <div class="col-sm-10">
-                                                    <img id="picture" src=""
-                                                         width="100" height="100" alt=""
-                                                         onmouseover="bigImg(this)" onmouseout="normalImg(this)"
-                                                         onclick="window.open(this.src,'_blank')">
-                                                    <input type='file' name="fileUpload" id="fileUpload"
-                                                           multiple="multiple"
-                                                           accept="image/png, image/jpeg"
-                                                           onchange="readURL(this);"/>
-                                                    <label class="custom-file-label" for="chooseFile">เลือกไฟล์
-                                                        (ไฟล์ .jpg , .png เท่านั้น)</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">
-                                                    ชื่ออุปกรณ์กีฬา</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="equipment_name" class="form-control"
-                                                           id="equipment_name"
-                                                           value=""
-                                                           required="required" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">สถานที่ที่จัดเก็บ
-                                                </label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="place" class="form-control"
-                                                           id="place"
-                                                           value=""
-                                                           required="required" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">จำนวน</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="quantity" class="form-control"
-                                                           id="quantity"
-                                                           value=""
-                                                           required="required" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default"
-                                                       class="col-sm-2 control-label">หมายเลขอุปกรณ์</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="equipment_no" class="form-control"
-                                                           id="equipment_no"
-                                                           value=""
-                                                           required="required" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="date"
-                                                       class="col-sm-2 control-label">วันที่ลงทะเบียนอุปกรณื</label>
-
-                                                <div class="col-sm-4">
-                                                    <input id="doc_date_from" name="doc_date_from" class="form-control"
-                                                           placeholder="วัน/เดือน/ปี" readonly="true">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>

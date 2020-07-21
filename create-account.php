@@ -17,7 +17,7 @@ if (strlen($_SESSION['alogin']) == "") {
             $picture = "images/icon/user-001.png";
         }
 
-        $sql = "SELECT UserName FROM admin WHERE UserName=:username ";
+        $sql = "SELECT UserName FROM tbluser_account  WHERE UserName=:username ";
         $query = $dbh->prepare($sql);
         $query->bindParam(':username', $username, PDO::PARAM_STR);
         $query->execute();
@@ -27,7 +27,7 @@ if (strlen($_SESSION['alogin']) == "") {
             $error = "มีชื่อ Account นี้อยู่แล้วในระบบ Something went wrong. Please try again !";
         } else {
 
-            $sql = "INSERT INTO  admin(UserName,Password,FirstName,LastName,account_type,picture) VALUES(:username,:password,:FirstName,:LastName,:account_type,:picture)";
+            $sql = "INSERT INTO tbluser_account(UserName,Password,FirstName,LastName,account_type,picture) VALUES(:username,:password,:FirstName,:LastName,:account_type,:picture)";
             $query = $dbh->prepare($sql);
             $query->bindParam(':username', $username, PDO::PARAM_STR);
             $query->bindParam(':password', $password, PDO::PARAM_STR);
@@ -37,7 +37,7 @@ if (strlen($_SESSION['alogin']) == "") {
             $query->bindParam(':picture', $picture, PDO::PARAM_STR);
             $query->execute();
 
-            $sql = "SELECT UserName FROM admin WHERE UserName=:username ";
+            $sql = "SELECT UserName FROM tbluser_account  WHERE UserName=:username ";
             $query = $dbh->prepare($sql);
             $query->bindParam(':username', $username, PDO::PARAM_STR);
             $query->execute();
@@ -69,7 +69,8 @@ if (strlen($_SESSION['alogin']) == "") {
 
         <script src="js/modernizr/modernizr.min.js"></script>
         <script src="js/bootstrap-select/bootstrap-select.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/jquery/jquery-2.2.4.min.js"></script>
+        <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script-->
         <script type="text/javascript">
             function valid() {
                 if (document.chngpwd.password.value != document.chngpwd.confirmpassword.value) {
@@ -112,7 +113,7 @@ if (strlen($_SESSION['alogin']) == "") {
                     <div class="container-fluid">
                         <div class="row page-title-div">
                             <div class="col-md-6">
-                                <h2 class="title">เพิ่มผู้ใช้งานระบบ</h2>
+                                <h2 class="title">สร้างบัญชีผู้ใช้งานระบบ</h2>
                             </div>
 
                         </div>
@@ -121,8 +122,8 @@ if (strlen($_SESSION['alogin']) == "") {
                             <div class="col-md-6">
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
-
-                                    <li class="active">เพิ่มผู้ใช้งานระบบ</li>
+                                    <li><a href="#">Account</a></li>
+                                    <li class="active">สร้างบัญชีผู้ใช้งานระบบ</li>
                                 </ul>
                             </div>
 
@@ -131,23 +132,24 @@ if (strlen($_SESSION['alogin']) == "") {
                     </div>
                     <!-- /.container-fluid -->
 
-                    <account_type class="account_type">
-                        <div class="container-fluid">
+                    <section class="section">
+                        <section class="container-fluid">
+
 
                             <div class="row">
                                 <div class="col-md-8 col-md-offset-2">
                                     <div class="panel">
                                         <div class="panel-heading">
                                             <div class="panel-title">
-                                                <h5>เพิ่มผู้ใช้งานระบบ</h5>
+                                                <h5>สร้างบัญชีผู้ใช้งานระบบ</h5>
                                             </div>
                                         </div>
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                             </div>
                                         <?php } ?>
 
@@ -235,10 +237,9 @@ if (strlen($_SESSION['alogin']) == "") {
                             </div>
                             <!-- /.row -->
 
-
                         </div>
                         <!-- /.container-fluid -->
-                    </account_type>
+                    </section>
                     <!-- /.account_type -->
 
                 </div>

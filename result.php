@@ -147,7 +147,7 @@ $cnt++;}
  {?>
 
 <div class="alert alert-danger left-icon-alert" role="alert">
-strong>Oh snap!</strong>
+strong>ข้อผิดพลาด !!! </strong>
 <?php
 echo htmlentities("Invalid Roll Id");
  }

@@ -2,6 +2,24 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
+
+if (isset($_GET['id'])) {
+    try {
+        $id = $_GET['id'];
+        $sql = "Delete from tblsport_events where id=:id";
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':id', $id, PDO::PARAM_STR);
+        $query->execute();
+
+        $msg = "ลบข้อมูล " . $delete_success . " เรียบร้อยแล้ว Delete Data Successfully";
+
+    } catch (PDOException $e) {
+        echo "ข้อผิดพลาด : " . $e->getMessage();
+    }
+
+
+}
+
 if (strlen($_SESSION['alogin']) == "") {
     header("Location: index.php");
 } else {
@@ -100,10 +118,12 @@ if (strlen($_SESSION['alogin']) == "") {
                                         </div>
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
+                                            <a href="#" class="close" data-dismiss="alert"
+                                               aria-label="close">&times;</a>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                             </div>
                                         <?php } ?>
                                         <div class="panel-body p-20">
@@ -147,6 +167,10 @@ if (strlen($_SESSION['alogin']) == "") {
                                                             <td>
                                                                 <a href="edit-sport-events.php?id=<?php echo htmlentities($result->id); ?>"><i
                                                                         class="fa fa-edit" title="Edit Record"></i> </a>
+                                                                &nbsp;
+                                                                <a href="javascript: delete_id(<?php echo htmlentities($result->id); ?>)"><i
+                                                                        class="fa fa-times"
+                                                                        title="Delete Record"></i></a>
 
                                                             </td>
                                                         </tr>
@@ -220,6 +244,21 @@ if (strlen($_SESSION['alogin']) == "") {
             $('#example3').DataTable();
         });
     </script>
+
+    <script type="text/javascript">
+        function delete_id(id) {
+
+            alertify.confirm('Confirm Delete !!!', 'ต้องการลบรายการนี้ออกจากระบบ?',
+                function () {
+                    window.location.href = 'manage-sport-events.php?id=' + id;
+                }
+                , function () {
+                    alertify.error('Cancel - ยกเลิก')
+                });
+
+        }
+    </script>
+
     </body>
     </html>
 <?php } ?>

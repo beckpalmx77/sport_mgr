@@ -48,7 +48,7 @@ if (strlen($_SESSION['alogin']) == "") {
                 $msg = "เพิ่มข้อมูลเรียบร้อยแล้ว info added successfully";
 
             } else {
-                $error = "Something went wrong. Please try again " ;
+                $error = "Something went wrong. Please try again ";
             }
 
         }
@@ -135,105 +135,110 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>เพิ่ม สไลด์ / ประกาศ</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>เพิ่ม สไลด์ / ประกาศ</h5>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        <a href="manage-slide-page.php"
+                                                           class="btn btn-info btn-labeled">BACK<span
+                                                                class="btn-label btn-label-right"><i
+                                                                    class="fa fa-check"></i></span></a>
+                                                    </div>
+                                                </div>
+
+                                                <?php
+                                                $id = intval($_GET['id']);
+                                                $sql = "SELECT * from tblslide order by id desc limit 1 ";
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) {
+
+                                                        $slide_id = "S-" . sprintf("%09d", $result->id + 1);
+                                                    }
+                                                } else {
+
+                                                    $slide_id = "S-" . sprintf("%09d", 1);
+                                                }
+
+                                                ?>
+
+                                                <input type="hidden" name="slide_id"
+                                                       value="<?php echo htmlentities($slide_id) ?>">
+
+
+                                                <div class="form-group">
+                                                    <label for="default"
+                                                           class="col-sm-2 control-label">รูปภาพ</label>
+
+                                                    <div class="col-sm-10">
+                                                        <img id="picture" src=""
+                                                             width="100" height="100" alt=""
+                                                             onmouseover="bigImg(this)" onmouseout="normalImg(this)"
+                                                             onclick="window.open(this.src,'_blank')">
+                                                        <input type='file' name="fileUpload" id="fileUpload"
+                                                               accept="image/*"
+                                                               accept="image/png, image/jpeg"
+                                                               onchange="readURL(this);"/>
+                                                        <label class="custom-file-label" for="chooseFile">เลือกไฟล์
+                                                            (ไฟล์ .jpg หรือ .png เท่านั้น)(Click
+                                                            ที่รูปเพื่อขยาย)</label>
+                                                        <label class="custom-file-label" for="chooseFile">ขนาดไฟล์ภาพ
+                                                            1600 x
+                                                            430 Pixel</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">รายละเอียด
+                                                        สไลด์ / ประกาศ</label>
+
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="filedoc_desc" class="form-control"
+                                                               id="filedoc_desc"
+                                                               value=""
+                                                               required="required" autocomplete="off">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="submit" class="btn btn-primary">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
                                         </div>
                                     </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                            </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                            <div class="panel-heading">
-                                                <div class="panel-title">
-                                                    <a href="manage-slide-page.php"
-                                                       class="btn btn-info btn-labeled">BACK<span
-                                                            class="btn-label btn-label-right"><i
-                                                                class="fa fa-check"></i></span></a>
-                                                </div>
-                                            </div>
-
-                                            <?php
-                                            $id = intval($_GET['id']);
-                                            $sql = "SELECT * from tblslide order by id desc limit 1 ";
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':id', $id, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) {
-
-                                                    $slide_id = "S-" . sprintf("%09d", $result->id + 1);
-                                                }
-                                            } else {
-
-                                                $slide_id = "S-" . sprintf("%09d", 1);
-                                            }
-
-                                            ?>
-
-                                            <input type="hidden" name="slide_id"
-                                                   value="<?php echo htmlentities($slide_id) ?>">
-
-
-                                            <div class="form-group">
-                                                <label for="default"
-                                                       class="col-sm-2 control-label">รูปภาพ</label>
-
-                                                <div class="col-sm-10">
-                                                    <img id="picture" src=""
-                                                         width="100" height="100" alt=""
-                                                         onmouseover="bigImg(this)" onmouseout="normalImg(this)"
-                                                         onclick="window.open(this.src,'_blank')">
-                                                    <input type='file' name="fileUpload" id="fileUpload"
-                                                           accept="image/*"
-                                                           accept="image/png, image/jpeg" onchange="readURL(this);"/>
-                                                    <label class="custom-file-label" for="chooseFile">เลือกไฟล์
-                                                        (ไฟล์ .jpg หรือ .png เท่านั้น)(Click
-                                                        ที่รูปเพื่อขยาย)</label>
-                                                    <label class="custom-file-label" for="chooseFile">ขนาดไฟล์ภาพ 1600 x
-                                                        430 Pixel</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">รายละเอียด
-                                                    สไลด์ / ประกาศ</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="filedoc_desc" class="form-control"
-                                                           id="filedoc_desc"
-                                                           value=""
-                                                           required="required" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>

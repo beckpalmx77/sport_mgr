@@ -7,7 +7,7 @@ if (isset($_GET['id'])) {
     try {
         $id = $_GET['id'];
 
-        $sql = "select * from admin where id=:id";
+        $sql = "select * FROM tbluser_account  where id=:id";
         $query = $dbh->prepare($sql);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
         $query->execute();
@@ -20,12 +20,12 @@ if (isset($_GET['id'])) {
                 if ($chk==1) {
                     $error = "ไม่สามารถลบข้อมูล บัญชีผู้ใช้นี้ได้";
                 } else {
-                    $sql = "Delete from admin where Respect <> 1 and id=:id";
+                    $sql = "Delete FROM tbluser_account  where Respect <> 1 and id=:id";
                     $query = $dbh->prepare($sql);
                     $query->bindParam(':id', $id, PDO::PARAM_STR);
                     $query->execute();
 
-                    $msg = "ลบข้อมูลเรียบร้อยแล้ว Delete Dasta Successfully - ";
+                    $msg = "ลบข้อมูลเรียบร้อยแล้ว Delete Data Successfully - ";
                 }
             }
         }
@@ -137,11 +137,11 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                             </div>
                                         <?php } ?>
@@ -170,7 +170,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                                 </tr>
                                                 </tfoot>
                                                 <tbody>
-                                                <?php $sql = "SELECT * from admin";
+                                                <?php $sql = "SELECT * FROM tbluser_account ";
                                                 $query = $dbh->prepare($sql);
                                                 $query->execute();
                                                 $results = $query->fetchAll(PDO::FETCH_OBJ);
@@ -270,19 +270,19 @@ if (strlen($_SESSION['alogin']) == "") {
     </script>
 
     <script type="text/javascript">
-
         function delete_id(id) {
-            if (id == null) {
-                alert("Error Parameter");
-            }
-            else {
-                if (confirm('ต้องการลบรายการนี้ออกจากระบบ?' + id)) {
+
+            alertify.confirm('Confirm Delete !!!', 'ต้องการลบรายการนี้ออกจากระบบ?',
+                function () {
                     window.location.href = 'manage-account.php?id=' + id;
                 }
-            }
-        }
+                , function () {
+                    alertify.error('Cancel - ยกเลิก')
+                });
 
+        }
     </script>
+
     </body>
     </html>
 <?php } ?>

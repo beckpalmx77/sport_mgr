@@ -11,7 +11,7 @@ if (isset($_GET['id'])) {
         $query->bindParam(':id', $id, PDO::PARAM_STR);
         $query->execute();
 
-        $msg = "ลบข้อมูลเรียบร้อยแล้ว Delete Dasta Successfully";
+        $msg = "ลบข้อมูลเรียบร้อยแล้ว Delete Data Successfully";
 
     } catch (PDOException $e) {
         echo "ข้อผิดพลาด : " . $e->getMessage();
@@ -112,11 +112,11 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
                                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                             </div>
                                         <?php } ?>

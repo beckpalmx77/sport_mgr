@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
         $query = $dbh->prepare($sql);
         $query->bindParam(':id', $id, PDO::PARAM_STR);
         $query->execute();
-        $msg = "ลบข้อมูลเรียบร้อยแล้ว Delete Dasta Successfully";
+        $msg = "ลบข้อมูลเรียบร้อยแล้ว Delete Data Successfully";
     } catch (PDOException $e) {
         echo "ข้อผิดพลาด : " . $e->getMessage();
     }
@@ -115,10 +115,10 @@ if (strlen($_SESSION['alogin']) == "") {
                                         </div>
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                             </div>
                                         <?php } ?>
 
@@ -241,6 +241,10 @@ if (strlen($_SESSION['alogin']) == "") {
 
     <script src="js/sweet-alert/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="css/sweet-alert/sweetalert2.min.css">
+    <script src="vender/alertifyjs/alertify.min.js"></script>
+    <link rel="stylesheet" href="vender/alertifyjs/css/alertify.min.css" />
+    <link rel="stylesheet" href="vender/alertifyjs/css/themes/default.min.css" />
+
 
     <script>
         $(function ($) {
@@ -276,9 +280,10 @@ if (strlen($_SESSION['alogin']) == "") {
 
     <script type="text/javascript">
         function delete_id(id) {
-            if (confirm('ต้องการลบรายการนี้ออกจากระบบ?') + id) {
-                window.location.href = 'manage-borrow-doc.php?id=' + id;
-            }
+
+                alertify.confirm('Confirm Delete !!!', 'ต้องการลบรายการนี้ออกจากระบบ?', function(){ window.location.href = 'manage-borrow-doc.php?id=' + id; }
+                    , function(){ alertify.error('Cancel - ยกเลิก')});
+
         }
     </script>
 

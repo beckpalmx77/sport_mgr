@@ -12,7 +12,7 @@ if(isset($_POST['submit']))
 $password=md5($_POST['password']);
 $newpassword=md5($_POST['newpassword']);
 $username=$_SESSION['alogin'];
-    $sql ="SELECT Password FROM admin WHERE UserName=:username and Password=:password";
+$sql ="SELECT Password FROM tbluser_account WHERE UserName=:username and Password=:password";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
@@ -20,7 +20,7 @@ $query-> execute();
 $results = $query -> fetchAll(PDO::FETCH_OBJ);
 if($query -> rowCount() > 0)
 {
-$con="update admin set Password=:newpassword where UserName=:username";
+$con="update tbluser_account set Password=:newpassword where UserName=:username";
 $chngpwd1 = $dbh->prepare($con);
 $chngpwd1-> bindParam(':username', $username, PDO::PARAM_STR);
 $chngpwd1-> bindParam(':newpassword', $newpassword, PDO::PARAM_STR);
@@ -122,11 +122,11 @@ return true;
                                             </div>
            <?php if($msg){?>
 <div class="alert alert-success left-icon-alert" role="alert">
- <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+ <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
  </div><?php } 
 else if($error){?>
     <div class="alert alert-danger left-icon-alert" role="alert">
-                                            <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                            <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                         </div>
                                         <?php } ?>
   

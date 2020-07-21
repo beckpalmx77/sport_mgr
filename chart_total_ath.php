@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("localhost", "sadmin", "sadmin", "sport_mgr_dbs") or die("Error: " . mysqli_error($con));
+$con = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME) or die("Error: " . mysqli_error($con));
 
 mysqli_query($con, "SET NAMES 'utf8' ");
 
@@ -12,9 +12,12 @@ $resultchart = mysqli_query($con, $query);
 $datesave = array();
 $Total = array();
 
+
 while ($rs = mysqli_fetch_array($resultchart)) {
     $SportName[] = "\"" . $rs['SportName'] . "\"";
     $Total[] = "\"" . $rs['Total'] . "\"";
+
+    $sum_total = $sum_total + $rs['Total'];
 }
 $SportName = implode(",", $SportName);
 $Total = implode(",", $Total);
@@ -25,8 +28,8 @@ $Total = implode(",", $Total);
 <!--table width="200" border="1" cellpadding="0"  cellspacing="0" align="center">
     <thead>
     <tr>
-        <th width="10%">ปี</th>
-        <th width="10%">ยอดขาย</th>
+        <th width="10%">ประเภท</th>
+        <th width="10%">จำนวน</th>
     </tr>
     </thead>
 
@@ -65,7 +68,7 @@ $Total = implode(",", $Total);
             labels: [<?php echo $SportName;?>
             ],
             datasets: [{
-                label: 'สรุปนักกีฬาตามประเภท (จำนวนคน)',
+                label: 'สรุปนักกีฬาตามประเภท (จำนวนคนทั้งหมด = <?php echo $sum_total?>) ',
                 data: [<?php echo $Total; ?>
                 ],
                 backgroundColor: [
@@ -78,7 +81,53 @@ $Total = implode(",", $Total);
                     'rgba(255, 0, 0, 0.2)',
                     'rgba(255, 255, 0, 0.2)',
                     'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',                ],
+                    'rgba(54, 162, 235, 0.2)',
+
+                    'rgba(40, 167, 69, 0.2)',
+                    'rgba(255, 0, 0, 0.2)',
+                    'rgba(0, 0, 255, 0.2)',
+                    'rgba(245, 6, 220, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(40, 167, 69, 0.2)',
+                    'rgba(255, 0, 0, 0.2)',
+                    'rgba(255, 255, 0, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+
+                    'rgba(40, 167, 69, 0.2)',
+                    'rgba(255, 0, 0, 0.2)',
+                    'rgba(0, 0, 255, 0.2)',
+                    'rgba(245, 6, 220, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(40, 167, 69, 0.2)',
+                    'rgba(255, 0, 0, 0.2)',
+                    'rgba(255, 255, 0, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+
+                    'rgba(40, 167, 69, 0.2)',
+                    'rgba(255, 0, 0, 0.2)',
+                    'rgba(0, 0, 255, 0.2)',
+                    'rgba(245, 6, 220, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(40, 167, 69, 0.2)',
+                    'rgba(255, 0, 0, 0.2)',
+                    'rgba(255, 255, 0, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+
+                    'rgba(40, 167, 69, 0.2)',
+                    'rgba(255, 0, 0, 0.2)',
+                    'rgba(0, 0, 255, 0.2)',
+                    'rgba(245, 6, 220, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(40, 167, 69, 0.2)',
+                    'rgba(255, 0, 0, 0.2)',
+                    'rgba(255, 255, 0, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+
+                ],
                 borderColor: [
                     'rgba(40, 167, 69, 1)',
                     'rgba(255, 0, 0, 1)',
@@ -90,6 +139,51 @@ $Total = implode(",", $Total);
                     'rgba(255, 255, 0, 1)',
                     'rgba(255,99,132,1)',
                     'rgba(54, 162, 235, 1)',
+
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(255, 0, 0, 1)',
+                    'rgba(0,0,255,1)',
+                    'rgba(245, 6, 220, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(255, 0, 0, 1)',
+                    'rgba(255, 255, 0, 1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(255, 0, 0, 1)',
+                    'rgba(0,0,255,1)',
+                    'rgba(245, 6, 220, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(255, 0, 0, 1)',
+                    'rgba(255, 255, 0, 1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(255, 0, 0, 1)',
+                    'rgba(0,0,255,1)',
+                    'rgba(245, 6, 220, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(255, 0, 0, 1)',
+                    'rgba(255, 255, 0, 1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(255, 0, 0, 1)',
+                    'rgba(0,0,255,1)',
+                    'rgba(245, 6, 220, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(255, 0, 0, 1)',
+                    'rgba(255, 255, 0, 1)',
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+
                 ],
                 borderWidth: 1
             }]

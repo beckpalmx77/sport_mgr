@@ -30,12 +30,12 @@ if (isset($_GET['id'])) {
             if ($resultD->file_3 != "") unlink($resultD->file_3);
             if ($resultD->file_4 != "") unlink($resultD->file_4);
             if ($resultD->file_5 != "") unlink($resultD->file_5);
-/*
-            unlink($resultD->file_2);
-            unlink($resultD->file_3);
-            unlink($resultD->file_4);
-            unlink($resultD->file_5);
-*/
+            /*
+                        unlink($resultD->file_2);
+                        unlink($resultD->file_3);
+                        unlink($resultD->file_4);
+                        unlink($resultD->file_5);
+            */
 
 
         }
@@ -156,12 +156,12 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
                                             <a href="#" class="close" data-dismiss="alert"
                                                aria-label="close">&times;</a>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                                 <a href="#" class="close" data-dismiss="alert"
                                                    aria-label="close">&times;</a>
                                             </div>
@@ -221,7 +221,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                                                      onclick="window.open(this.src,'_blank')">
                                                             </td>
 
-                                                            <td><?php echo htmlentities(str_replace("upload/","",$result->file_name)); ?></td>
+                                                            <td><?php echo htmlentities(str_replace("upload/", "", $result->file_name)); ?></td>
 
                                                             <td>
                                                                 <a href="edit-news.php?id=<?php echo htmlentities($result->id); ?>"><i
@@ -291,6 +291,11 @@ if (strlen($_SESSION['alogin']) == "") {
     <script src="js/main.js"></script>
     <script src="vender/myjs/myAction.js"></script>
 
+    <script src="vender/alertifyjs/alertify.min.js"></script>
+    <link rel="stylesheet" href="vender/alertifyjs/css/alertify.min.css"/>
+    <link rel="stylesheet" href="vender/alertifyjs/css/themes/default.min.css"/>
+
+
     <script>
         $(function ($) {
             $('#example').DataTable();
@@ -305,31 +310,19 @@ if (strlen($_SESSION['alogin']) == "") {
         });
     </script>
 
-    <script type="text/javascript">
-        /*
-         function delete_id(id, rollid) {
-         if (id == null) {
-         alert("Error Parameter");
-         }
-         else {
-         if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
-         window.location.href = 'manage-edit-files.php?id=' + id + ',rollid=' + rollid;
-         }
-         }
-         }
-         */
 
+    <script type="text/javascript">
         function delete_id(id) {
-            if (id == null) {
-                alert("Error Parameter");
-            }
-            else {
-                if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
+
+            alertify.confirm('Confirm Delete !!!', 'ต้องการลบรายการนี้ออกจากระบบ?',
+                function () {
                     window.location.href = 'manage-news-page.php?id=' + id;
                 }
-            }
-        }
+                , function () {
+                    alertify.error('Cancel - ยกเลิก')
+                });
 
+        }
     </script>
 
     <script>

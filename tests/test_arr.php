@@ -17,7 +17,7 @@ include("../includes/config.php");
 
 $db = new mydbs(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 
-$accounts = $db->query('SELECT * FROM admin')->fetchAll();
+$accounts = $db->query('SELECT * FROM tbluser_account ')->fetchAll();
 foreach ($accounts as $account) {
     echo $account['id'] . ' | ';
     echo $account['UserName'] . ' | ';

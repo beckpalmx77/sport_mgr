@@ -120,149 +120,157 @@ if (strlen($_SESSION['alogin']) == "") {
                                 <ul class="breadcrumb">
                                     <li><a href="dashboard.php"><i class="fa fa-home"></i> Home</a></li>
                                     <li>ทะเบียนนักกีฬา</li>
-                                    <li class="active">เพิ่ม ภาพถ่าย / เอกสาร </li>
+                                    <li class="active">เพิ่ม ภาพถ่าย / เอกสาร</li>
                                 </ul>
                             </div>
 
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>เพิ่ม ภาพถ่าย / เอกสาร</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>เพิ่ม ภาพถ่าย / เอกสาร</h5>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        <a href="manage-file-attach.php"
+                                                           class="btn btn-info btn-labeled">BACK<span
+                                                                class="btn-label btn-label-right"><i
+                                                                    class="fa fa-check"></i></span></a>
+                                                    </div>
+                                                </div>
+
+                                                <?php
+                                                $sid = intval($_GET['stid']);
+                                                $sql = "SELECT * from tblstudents where StudentId=:sid";
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':sid', $sid, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) { ?>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">รหัสประจำตัว</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="rollid" class="form-control"
+                                                                       id="rollid" readonly="true"
+                                                                       value="<?php echo htmlentities($result->RollId) ?>"
+                                                                       maxlength="20" required="required"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ชื่อ</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="firstname" class="form-control"
+                                                                       id="firstname" readonly="true"
+                                                                       value="<?php echo htmlentities($result->FirstName) ?>"
+                                                                       maxlength="20" required="required"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">นามสกุล</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="lastname" class="form-control"
+                                                                       id="lastname" readonly="true"
+                                                                       value="<?php echo htmlentities($result->LastName) ?>"
+                                                                       maxlength="20" required="required"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <?php
+
+                                                    }
+                                                }
+
+                                                ?>
+
+
+                                                <div class="form-group">
+                                                    <label for="default"
+                                                           class="col-sm-2 control-label">รูปภาพ</label>
+
+                                                    <div class="col-sm-10">
+                                                        <img id="picture" src=""
+                                                             width="100" height="100" alt=""
+                                                             onmouseover="bigImg(this)" onmouseout="normalImg(this)"
+                                                             onclick="window.open(this.src,'_blank')">
+                                                        <input type='file' name="fileUpload" id="fileUpload"
+                                                               accept="image/png, image/jpeg"
+                                                               onchange="readURL(this);"/>
+                                                        <label class="custom-file-label" for="chooseFile">เลือกไฟล์
+                                                            (ไฟล์ .jpg หรือ .png เท่านั้น)(Click
+                                                            ที่รูปเพื่อขยาย)</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default"
+                                                           class="input-group my-3">
+                                                        &nbsp;&nbsp;ประเภทเอกสาร/ภาพถ่าย</label>
+
+                                                    <div class="col-sm-10">
+                                                        <select name="filedoc_type" class="form-control"
+                                                                id="filedoc_type" required="required">
+
+                                                            <option value="">เลือก ประเภทเอกสาร/ภาพถ่าย</option>
+                                                            <?php $sql = "SELECT * from tbldoctype";
+                                                            $query = $dbh->prepare($sql);
+                                                            $query->execute();
+                                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                            if ($query->rowCount() > 0) {
+                                                                foreach ($results as $result) { ?>
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->id); ?>"><?php echo htmlentities($result->document_type_name); ?></option>
+                                                                <?php }
+                                                            } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="submit" class="btn btn-primary">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
                                         </div>
                                     </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                            </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                            <div class="panel-heading">
-                                                <div class="panel-title">
-                                                    <a href="manage-file-attach.php"
-                                                       class="btn btn-info btn-labeled">BACK<span
-                                                            class="btn-label btn-label-right"><i
-                                                                class="fa fa-check"></i></span></a>
-                                                </div>
-                                            </div>
-
-                                            <?php
-                                            $sid = intval($_GET['stid']);
-                                            $sql = "SELECT * from tblstudents where StudentId=:sid";
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':sid', $sid, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                            foreach ($results as $result) { ?>
-
-                                                <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">รหัสประจำตัว</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="rollid" class="form-control"
-                                                                   id="rollid" readonly="true"
-                                                                   value="<?php echo htmlentities($result->RollId) ?>"
-                                                                   maxlength="20" required="required"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                <div class="form-group">
-                                                    <label for="default"
-                                                           class="col-sm-2 control-label">ชื่อ</label>
-
-                                                    <div class="col-sm-4">
-                                                        <input type="text" name="firstname" class="form-control"
-                                                               id="firstname" readonly="true"
-                                                               value="<?php echo htmlentities($result->FirstName) ?>"
-                                                               maxlength="20" required="required"
-                                                               autocomplete="off">
-                                                    </div>
-                                                    <label for="default"
-                                                           class="col-sm-2 control-label">นามสกุล</label>
-
-                                                    <div class="col-sm-4">
-                                                        <input type="text" name="lastname" class="form-control"
-                                                               id="lastname" readonly="true"
-                                                               value="<?php echo htmlentities($result->LastName) ?>"
-                                                               maxlength="20" required="required"
-                                                               autocomplete="off">
-                                                    </div>
-                                                </div>
-
-                                             <?php
-
-                                                }
-                                            }
-
-                                            ?>
-
-
-                                            <div class="form-group">
-                                                <label for="default"
-                                                       class="col-sm-2 control-label">รูปภาพ</label>
-                                                <div class="col-sm-10">
-                                                    <img id="picture" src=""
-                                                         width="100" height="100" alt=""
-                                                         onmouseover="bigImg(this)" onmouseout="normalImg(this)"
-                                                         onclick="window.open(this.src,'_blank')">
-                                                    <input type='file' name="fileUpload" id="fileUpload"
-                                                           accept="image/png, image/jpeg" onchange="readURL(this);"/>
-                                                    <label class="custom-file-label" for="chooseFile">เลือกไฟล์
-                                                        (ไฟล์ .jpg หรือ .png เท่านั้น)(Click ที่รูปเพื่อขยาย)</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default"
-                                                       class="input-group my-3">&nbsp;&nbsp;ประเภทเอกสาร/ภาพถ่าย</label>
-
-                                                <div class="col-sm-10">
-                                                    <select name="filedoc_type" class="form-control" id="filedoc_type" required="required">
-
-                                                        <option value="">เลือก ประเภทเอกสาร/ภาพถ่าย</option>
-                                                        <?php $sql = "SELECT * from tbldoctype";
-                                                        $query = $dbh->prepare($sql);
-                                                        $query->execute();
-                                                        $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                                        if ($query->rowCount() > 0) {
-                                                            foreach ($results as $result) { ?>
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->id); ?>"><?php echo htmlentities($result->document_type_name); ?></option>
-                                                            <?php }
-                                                        } ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>

@@ -30,7 +30,6 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap4/bootstrap.min.css">
 <script src="js/bootstrap.min.js"></script>
 
-
 <div class="container h-100">
     <div class="row align-items-center h-100">
         <div class="col-8 mx-auto">

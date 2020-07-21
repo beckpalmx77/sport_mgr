@@ -9,15 +9,17 @@ if (strlen($_SESSION['alogin']) == "") {
 
         $main_menu_id = $_POST['main_menu_id'];
         $label = $_POST['label'];
+        $label_en = $_POST['label_en'];
         $link = $_POST['link'];
         $icon = $_POST['icon'];
         $sort = $_POST['sort'];
         $privilege = $_POST['privilege'];
 
-        $sql = "INSERT INTO  menu_main(main_menu_id,label,link,icon,sort,privilege) VALUES(:main_menu_id,:label,:link,:icon,:sort,:privilege)";
+        $sql = "INSERT INTO  menu_main(main_menu_id,label,label_en,link,icon,sort,privilege) VALUES(:main_menu_id,:label,:label_en,:link,:icon,:sort,:privilege)";
         $query = $dbh->prepare($sql);
         $query->bindParam(':main_menu_id', $main_menu_id, PDO::PARAM_STR);
         $query->bindParam(':label', $label, PDO::PARAM_STR);
+        $query->bindParam(':label_en', $label_en, PDO::PARAM_STR);
         $query->bindParam(':link', $link, PDO::PARAM_STR);
         $query->bindParam(':icon', $icon, PDO::PARAM_STR);
         $query->bindParam(':sort', $sort, PDO::PARAM_STR);
@@ -131,10 +133,10 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                             </div>
                                         <?php } ?>
 
@@ -174,11 +176,21 @@ if (strlen($_SESSION['alogin']) == "") {
                                                 </div>
 
                                                 <div class="form-group has-success">
-                                                    <label for="success" class="control-label">ชื่อเมนู</label>
+                                                    <label for="success" class="control-label">ชื่อเมนู ภาษาไทย / THAI MENU NAME</label>
 
                                                     <div class="">
                                                         <input type="text" name="label" class="form-control"
                                                                required="required" id="label">
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group has-success">
+                                                    <label for="success" class="control-label">ชื่อเมนู ภาษาอังกฤษ  / ENGLISH MENU NAME</label>
+
+                                                    <div class="">
+                                                        <input type="text" name="label_en" class="form-control"
+                                                               required="required" id="label_en">
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>

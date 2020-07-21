@@ -10,7 +10,7 @@ if (strlen($_SESSION['alogin']) == "") {
         $aid = intval($_GET['aid']);
         $password = md5($_POST['password']);
 
-        $sql = "update  admin set Password=:password where id=:aid ";
+        $sql = "update tbluser_account  set Password=:password where id=:aid ";
         $query = $dbh->prepare($sql);
         $query->bindParam(':password', $password, PDO::PARAM_STR);
         $query->bindParam(':aid', $aid, PDO::PARAM_STR);
@@ -99,17 +99,17 @@ if (strlen($_SESSION['alogin']) == "") {
                                         </div>
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                             </div>
                                         <?php } ?>
 
                                         <form name="chngpwd" method="post" \ onSubmit="return valid();">
                                             <?php
                                             $aid = intval($_GET['aid']);
-                                            $sql = "SELECT * from admin where id=:aid";
+                                            $sql = "SELECT * FROM tbluser_account  where id=:aid";
                                             $query = $dbh->prepare($sql);
                                             $query->bindParam(':aid', $aid, PDO::PARAM_STR);
                                             $query->execute();

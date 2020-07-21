@@ -133,278 +133,290 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>ปรับปรุง ข้อมูลทดสอบสมรรถภาพร่างกาย </h5>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>ปรับปรุง ข้อมูลทดสอบสมรรถภาพร่างกาย </h5>
                                             </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
 
-                                            <?php
-                                            $sql = "SELECT *
+                                                <?php
+                                                $sql = "SELECT *
 					                        ,(select tblstudents.FirstName from tblstudents where tblstudents.RollId = tbl_performance.sid) as FirstName
 					                        ,(select tblstudents.LastName from tblstudents where tblstudents.RollId = tbl_performance.sid) as LastName
 					                        ,(select tblstudents.picture from tblstudents where tblstudents.RollId = tbl_performance.sid) as picture
                                             from tbl_performance
                                             where id=:id";
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':id', $id, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) { ?>
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) { ?>
 
-                                                    <input type="hidden" name="rec_id" value="<?php echo htmlentities($result-->id)?>">
+                                                        <input type="hidden" name="rec_id"
+                                                               value="<?php echo htmlentities($result-- > id) ?>">
 
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">รูปภาพ</label>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">รูปภาพ</label>
 
-                                                        <div class="col-sm-10">
-                                                            <img id="picture"
-                                                                 src="<?php echo htmlentities($result->picture) ?>"
-                                                                 width="100" height="100" alt=""
-                                                                 onmouseover="bigImg(this)" onmouseout="normalImg(this)"
-                                                                 onclick="window.open(this.src,'_blank')">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">รหัสประจำตัว</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="sid" class="form-control"
-                                                                   id="sid" readonly="true"
-                                                                   value="<?php echo htmlentities($result->sid) ?>"
-                                                                   maxlength="20" required="required"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">ชื่อ</label>
-
-                                                        <div class="col-sm-4">
-                                                            <input type="text" name="firstname" class="form-control"
-                                                                   id="firstname" readonly="true"
-                                                                   value="<?php echo htmlentities($result->FirstName) ?>"
-                                                                   maxlength="20" required="required"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">นามสกุล</label>
-
-                                                        <div class="col-sm-4">
-                                                            <input type="text" name="lastname" class="form-control"
-                                                                   id="lastname" readonly="true"
-                                                                   value="<?php echo htmlentities($result->LastName) ?>"
-                                                                   maxlength="20" required="required"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="order_test"
-                                                               class="col-sm-2 control-label">ครั้งที่ทดสอบ</label>
-
-                                                        <div class="col-sm-4">
-                                                            <input id="order_test" name="order_test"
-                                                                   class="form-control"
-                                                                   value="<?php echo htmlentities($result->order_test) ?>"
-                                                                   placeholder="" readonly="true">
+                                                            <div class="col-sm-10">
+                                                                <img id="picture"
+                                                                     src="<?php echo htmlentities($result->picture) ?>"
+                                                                     width="100" height="100" alt=""
+                                                                     onmouseover="bigImg(this)"
+                                                                     onmouseout="normalImg(this)"
+                                                                     onclick="window.open(this.src,'_blank')">
+                                                            </div>
                                                         </div>
 
-                                                        <label for="date"
-                                                               class="col-sm-2 control-label">วันที่ทดสอบ</label>
-                                                        <!--  สร้าง textbox สำหรับสร้างตัวเลือก ปฎิทิน โดยมี id มีค่าเป็น my_date  -->
-                                                        <div class="col-sm-4">
-                                                            <input id="date_test" name="date_test" class="form-control"
-                                                                   value="<?php echo htmlentities($result->date_test) ?>"
-                                                                   placeholder="วัน/เดือน/ปี">
-                                                        </div>
-                                                    </div>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">รหัสประจำตัว</label>
 
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">ส่วนสูง</label>
-
-                                                        <div class="col-sm-4">
-                                                            <input type="number" name="hight" class="form-control"
-                                                                   value="<?php echo htmlentities($result->hight) ?>"
-                                                                   id="hight" autocomplete="off">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="sid" class="form-control"
+                                                                       id="sid" readonly="true"
+                                                                       value="<?php echo htmlentities($result->sid) ?>"
+                                                                       maxlength="20" required="required"
+                                                                       autocomplete="off">
+                                                            </div>
                                                         </div>
 
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">น้ำหนัก</label>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ชื่อ</label>
 
-                                                        <div class="col-sm-4">
-                                                            <input type="number" name="weight" class="form-control"
-                                                                   value="<?php echo htmlentities($result->weight) ?>"
-                                                                   id="weight" autocomplete="off">
-                                                        </div>
-                                                    </div>
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="firstname" class="form-control"
+                                                                       id="firstname" readonly="true"
+                                                                       value="<?php echo htmlentities($result->FirstName) ?>"
+                                                                       maxlength="20" required="required"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">นามสกุล</label>
 
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">เปอร์เซ็นต์ไขมัน
-                                                            Body fat Percentage </label>
-
-                                                        <div class="col-sm-4">
-                                                            <input type="number" name="bfp" class="form-control"
-                                                                   value="<?php echo htmlentities($result->bfp) ?>"
-                                                                   id="bfp" autocomplete="off">
-                                                        </div>
-
-                                                        <label for="default" class="col-sm-2 control-label">วิ่งเร็ว 50
-                                                            เมตร (50MeterSprint)</label>
-                                                        <div class="col-sm-4">
-                                                            <input type="number" name="fms" class="form-control"
-                                                                   value="<?php echo htmlentities($result->fms) ?>"
-                                                                   id="fms" autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">ยืนกระโดดไกล
-                                                            (StandJump)</label>
-
-                                                        <div class="col-sm-4">
-                                                            <input type="number" name="sj" class="form-control"
-                                                                   value="<?php echo htmlentities($result->sj) ?>"
-                                                                   id="sj" autocomplete="off">
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="lastname" class="form-control"
+                                                                       id="lastname" readonly="true"
+                                                                       value="<?php echo htmlentities($result->LastName) ?>"
+                                                                       maxlength="20" required="required"
+                                                                       autocomplete="off">
+                                                            </div>
                                                         </div>
 
-                                                        <label for="default" class="col-sm-2 control-label">แรงบีบมือ
-                                                            (GripStrength) </label>
+                                                        <div class="form-group">
+                                                            <label for="order_test"
+                                                                   class="col-sm-2 control-label">ครั้งที่ทดสอบ</label>
 
-                                                        <div class="col-sm-4">
-                                                            <input type="number" name="gs" class="form-control"
-                                                                   value="<?php echo htmlentities($result->gs) ?>"
-                                                                   id="gs" autocomplete="off">
+                                                            <div class="col-sm-4">
+                                                                <input id="order_test" name="order_test"
+                                                                       class="form-control"
+                                                                       value="<?php echo htmlentities($result->order_test) ?>"
+                                                                       placeholder="" readonly="true">
+                                                            </div>
+
+                                                            <label for="date"
+                                                                   class="col-sm-2 control-label">วันที่ทดสอบ</label>
+                                                            <!--  สร้าง textbox สำหรับสร้างตัวเลือก ปฎิทิน โดยมี id มีค่าเป็น my_date  -->
+                                                            <div class="col-sm-4">
+                                                                <input id="date_test" name="date_test"
+                                                                       class="form-control"
+                                                                       value="<?php echo htmlentities($result->date_test) ?>"
+                                                                       placeholder="วัน/เดือน/ปี">
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">ลุก-นั่ง 30
-                                                            วินาที (30SecondSit-up)</label>
-                                                        <div class="col-sm-4">
-                                                            <input type="number" name="tss" class="form-control"
-                                                                   value="<?php echo htmlentities($result->tss) ?>"
-                                                                   id="tss" autocomplete="off">
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ส่วนสูง</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="hight" class="form-control"
+                                                                       value="<?php echo htmlentities($result->hight) ?>"
+                                                                       id="hight" autocomplete="off">
+                                                            </div>
+
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">น้ำหนัก</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="weight" class="form-control"
+                                                                       value="<?php echo htmlentities($result->weight) ?>"
+                                                                       id="weight" autocomplete="off">
+                                                            </div>
                                                         </div>
 
-                                                        <label for="default" class="col-sm-2 control-label">วิ่งเก็บของ
-                                                            ( Shuttle Run)</label>
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">เปอร์เซ็นต์ไขมัน
+                                                                Body fat Percentage </label>
 
-                                                        <div class="col-sm-4">
-                                                            <input type="number" name="sr" class="form-control"
-                                                                   value="<?php echo htmlentities($result->sr) ?>"
-                                                                   id="sr" autocomplete="off">
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="bfp" class="form-control"
+                                                                       value="<?php echo htmlentities($result->bfp) ?>"
+                                                                       id="bfp" autocomplete="off">
+                                                            </div>
+
+                                                            <label for="default" class="col-sm-2 control-label">วิ่งเร็ว
+                                                                50
+                                                                เมตร (50MeterSprint)</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="fms" class="form-control"
+                                                                       value="<?php echo htmlentities($result->fms) ?>"
+                                                                       id="fms" autocomplete="off">
+                                                            </div>
                                                         </div>
-                                                    </div>
 
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">ยืนกระโดดไกล
+                                                                (StandJump)</label>
 
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">นั่งงอตัวไปข้างหน้า
-                                                            (Trunk Forward Flexion)</label>
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="sj" class="form-control"
+                                                                       value="<?php echo htmlentities($result->sj) ?>"
+                                                                       id="sj" autocomplete="off">
+                                                            </div>
 
-                                                        <div class="col-sm-4">
-                                                            <input type="number" name="tff" class="form-control"
-                                                                   value="<?php echo htmlentities($result->tff) ?>"
-                                                                   id="tff" autocomplete="off">
+                                                            <label for="default" class="col-sm-2 control-label">แรงบีบมือ
+                                                                (GripStrength) </label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="gs" class="form-control"
+                                                                       value="<?php echo htmlentities($result->gs) ?>"
+                                                                       id="gs" autocomplete="off">
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">ลุก-นั่ง
+                                                                30
+                                                                วินาที (30SecondSit-up)</label>
 
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">วิ่งระยะไกล (Distance
-                                                            Run) </label>
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="tss" class="form-control"
+                                                                       value="<?php echo htmlentities($result->tss) ?>"
+                                                                       id="tss" autocomplete="off">
+                                                            </div>
 
-                                                        <div class="col-sm-4">
-                                                            <select id="dr_type" name="dr_type"
-                                                                    class="form-control" data-live-search="true"
-                                                                    title="Please select">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->dr_type); ?>"
-                                                                    selected><?php echo htmlentities($result->dr_type); ?></option>
-                                                                <option>วิ่ง 1,000 เมตร นักกีฬาชาย</option>
-                                                                <option>วิ่ง 800 เมตร นักกีฬาหญิง</option>
-                                                            </select>
+                                                            <label for="default" class="col-sm-2 control-label">วิ่งเก็บของ
+                                                                ( Shuttle Run)</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="sr" class="form-control"
+                                                                       value="<?php echo htmlentities($result->sr) ?>"
+                                                                       id="sr" autocomplete="off">
+                                                            </div>
                                                         </div>
-                                                        <label for="default"
-                                                        <label for="date" class="col-sm-2 control-label">ผลทดสอบ</label>
 
-                                                        <div class="col-sm-4">
-                                                            <input id="dr_result" name="dr_result" class="form-control"
-                                                                   value="<?php echo htmlentities($result->dr_result); ?>"
-                                                                   placeholder="">
+
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">นั่งงอตัวไปข้างหน้า
+                                                                (Trunk Forward Flexion)</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="tff" class="form-control"
+                                                                       value="<?php echo htmlentities($result->tff) ?>"
+                                                                       id="tff" autocomplete="off">
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">ผลการทดสอบ</label>
+                                                        <div class="form-group">
 
-                                                        <div class="col-sm-10">
-                                                            <select id="test_result" name="test_result"
-                                                                    class="form-control" data-live-search="true"
-                                                                    title="Please select">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->test_result); ?>"
-                                                                    selected><?php echo htmlentities($result->test_result); ?></option>
-                                                                <option>ผ่าน</option>
-                                                                <option>ไม่ผ่าน</option>
-                                                            </select>
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">วิ่งระยะไกล (Distance
+                                                                Run) </label>
+
+                                                            <div class="col-sm-4">
+                                                                <select id="dr_type" name="dr_type"
+                                                                        class="form-control" data-live-search="true"
+                                                                        title="Please select">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->dr_type); ?>"
+                                                                        selected><?php echo htmlentities($result->dr_type); ?></option>
+                                                                    <option>วิ่ง 1,000 เมตร นักกีฬาชาย</option>
+                                                                    <option>วิ่ง 800 เมตร นักกีฬาหญิง</option>
+                                                                </select>
+                                                            </div>
+                                                            <label for="default"
+                                                            <label for="date"
+                                                                   class="col-sm-2 control-label">ผลทดสอบ</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input id="dr_result" name="dr_result"
+                                                                       class="form-control"
+                                                                       value="<?php echo htmlentities($result->dr_result); ?>"
+                                                                       placeholder="">
+                                                            </div>
                                                         </div>
-                                                    </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ผลการทดสอบ</label>
+
+                                                            <div class="col-sm-10">
+                                                                <select id="test_result" name="test_result"
+                                                                        class="form-control" data-live-search="true"
+                                                                        title="Please select">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->test_result); ?>"
+                                                                        selected><?php echo htmlentities($result->test_result); ?></option>
+                                                                    <option>ผ่าน</option>
+                                                                    <option>ไม่ผ่าน</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
 
 
-                                                    <?php
+                                                        <?php
+                                                    }
                                                 }
-                                            }
-                                            ?>
+                                                ?>
 
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="update" class="btn btn-primary">Update
-                                                    </button>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="update" class="btn btn-primary">
+                                                            Update
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="panel-heading">
-                                                <div class="panel-title">
-                                                    <a href="manage-edit-performance.php?rollid=<?php echo htmlentities($result->sid); ?>"
-                                                       class="btn btn-info btn-labeled">BACK<span
-                                                            class="btn-label btn-label-right"><i
-                                                                class="fa fa-check"></i></span></a>
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        <a href="manage-edit-performance.php?rollid=<?php echo htmlentities($result->sid); ?>"
+                                                           class="btn btn-info btn-labeled">BACK<span
+                                                                class="btn-label btn-label-right"><i
+                                                                    class="fa fa-check"></i></span></a>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        </form>
+                                            </form>
 
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>

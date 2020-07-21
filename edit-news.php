@@ -175,190 +175,197 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>ปรับปรุง ประกาศ/ข่าวสาร</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>ปรับปรุง ประกาศ/ข่าวสาร</h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                            </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                            <div class="panel-heading">
-                                                <div class="panel-title">
-                                                    <a href="manage-news-page.php"
-                                                       class="btn btn-info btn-labeled">BACK<span
-                                                            class="btn-label btn-label-right"><i
-                                                                class="fa fa-check"></i></span></a>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                                 </div>
-                                            </div>
-
-                                            <?php
-
-                                            $sql = "SELECT * from tblnews where id=:id";
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':id', $id, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) { ?>
-
-
-                                                    <?php
-                                                    if (file_exists($result->file_name)) {
-                                                        $file = $result->file_name;
-                                                    } else {
-                                                        $file = "images/Document-icon.png";
-                                                    }
-                                                    ?>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">รูปภาพ/ไฟล์ pdf</label>
-
-                                                        <div class="col-sm-10">
-                                                            <img id="picture" src="<?php echo htmlentities($file) ?>"
-                                                                 width="100" height="100" alt=""
-                                                                 onmouseover="bigImg(this)" onmouseout="normalImg(this)"
-                                                                 onclick="window.open(this.src,'_blank')">
-                                                            <input type='file' name="fileUpload" id="fileUpload"
-                                                                   multiple="multiple"
-                                                                   accept="image/png, image/jpeg ,.pdf"
-                                                                   onchange="readURL(this);"/>
-                                                            <label class="custom-file-label" for="chooseFile">เลือกไฟล์
-                                                                (ไฟล์ .jpg , .png , .pdf เท่านั้น)</label>
-                                                        </div>
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        <a href="manage-news-page.php"
+                                                           class="btn btn-info btn-labeled">BACK<span
+                                                                class="btn-label btn-label-right"><i
+                                                                    class="fa fa-check"></i></span></a>
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">หัวข้อ
-                                                            ประกาศ/ข่าวสาร</label>
+                                                <?php
 
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="topic" class="form-control"
-                                                                   id="topic"
-                                                                   value="<?php echo htmlentities($result->topic) ?>"
-                                                                   required="required" autocomplete="off">
+                                                $sql = "SELECT * from tblnews where id=:id";
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) { ?>
+
+
+                                                        <?php
+                                                        if (file_exists($result->file_name)) {
+                                                            $file = $result->file_name;
+                                                        } else {
+                                                            $file = "images/Document-icon.png";
+                                                        }
+                                                        ?>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">รูปภาพ/ไฟล์
+                                                                pdf</label>
+
+                                                            <div class="col-sm-10">
+                                                                <img id="picture"
+                                                                     src="<?php echo htmlentities($file) ?>"
+                                                                     width="100" height="100" alt=""
+                                                                     onmouseover="bigImg(this)"
+                                                                     onmouseout="normalImg(this)"
+                                                                     onclick="window.open(this.src,'_blank')">
+                                                                <input type='file' name="fileUpload" id="fileUpload"
+                                                                       multiple="multiple"
+                                                                       accept="image/png, image/jpeg ,.pdf"
+                                                                       onchange="readURL(this);"/>
+                                                                <label class="custom-file-label" for="chooseFile">เลือกไฟล์
+                                                                    (ไฟล์ .jpg , .png , .pdf เท่านั้น)</label>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">รายละเอียด
-                                                            ประกาศ/ข่าวสาร</label>
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">หัวข้อ
+                                                                ประกาศ/ข่าวสาร</label>
 
-                                                        <div class="col-sm-10">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="topic" class="form-control"
+                                                                       id="topic"
+                                                                       value="<?php echo htmlentities($result->topic) ?>"
+                                                                       required="required" autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">รายละเอียด
+                                                                ประกาศ/ข่าวสาร</label>
+
+                                                            <div class="col-sm-10">
                                                     <textarea rows="4" cols="50" name="topic_desc" class="form-control"
                                                               id="topic_desc" required="required"
                                                               autocomplete="off"><?php echo $result->topic_desc ?></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">Link URL
-                                                            ที่เกี่ยวข้อง</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="link" class="form-control"
-                                                                   id="link"
-                                                                   value="<?php echo htmlentities($result->link) ?>"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">ไฟล์เอกสาร
-                                                            รูปภาพ PNG , JPG , PDF,WORD</label>
-
-                                                        <div class='col-sm-10'>
-                                                            <div class="menu">
-                                                                <?PHP
-
-                                                                $max = 5;
-
-                                                                for ($i = 1; $i <= $max; $i++) {
-
-                                                                    ${"file_" . $i} = $result->{"file_" . $i};
-
-                                                                    //echo ${"file_" . $i};
-
-                                                                    if (${"file_" . $i} != "") { ?>
-                                                                        <a href="<?php echo htmlentities(${"file_" . $i}) ?>"
-                                                                           target="_blank">CLICK ดูรายละเอียด
-                                                                            ไฟล์ที่ <?php echo $i ?>
-                                                                            <img
-                                                                                src="<?php echo GetIconPNG(${"file_" . $i}) ?>"
-                                                                                width="30" height="30">
-                                                                            <?php echo str_replace("upload/", "", htmlentities(${"file_" . $i})) ?>
-                                                                        </a>
-                                                                        <?php
-                                                                        echo "<br><br>";
-                                                                    }
-                                                                }
-                                                                ?>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">แนบไฟล์เอกสาร
-                                                            รูปภาพ PNG , JPG , PDF,WORD</label>
-                                                        <?php
-                                                        echo "<div class='col-sm-10'>";
-                                                        $max_no_img = 5; // Maximum number of images value to be set here
-                                                        for ($i = 1; $i <= $max_no_img; $i++) {
-                                                            echo "ไฟล์ที่ " . $i;
-                                                            echo "<input type=file name='upload_file[]' class='bginput' accept='.doc,.docx,.pdf,.jpg,.png'>";
-                                                        }
-                                                        echo "</div>";
-                                                        ?>
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">Link URL
+                                                                ที่เกี่ยวข้อง</label>
 
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <label for="date"
-                                                               class="col-sm-2 control-label">วันที่ประกาศ</label>
-                                                        <!--  สร้าง textbox สำหรับสร้างตัวเลือก ปฎิทิน โดยมี id มีค่าเป็น my_date  -->
-                                                        <div class="col-sm-4">
-                                                            <input id="doc_date" name="doc_date" class="form-control"
-                                                                   required="required"
-                                                                   value="<?php echo htmlentities($result->doc_date) ?>"
-                                                                   placeholder="วัน/เดือน/ปี" readonly="true">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="link" class="form-control"
+                                                                       id="link"
+                                                                       value="<?php echo htmlentities($result->link) ?>"
+                                                                       autocomplete="off">
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <?php
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">ไฟล์เอกสาร
+                                                                รูปภาพ PNG , JPG , PDF,WORD</label>
+
+                                                            <div class='col-sm-10'>
+                                                                <div class="menu">
+                                                                    <?PHP
+
+                                                                    $max = 5;
+
+                                                                    for ($i = 1; $i <= $max; $i++) {
+
+                                                                        ${"file_" . $i} = $result->{"file_" . $i};
+
+                                                                        //echo ${"file_" . $i};
+
+                                                                        if (${"file_" . $i} != "") { ?>
+                                                                            <a href="<?php echo htmlentities(${"file_" . $i}) ?>"
+                                                                               target="_blank">CLICK ดูรายละเอียด
+                                                                                ไฟล์ที่ <?php echo $i ?>
+                                                                                <img
+                                                                                    src="<?php echo GetIconPNG(${"file_" . $i}) ?>"
+                                                                                    width="30" height="30">
+                                                                                <?php echo str_replace("upload/", "", htmlentities(${"file_" . $i})) ?>
+                                                                            </a>
+                                                                            <?php
+                                                                            echo "<br><br>";
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">แนบไฟล์เอกสาร
+                                                                รูปภาพ PNG , JPG , PDF,WORD</label>
+                                                            <?php
+                                                            echo "<div class='col-sm-10'>";
+                                                            $max_no_img = 5; // Maximum number of images value to be set here
+                                                            for ($i = 1; $i <= $max_no_img; $i++) {
+                                                                echo "ไฟล์ที่ " . $i;
+                                                                echo "<input type=file name='upload_file[]' class='bginput' accept='.doc,.docx,.pdf,.jpg,.png'>";
+                                                            }
+                                                            echo "</div>";
+                                                            ?>
+
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="date"
+                                                                   class="col-sm-2 control-label">วันที่ประกาศ</label>
+                                                            <!--  สร้าง textbox สำหรับสร้างตัวเลือก ปฎิทิน โดยมี id มีค่าเป็น my_date  -->
+                                                            <div class="col-sm-4">
+                                                                <input id="doc_date" name="doc_date"
+                                                                       class="form-control"
+                                                                       required="required"
+                                                                       value="<?php echo htmlentities($result->doc_date) ?>"
+                                                                       placeholder="วัน/เดือน/ปี" readonly="true">
+                                                            </div>
+                                                        </div>
+
+                                                        <?php
+                                                    }
                                                 }
-                                            }
 
-                                            ?>
+                                                ?>
 
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit
-                                                    </button>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="submit" class="btn btn-primary">
+                                                            Submit
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
 
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>

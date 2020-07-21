@@ -112,129 +112,133 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>ปรับปรุง รายการแข่งขันกีฬา</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>ปรับปรุง รายการแข่งขันกีฬา</h5>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        <a href="manage-sport-events.php"
+                                                           class="btn btn-info btn-labeled">BACK<span
+                                                                class="btn-label btn-label-right"><i
+                                                                    class="fa fa-check"></i></span></a>
+                                                    </div>
+                                                </div>
+
+                                                <?php
+                                                $id = intval($_GET['id']);
+                                                $sql = "SELECT tblsport_events.* FROM tblsport_events WHERE id=:id ";
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) {
+
+                                                        ?>
+
+                                                        <input type="hidden" name="event_id"
+                                                               value="<?php echo htmlentities($result->event_id) ?>">
+
+                                                        <input type="hidden" name="id"
+                                                               value="<?php echo htmlentities($result->id) ?>">
+
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">
+                                                                รายการแข่งขันกีฬา</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="event_name"
+                                                                       class="form-control"
+                                                                       id="event_name"
+                                                                       value="<?php echo htmlentities($result->event_name) ?>"
+                                                                       required="required" autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">สถานที่จัดการแข่งขัน</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="place" class="form-control"
+                                                                       id="place"
+                                                                       value="<?php echo htmlentities($result->place) ?>"
+                                                                       required="required" autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">Link URL
+                                                                ที่เกี่ยวข้อง</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="link" class="form-control"
+                                                                       id="link"
+                                                                       value="<?php echo htmlentities($result->link) ?>"
+                                                                       required="required" autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="date" class="col-sm-2 control-label">วันที่การแข่งขัน
+                                                                เริ่มต้น</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input id="doc_date_from" name="doc_date_from"
+                                                                       class="form-control"
+                                                                       value="<?php echo htmlentities($result->doc_date_from) ?>"
+                                                                       placeholder="วัน/เดือน/ปี" readonly="true">
+                                                            </div>
+                                                            <label for="date" class="col-sm-2 control-label">วันที่การแข่งขัน
+                                                                สิ้นสุด</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input id="doc_date_to" name="doc_date_to"
+                                                                       class="form-control"
+                                                                       value="<?php echo htmlentities($result->doc_date_to) ?>"
+                                                                       placeholder="วัน/เดือน/ปี" readonly="true">
+                                                            </div>
+                                                        </div>
+
+                                                    <?php }
+                                                } ?>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="submit" class="btn btn-primary">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
                                         </div>
                                     </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                            </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                            <div class="panel-heading">
-                                                <div class="panel-title">
-                                                    <a href="manage-sport-events.php"
-                                                       class="btn btn-info btn-labeled">BACK<span
-                                                            class="btn-label btn-label-right"><i
-                                                                class="fa fa-check"></i></span></a>
-                                                </div>
-                                            </div>
-
-                                            <?php
-                                            $id = intval($_GET['id']);
-                                            $sql = "SELECT tblsport_events.* FROM tblsport_events WHERE id=:id ";
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':id', $id, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) {
-
-                                                    ?>
-
-                                                    <input type="hidden" name="event_id"
-                                                           value="<?php echo htmlentities($result->event_id) ?>">
-
-                                                    <input type="hidden" name="id"
-                                                           value="<?php echo htmlentities($result->id) ?>">
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">
-                                                            รายการแข่งขันกีฬา</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="event_name" class="form-control"
-                                                                   id="event_name"
-                                                                   value="<?php echo htmlentities($result->event_name) ?>"
-                                                                   required="required" autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">สถานที่จัดการแข่งขัน</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="place" class="form-control"
-                                                                   id="place"
-                                                                   value="<?php echo htmlentities($result->place) ?>"
-                                                                   required="required" autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">Link URL
-                                                            ที่เกี่ยวข้อง</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="link" class="form-control"
-                                                                   id="link"
-                                                                   value="<?php echo htmlentities($result->link) ?>"
-                                                                   required="required" autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="date" class="col-sm-2 control-label">วันที่การแข่งขัน
-                                                            เริ่มต้น</label>
-
-                                                        <div class="col-sm-4">
-                                                            <input id="doc_date_from" name="doc_date_from"
-                                                                   class="form-control"
-                                                                   value="<?php echo htmlentities($result->doc_date_from) ?>"
-                                                                   placeholder="วัน/เดือน/ปี" readonly="true">
-                                                        </div>
-                                                        <label for="date" class="col-sm-2 control-label">วันที่การแข่งขัน
-                                                            สิ้นสุด</label>
-
-                                                        <div class="col-sm-4">
-                                                            <input id="doc_date_to" name="doc_date_to"
-                                                                   class="form-control"
-                                                                   value="<?php echo htmlentities($result->doc_date_to) ?>"
-                                                                   placeholder="วัน/เดือน/ปี" readonly="true">
-                                                        </div>
-                                                    </div>
-
-                                                <?php }
-                                            } ?>
-
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>

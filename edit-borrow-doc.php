@@ -137,203 +137,209 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>แก้ไข ปรับปรุง เอกสารการยืมอุปกรณ์</h5>
+                    <section class="section">
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>แก้ไข ปรับปรุง เอกสารการยืมอุปกรณ์</h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                            </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                            <div class="panel-heading">
-                                                <div class="panel-title">
-                                                    <a href="manage-borrow-doc.php"
-                                                       class="btn btn-info btn-labeled">BACK<span
-                                                            class="btn-label btn-label-right"><i
-                                                                class="fa fa-check"></i></span></a>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                                 </div>
-                                            </div>
-                                            <?php
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        <a href="manage-borrow-doc.php"
+                                                           class="btn btn-info btn-labeled">BACK<span
+                                                                class="btn-label btn-label-right"><i
+                                                                    class="fa fa-check"></i></span></a>
+                                                    </div>
+                                                </div>
+                                                <?php
 
-                                            $sql = "SELECT tblborrow_doc.*
+                                                $sql = "SELECT tblborrow_doc.*
                                                 ,(SELECT CONCAT(FirstName, ' ', LastName) FROM tblstudents where tblstudents.RollId=tblborrow_doc.stid) AS STDName
                                                 ,(SELECT equipment_name FROM tblsport_equipment where tblsport_equipment.equipment_id=tblborrow_doc.equipment_id) AS EQName
                                                 from tblborrow_doc where id=:id";
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':id', $id, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) { ?>
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) { ?>
 
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">เลขที่เอกสาร</label>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">เลขที่เอกสาร</label>
 
-                                                        <div class="col-sm-4">
-                                                            <input type="text" name="quantity" class="form-control"
-                                                                   id="quantity"
-                                                                   value="<?php echo htmlentities($result->doc_id) ?>"
-                                                                   readonly="true" autocomplete="off">
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="quantity" class="form-control"
+                                                                       id="quantity"
+                                                                       value="<?php echo htmlentities($result->doc_id) ?>"
+                                                                       readonly="true" autocomplete="off">
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="date"
-                                                               class="col-sm-2 control-label">วันที่เอกสาร</label>
+                                                        <div class="form-group">
+                                                            <label for="date"
+                                                                   class="col-sm-2 control-label">วันที่เอกสาร</label>
 
-                                                        <div class="col-sm-4">
-                                                            <input id="doc_date" name="doc_date" class="form-control"
-                                                                   value="<?php echo htmlentities($result->doc_date) ?>"
-                                                                   placeholder="วัน/เดือน/ปี" readonly="true">
+                                                            <div class="col-sm-4">
+                                                                <input id="doc_date" name="doc_date"
+                                                                       class="form-control"
+                                                                       value="<?php echo htmlentities($result->doc_date) ?>"
+                                                                       placeholder="วัน/เดือน/ปี" readonly="true">
 
+                                                            </div>
+                                                            <label for="date"
+                                                                   class="col-sm-2 control-label">วันที่ยืม</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input id="doc_borrow" name="doc_borrow"
+                                                                       class="form-control"
+                                                                       value="<?php echo htmlentities($result->doc_borrow) ?>"
+                                                                       placeholder="วัน/เดือน/ปี" readonly="true"
+                                                                       required="required">
+                                                            </div>
                                                         </div>
-                                                        <label for="date"
-                                                               class="col-sm-2 control-label">วันที่ยืม</label>
 
-                                                        <div class="col-sm-4">
-                                                            <input id="doc_borrow" name="doc_borrow"
-                                                                   class="form-control"
-                                                                   value="<?php echo htmlentities($result->doc_borrow) ?>"
-                                                                   placeholder="วัน/เดือน/ปี" readonly="true"
-                                                                   required="required">
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ชื่อผู้ยืม</label>
+
+                                                            <div class="col-sm-10">
+                                                                <select name="stid" class="form-control" id="stid"
+                                                                        data-live-search="true">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->stid); ?>"
+                                                                        selected><?php echo htmlentities($result->STDName); ?></option>
+                                                                    <?php $sql1 = "SELECT * from tblstudents order by FirstName ";
+                                                                    $query1 = $dbh->prepare($sql);
+                                                                    $query1->execute();
+                                                                    $results1 = $query->fetchAll(PDO::FETCH_OBJ);
+                                                                    if ($query1->rowCount() > 0) {
+                                                                        foreach ($results1 as $result1) { ?>
+                                                                            <option
+                                                                                value="<?php echo htmlentities($result1->RollId); ?>"><?php echo htmlentities($result1->FirstName) . "-" . htmlentities($result1->LastName); ?></option>
+                                                                        <?php }
+                                                                    } ?>
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">ชื่อผู้ยืม</label>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">อุปกรณ์ที่ยืม</label>
 
-                                                        <div class="col-sm-10">
-                                                            <select name="stid" class="form-control" id="stid"
-                                                                    data-live-search="true">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->stid); ?>"
-                                                                    selected><?php echo htmlentities($result->STDName); ?></option>
-                                                                <?php $sql1 = "SELECT * from tblstudents order by FirstName ";
-                                                                $query1 = $dbh->prepare($sql);
-                                                                $query1->execute();
-                                                                $results1 = $query->fetchAll(PDO::FETCH_OBJ);
-                                                                if ($query1->rowCount() > 0) {
-                                                                    foreach ($results1 as $result1) { ?>
-                                                                        <option
-                                                                            value="<?php echo htmlentities($result1->RollId); ?>"><?php echo htmlentities($result1->FirstName) . "-" . htmlentities($result1->LastName); ?></option>
-                                                                    <?php }
-                                                                } ?>
-                                                            </select>
+                                                            <div class="col-sm-10">
+                                                                <select name="equipment_id" class="form-control"
+                                                                        id="equipment_id"
+                                                                        data-live-search="true">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->equipment_id); ?>"
+                                                                        selected><?php echo htmlentities($result->EQName); ?></option>
+                                                                    <?php $sql1 = "SELECT * from tblsport_equipment order by id ";
+                                                                    $query1 = $dbh->prepare($sql);
+                                                                    $query1->execute();
+                                                                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                                    if ($query1->rowCount() > 0) {
+                                                                        foreach ($results1 as $result1) { ?>
+                                                                            <option
+                                                                                value="<?php echo htmlentities($result1->equipment_id); ?>"><?php echo htmlentities($result1->equipment_name); ?></option>
+                                                                        <?php }
+                                                                    } ?>
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">อุปกรณ์ที่ยืม</label>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">จำนวน</label>
 
-                                                        <div class="col-sm-10">
-                                                            <select name="equipment_id" class="form-control"
-                                                                    id="equipment_id"
-                                                                    data-live-search="true">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->equipment_id); ?>"
-                                                                    selected><?php echo htmlentities($result->EQName); ?></option>
-                                                                <?php $sql1 = "SELECT * from tblsport_equipment order by id ";
-                                                                $query1 = $dbh->prepare($sql);
-                                                                $query1->execute();
-                                                                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                                                                if ($query1->rowCount() > 0) {
-                                                                    foreach ($results1 as $result1) { ?>
-                                                                        <option
-                                                                            value="<?php echo htmlentities($result1->equipment_id); ?>"><?php echo htmlentities($result1->equipment_name); ?></option>
-                                                                    <?php }
-                                                                } ?>
-                                                            </select>
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="quantity" class="form-control"
+                                                                       id="quantity"
+                                                                       value="<?php echo htmlentities($result->quantity) ?>"
+                                                                       required="required" autocomplete="off">
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">จำนวน</label>
+                                                        <div class="form-group">
+                                                            <label for="date"
+                                                                   class="col-sm-2 control-label">วันที่กำหนดคืน</label>
 
-                                                        <div class="col-sm-4">
-                                                            <input type="text" name="quantity" class="form-control"
-                                                                   id="quantity"
-                                                                   value="<?php echo htmlentities($result->quantity) ?>"
-                                                                   required="required" autocomplete="off">
+                                                            <div class="col-sm-4">
+                                                                <input id="doc_int_borrow" name="doc_int_borrow"
+                                                                       class="form-control"
+                                                                       value="<?php echo htmlentities($result->doc_int_borrow) ?>"
+                                                                       placeholder="วัน/เดือน/ปี" readonly="true">
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="date"
-                                                               class="col-sm-2 control-label">วันที่กำหนดคืน</label>
+                                                        <div class="form-group">
+                                                            <label for="date"
+                                                                   class="col-sm-2 control-label">วันที่คืน</label>
 
-                                                        <div class="col-sm-4">
-                                                            <input id="doc_int_borrow" name="doc_int_borrow"
-                                                                   class="form-control"
-                                                                   value="<?php echo htmlentities($result->doc_int_borrow) ?>"
-                                                                   placeholder="วัน/เดือน/ปี" readonly="true">
+                                                            <div class="col-sm-4">
+                                                                <input id="doc_return_borrow" name="doc_return_borrow"
+                                                                       class="form-control"
+                                                                       value="<?php echo htmlentities($result->doc_return_borrow) ?>"
+                                                                       placeholder="วัน/เดือน/ปี" readonly="true">
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="date"
-                                                               class="col-sm-2 control-label">วันที่คืน</label>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">สถานะการ
+                                                                ยืม/คืน</label>
 
-                                                        <div class="col-sm-4">
-                                                            <input id="doc_return_borrow" name="doc_return_borrow"
-                                                                   class="form-control"
-                                                                   value="<?php echo htmlentities($result->doc_return_borrow) ?>"
-                                                                   placeholder="วัน/เดือน/ปี" readonly="true">
+                                                            <div class="col-sm-4">
+                                                                <select id="borrow_status" name="borrow_status"
+                                                                        class="form-control" data-live-search="true"
+                                                                        title="Please select">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->borrow_status); ?>"
+                                                                        selected><?php echo htmlentities($result->borrow_status); ?></option>
+                                                                    <option>เลือกรายการ</option>
+                                                                    <option>ยืม</option>
+                                                                    <option>คืนแล้ว</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">สถานะการ ยืม/คืน</label>
-
-                                                        <div class="col-sm-4">
-                                                            <select id="borrow_status" name="borrow_status"
-                                                                    class="form-control" data-live-search="true"
-                                                                    title="Please select">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->borrow_status); ?>"
-                                                                    selected><?php echo htmlentities($result->borrow_status); ?></option>
-                                                                <option>เลือกรายการ</option>
-                                                                <option>ยืม</option>
-                                                                <option>คืนแล้ว</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <?php
+                                                        <?php
+                                                    }
                                                 }
-                                            }
-                                            ?>
+                                                ?>
 
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit
-                                                    </button>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="submit" class="btn btn-primary">
+                                                            Submit
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
 
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>

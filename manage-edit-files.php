@@ -144,12 +144,12 @@ if (strlen($_SESSION['alogin']) == "") {
 
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
                                             <a href="#" class="close" data-dismiss="alert"
                                                aria-label="close">&times;</a>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                                 <a href="#" class="close" data-dismiss="alert"
                                                    aria-label="close">&times;</a>
                                             </div>
@@ -316,30 +316,17 @@ if (strlen($_SESSION['alogin']) == "") {
     </script>
 
     <script type="text/javascript">
-/*
-        function delete_id(id, rollid) {
-            if (id == null) {
-                alert("Error Parameter");
-            }
-            else {
-                if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
-                    window.location.href = 'manage-edit-files.php?id=' + id + ',rollid=' + rollid;
-                }
-            }
-        }
-*/
-
         function delete_id(id) {
-            if (id == null) {
-                alert("Error Parameter");
-            }
-            else {
-                if (confirm('ต้องการลบรายการนี้ออกจากระบบ? ' + id)) {
-                    window.location.href = 'manage-edit-files.php?id=' + id ;
-                }
-            }
-        }
 
+            alertify.confirm('Confirm Delete !!!', 'ต้องการลบรายการนี้ออกจากระบบ?',
+                function () {
+                    window.location.href = 'manage-edit-files.php?id=' + id;
+                }
+                , function () {
+                    alertify.error('Cancel - ยกเลิก')
+                });
+
+        }
     </script>
 
     <script>

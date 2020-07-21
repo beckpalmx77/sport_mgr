@@ -2,6 +2,10 @@
 session_start();
 error_reporting(0);
 include('includes/config.php');
+include "vender/phpqrcode/qrlib.php";
+
+$PNG_WEB_DIR = 'images/education/';
+
 if (strlen($_SESSION['alogin']) == "") {
     header("Location: index.php");
 } else {
@@ -194,35 +198,36 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>Fill the Athlete info</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>Fill the Athlete info</h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            <a href="#" class="close" data-dismiss="alert"
-                                               aria-label="close">&times;</a>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
                                                 <a href="#" class="close" data-dismiss="alert"
                                                    aria-label="close">&times;</a>
-                                            </div>
-                                        <?php } ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
+                                                    <a href="#" class="close" data-dismiss="alert"
+                                                       aria-label="close">&times;</a>
+                                                </div>
+                                            <?php } ?>
 
-                                        <form action="" class="form-horizontal" method="post"
-                                              enctype="multipart/form-data">
-                                            <?php
+                                            <form action="" class="form-horizontal" method="post"
+                                                  enctype="multipart/form-data">
+                                                <?php
 
-                                            $sql = "SELECT tblstudents.*,tblsubjects.SubjectName,tblclasses.ClassName
+                                                $sql = "SELECT tblstudents.*,tblsubjects.SubjectName,tblclasses.ClassName
 					                        ,(select tblsporttype.SportName from tblsporttype where tblsporttype.id = tblstudents.sport_type1) as SportName1
 					                        ,(select tblsporttype.SportName from tblsporttype where tblsporttype.id = tblstudents.sport_type2) as SportName2
 					                        ,(select tblsporttype.SportName from tblsporttype where tblsporttype.id = tblstudents.sport_type3) as SportName3
@@ -232,204 +237,227 @@ if (strlen($_SESSION['alogin']) == "") {
                                             left join tblsubjects on tblsubjects.id=tblstudents.SubjectId
                                             where tblstudents.StudentId=:stid";
 
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':stid', $stid, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) { ?>
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':stid', $stid, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) { ?>
 
-                                                    <div class="panel-heading">
-                                                        <div class="panel-title">
-                                                            <a href="manage-students.php"
-                                                               class="btn btn-info btn-labeled">BACK<span
-                                                                    class="btn-label btn-label-right"><i
-                                                                        class="fa fa-check"></i></span></a>
+                                                        <div class="panel-heading">
+                                                            <div class="panel-title">
+                                                                <a href="manage-students.php"
+                                                                   class="btn btn-info btn-labeled">BACK<span
+                                                                        class="btn-label btn-label-right"><i
+                                                                            class="fa fa-check"></i></span></a>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">รูปภาพ</label>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">รูปภาพ</label>
 
-                                                        <?php
-                                                        if(file_exists($result->picture)){
-                                                            $file = $result->picture;
-                                                        } else {
-                                                            $file = "images/person.png";
-                                                        }
-                                                        ?>
-
-                                                        <div class="col-sm-10">
-                                                            <img id="picture"
-                                                                 src="<?php echo htmlentities($file) ?>"
-                                                                 width="100" height="100"
-                                                                 alt="<?php echo htmlentities($file) ?>"
-                                                                 onmouseover="bigImg(this)" onmouseout="normalImg(this)"
-                                                                 onclick="window.open(this.src,'_blank')">
-                                                            <input type='file' name="fileUpload" id="fileUpload"
-                                                                   accept="image/png, image/jpeg" onchange="readURL(this);"/>
-                                                            <label class="custom-file-label" for="chooseFile">เลือกไฟล์
-                                                                (ไฟล์ .jpg หรือ .png เท่านั้น)(Click
-                                                                ที่รูปเพื่อขยาย)</label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">ประเภทสมาชิก</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="radio" name="membertype" value="1"
-                                                                   required="required"
-                                                                   checked="">&nbsp;นักศึกษา
-                                                            <input type="radio" name="membertype" value="2"
-                                                                   required="required">&nbsp;เจ้าหน้าที่/บุคลากร
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">ประเภท
-                                                            กรณีนักศึกษา</label>
-
-                                                        <div class="col-sm-4">
-                                                            <select name="edutcat_id" class="form-control"
-                                                                    id="edutcat_id">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->EducatId); ?>"
-                                                                    selected><?php echo htmlentities($result->EducatName); ?></option>
-                                                                <?php $sql1 = "SELECT * from tbleducat";
-                                                                $query1 = $dbh->prepare($sql1);
-                                                                $query1->execute();
-                                                                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                                                                if ($query1->rowCount() > 0) {
-                                                                    foreach ($results1 as $result1) { ?>
-                                                                        <option
-                                                                            value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->educat_name); ?></option>
-                                                                    <?php }
-                                                                } ?>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <select name="edutype_id" class="form-control"
-                                                                    id="edutype_id">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->edutype_id); ?>"
-                                                                    selected><?php echo htmlentities($result->edutype_name); ?></option>
-                                                                <?php $sql1 = "SELECT * from tbledutype";
-                                                                $query1 = $dbh->prepare($sql1);
-                                                                $query1->execute();
-                                                                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                                                                if ($query1->rowCount() > 0) {
-                                                                    foreach ($results1 as $result1) { ?>
-                                                                        <option
-                                                                            value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->educationname); ?></option>
-                                                                    <?php }
-                                                                } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">รหัสประจำตัว</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="rollid" class="form-control"
-                                                                   id="rollid"
-                                                                   value="<?php echo htmlentities($result->RollId) ?>"
-                                                                   maxlength="20" required="required"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">เลขบัตรประชาชน</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="citi_no" class="form-control"
-                                                                   id="citi_no"
-                                                                   value="<?php echo htmlentities($result->citi_no) ?>"
-                                                                   onchange="chkDigitPid(this.value)"
-                                                                   maxlength="13" required="required"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">เพศ</label>
-
-                                                        <div class="col-sm-10">
-                                                            <?php $gndr = $result->Gender;
-                                                            if ($gndr == "Male") {
-                                                                ?>
-                                                                <input type="radio" name="gender" value="Male"
-                                                                       required="required" checked>&nbsp;ผู้ชาย
-                                                                <input type="radio" name="gender" value="Female"
-                                                                       required="required">&nbsp;ผู้หญิง
-                                                                <input type="radio" name="gender" value="Other"
-                                                                       required="required">&nbsp;อื่นๆ
-                                                            <?php } ?>
                                                             <?php
-                                                            if ($gndr == "Female") {
-                                                                ?>
-                                                                <input type="radio" name="gender" value="Male"
-                                                                       required="required">&nbsp;ผู้ชาย
-                                                                <input type="radio" name="gender" value="Female"
-                                                                       required="required" checked>&nbsp;ผู้หญิง
-                                                                <input type="radio" name="gender" value="Other"
-                                                                       required="required">&nbsp;อื่นๆ
-                                                            <?php } ?>
+                                                            if (file_exists($result->picture)) {
+                                                                $file = $result->picture;
+                                                            } else {
+                                                                $file = "images/person.png";
+                                                            }
+                                                            ?>
+
+                                                            <div class="col-sm-4">
+                                                                <img id="picture"
+                                                                     src="<?php echo htmlentities($file) ?>"
+                                                                     width="100" height="100"
+                                                                     alt="<?php echo htmlentities($file) ?>"
+                                                                     onmouseover="bigImg(this)"
+                                                                     onmouseout="normalImg(this)"
+                                                                     onclick="window.open(this.src,'_blank')">
+                                                                <input type='file' name="fileUpload" id="fileUpload"
+                                                                       accept="image/png, image/jpeg"
+                                                                       onchange="readURL(this);"/>
+                                                                <label class="custom-file-label" for="chooseFile">เลือกไฟล์
+                                                                    (ไฟล์ .jpg หรือ .png เท่านั้น)(Click
+                                                                    ที่รูปเพื่อขยาย)</label>
+                                                            </div>
                                                             <?php
-                                                            if ($gndr == "Other") {
-                                                                ?>
-                                                                <input type="radio" name="gender" value="Male"
-                                                                       required="required">&nbsp;ผู้ชาย
-                                                                <input type="radio" name="gender" value="Female"
-                                                                       required="required">&nbsp;ผู้หญิง
-                                                                <input type="radio" name="gender" value="Other"
-                                                                       required="required" checked>&nbsp;อื่นๆ
-                                                            <?php } ?>
 
+                                                            if ($result->RollId == '') {
+                                                                $qrcode_filename = $PNG_WEB_DIR . 'system-name.png';
+                                                            } else {
+                                                                $qrcode_filename = $PNG_WEB_DIR . $result->RollId . '.png';
+                                                                QRcode::png($result->RollId, $qrcode_filename, 'H', '10', 2);
+                                                            }
 
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">ชื่อ</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="firstname" class="form-control"
-                                                                   id="firstname"
-                                                                   value="<?php echo htmlentities($result->FirstName) ?>"
-                                                                   required="required" autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">นามสกุล</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="lastname" class="form-control"
-                                                                   id="lastname"
-                                                                   value="<?php echo htmlentities($result->LastName) ?>"
-                                                                   required="required" autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="date" class="col-sm-2 control-label">วันเกิด</label>
-                                                        <!--  สร้าง textbox สำหรับสร้างตัวเลือก ปฎิทิน โดยมี id มีค่าเป็น my_date  -->
-                                                        <div class="col-sm-4">
-                                                            <input id="dob" name="dob" class="form-control"
-                                                                   value="<?php echo htmlentities($result->DOB) ?>"
-                                                                   readonly="true">
+                                                            ?>
+                                                            <div class="col-sm-4">
+                                                                <img id="qrcode"
+                                                                     src="<?php echo $qrcode_filename; ?>"
+                                                                     width="100" height="100"
+                                                                     alt="<?php echo htmlentities($qrcode_filename) ?>"
+                                                                     onmouseover="bigImg(this)"
+                                                                     onmouseout="normalImg(this)"
+                                                                     onclick="window.open(this.src,'_blank')">
+                                                            </div>
                                                         </div>
 
-                                                        <!--label for="default" class="col-sm-2 control-label">ขนาดเสื้อ</label>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ประเภทสมาชิก</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="radio" name="membertype" value="1"
+                                                                       required="required"
+                                                                       checked="">&nbsp;นักศึกษา
+                                                                <input type="radio" name="membertype" value="2"
+                                                                       required="required">&nbsp;เจ้าหน้าที่/บุคลากร
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">ประเภท
+                                                                กรณีนักศึกษา</label>
+
+                                                            <div class="col-sm-4">
+                                                                <select name="edutcat_id" class="form-control"
+                                                                        id="edutcat_id">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->EducatId); ?>"
+                                                                        selected><?php echo htmlentities($result->EducatName); ?></option>
+                                                                    <?php $sql1 = "SELECT * from tbleducat";
+                                                                    $query1 = $dbh->prepare($sql1);
+                                                                    $query1->execute();
+                                                                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                                    if ($query1->rowCount() > 0) {
+                                                                        foreach ($results1 as $result1) { ?>
+                                                                            <option
+                                                                                value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->educat_name); ?></option>
+                                                                        <?php }
+                                                                    } ?>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <select name="edutype_id" class="form-control"
+                                                                        id="edutype_id">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->edutype_id); ?>"
+                                                                        selected><?php echo htmlentities($result->edutype_name); ?></option>
+                                                                    <?php $sql1 = "SELECT * from tbledutype";
+                                                                    $query1 = $dbh->prepare($sql1);
+                                                                    $query1->execute();
+                                                                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                                    if ($query1->rowCount() > 0) {
+                                                                        foreach ($results1 as $result1) { ?>
+                                                                            <option
+                                                                                value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->educationname); ?></option>
+                                                                        <?php }
+                                                                    } ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">รหัสประจำตัว</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="rollid" class="form-control"
+                                                                       id="rollid"
+                                                                       value="<?php echo htmlentities($result->RollId) ?>"
+                                                                       maxlength="20" required="required"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">เลขบัตรประชาชน</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="citi_no" class="form-control"
+                                                                       id="citi_no"
+                                                                       value="<?php echo htmlentities($result->citi_no) ?>"
+                                                                       onchange="chkDigitPid(this.value)"
+                                                                       maxlength="13" required="required"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">เพศ</label>
+
+                                                            <div class="col-sm-10">
+                                                                <?php $gndr = $result->Gender;
+                                                                if ($gndr == "Male") {
+                                                                    ?>
+                                                                    <input type="radio" name="gender" value="Male"
+                                                                           required="required" checked>&nbsp;ผู้ชาย
+                                                                    <input type="radio" name="gender" value="Female"
+                                                                           required="required">&nbsp;ผู้หญิง
+                                                                    <input type="radio" name="gender" value="Other"
+                                                                           required="required">&nbsp;อื่นๆ
+                                                                <?php } ?>
+                                                                <?php
+                                                                if ($gndr == "Female") {
+                                                                    ?>
+                                                                    <input type="radio" name="gender" value="Male"
+                                                                           required="required">&nbsp;ผู้ชาย
+                                                                    <input type="radio" name="gender" value="Female"
+                                                                           required="required" checked>&nbsp;ผู้หญิง
+                                                                    <input type="radio" name="gender" value="Other"
+                                                                           required="required">&nbsp;อื่นๆ
+                                                                <?php } ?>
+                                                                <?php
+                                                                if ($gndr == "Other") {
+                                                                    ?>
+                                                                    <input type="radio" name="gender" value="Male"
+                                                                           required="required">&nbsp;ผู้ชาย
+                                                                    <input type="radio" name="gender" value="Female"
+                                                                           required="required">&nbsp;ผู้หญิง
+                                                                    <input type="radio" name="gender" value="Other"
+                                                                           required="required" checked>&nbsp;อื่นๆ
+                                                                <?php } ?>
+
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ชื่อ</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="firstname" class="form-control"
+                                                                       id="firstname"
+                                                                       value="<?php echo htmlentities($result->FirstName) ?>"
+                                                                       required="required" autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">นามสกุล</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="lastname" class="form-control"
+                                                                       id="lastname"
+                                                                       value="<?php echo htmlentities($result->LastName) ?>"
+                                                                       required="required" autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="date"
+                                                                   class="col-sm-2 control-label">วันเกิด</label>
+                                                            <!--  สร้าง textbox สำหรับสร้างตัวเลือก ปฎิทิน โดยมี id มีค่าเป็น my_date  -->
+                                                            <div class="col-sm-4">
+                                                                <input id="dob" name="dob" class="form-control"
+                                                                       value="<?php echo htmlentities($result->DOB) ?>"
+                                                                       readonly="true">
+                                                            </div>
+
+                                                            <!--label for="default" class="col-sm-2 control-label">ขนาดเสื้อ</label>
                                                         <div class="col-sm-4">
                                                             <input type="text" name="size_shirt" class="form-control"
                                                                    id="size_shirt" autocomplete="off"
@@ -437,81 +465,81 @@ if (strlen($_SESSION['alogin']) == "") {
                                                         </div-->
 
 
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">ขนาดเสื้อ</label>
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ขนาดเสื้อ</label>
 
-                                                        <div class="col-sm-4">
-                                                            <select id="size_shirt" name="size_shirt"
-                                                                    class="form-control" data-live-search="true"
-                                                                    title="Please select">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->size_shirt); ?>"
-                                                                    selected><?php echo htmlentities($result->size_shirt); ?></option>
-                                                                <option>SS</option>
-                                                                <option>S</option>
-                                                                <option>M</option>
-                                                                <option>L</option>
-                                                                <option>XL</option>
-                                                                <option>2XL</option>
-                                                                <option>3XL</option>
-                                                                <option>4XL</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">ส่วนสูง</label>
-
-                                                        <div class="col-sm-4">
-                                                            <input type="number" name="hight" class="form-control"
-                                                                   id="hight" autocomplete="off"
-                                                                   value="<?php echo htmlentities($result->hight) ?>">
+                                                            <div class="col-sm-4">
+                                                                <select id="size_shirt" name="size_shirt"
+                                                                        class="form-control" data-live-search="true"
+                                                                        title="Please select">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->size_shirt); ?>"
+                                                                        selected><?php echo htmlentities($result->size_shirt); ?></option>
+                                                                    <option>SS</option>
+                                                                    <option>S</option>
+                                                                    <option>M</option>
+                                                                    <option>L</option>
+                                                                    <option>XL</option>
+                                                                    <option>2XL</option>
+                                                                    <option>3XL</option>
+                                                                    <option>4XL</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
 
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">น้ำหนัก</label>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ส่วนสูง</label>
 
-                                                        <div class="col-sm-4">
-                                                            <input type="number" name="weight" class="form-control"
-                                                                   id="weight" autocomplete="off"
-                                                                   value="<?php echo htmlentities($result->weight) ?>">
-                                                        </div>
-                                                    </div>
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="hight" class="form-control"
+                                                                       id="hight" autocomplete="off"
+                                                                       value="<?php echo htmlentities($result->hight) ?>">
+                                                            </div>
 
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">กลุ่มเลือด</label>
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">น้ำหนัก</label>
 
-                                                        <div class="col-sm-1">
-                                                            <select id="BloodGroup" name="BloodGroup"
-                                                                    class="form-control" data-live-search="true"
-                                                                    title="Please select">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->BloodGroup); ?>"
-                                                                    selected><?php echo htmlentities($result->BloodGroup); ?></option>
-                                                                <option>A</option>
-                                                                <option>B</option>
-                                                                <option>AB</option>
-                                                                <option>O</option>
-                                                            </select>
+                                                            <div class="col-sm-4">
+                                                                <input type="number" name="weight" class="form-control"
+                                                                       id="weight" autocomplete="off"
+                                                                       value="<?php echo htmlentities($result->weight) ?>">
+                                                            </div>
                                                         </div>
 
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">กลุ่มเลือด</label>
 
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">RH กลุ่มเลือด</label>
+                                                            <div class="col-sm-1">
+                                                                <select id="BloodGroup" name="BloodGroup"
+                                                                        class="form-control" data-live-search="true"
+                                                                        title="Please select">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->BloodGroup); ?>"
+                                                                        selected><?php echo htmlentities($result->BloodGroup); ?></option>
+                                                                    <option>A</option>
+                                                                    <option>B</option>
+                                                                    <option>AB</option>
+                                                                    <option>O</option>
+                                                                </select>
+                                                            </div>
 
-                                                        <div class="col-sm-1">
-                                                            <select id="rh_blood" name="rh_blood"
-                                                                    class="form-control" data-live-search="true"
-                                                                    title="Please select">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->rh_blood); ?>"
-                                                                    selected><?php echo htmlentities($result->rh_blood); ?></option>
-                                                                <option>+</option>
-                                                                <option>-</option>
-                                                            </select>
-                                                        </div>
+
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">RH กลุ่มเลือด</label>
+
+                                                            <div class="col-sm-1">
+                                                                <select id="rh_blood" name="rh_blood"
+                                                                        class="form-control" data-live-search="true"
+                                                                        title="Please select">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->rh_blood); ?>"
+                                                                        selected><?php echo htmlentities($result->rh_blood); ?></option>
+                                                                    <option>+</option>
+                                                                    <option>-</option>
+                                                                </select>
+                                                            </div>
 
                                                             <label for="default" class="col-sm-2 control-label">BMI
                                                             </label>
@@ -523,224 +551,225 @@ if (strlen($_SESSION['alogin']) == "") {
                                                                        autocomplete="off">
                                                             </div>
 
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">ประเภทกีฬา
-                                                            (หลัก)</label>
-
-                                                        <div class="col-sm-2">
-                                                            <select name="sport_type1" class="form-control"
-                                                                    id="sport_type1">
-                                                                <!--option value="">Select Class</option-->
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->sport_type1); ?>"
-                                                                    selected><?php echo htmlentities($result->SportName1); ?></option>
-                                                                <?php $sql1 = "SELECT * from tblsporttype";
-                                                                $query1 = $dbh->prepare($sql1);
-                                                                $query1->execute();
-                                                                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                                                                if ($query1->rowCount() > 0) {
-                                                                    foreach ($results1 as $result1) { ?>
-                                                                        <option
-                                                                            value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->SportName); ?></option>
-                                                                    <?php }
-                                                                } ?>
-                                                            </select>
                                                         </div>
 
-                                                        <label for="default" class="col-sm-2 control-label">ประเภทกีฬา
-                                                            (สำรอง 1)</label>
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">ประเภทกีฬา
+                                                                (หลัก)</label>
 
-                                                        <div class="col-sm-2">
-                                                            <select name="sport_type2" class="form-control"
-                                                                    id="sport_type2">
-                                                                <!--option value="">Select Class</option-->
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->sport_type2); ?>"
-                                                                    selected><?php echo htmlentities($result->SportName2); ?></option>
-                                                                <?php $sql1 = "SELECT * from tblsporttype";
-                                                                $query1 = $dbh->prepare($sql1);
-                                                                $query1->execute();
-                                                                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                                                                if ($query1->rowCount() > 0) {
-                                                                    foreach ($results1 as $result1) { ?>
-                                                                        <option
-                                                                            value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->SportName); ?></option>
-                                                                    <?php }
-                                                                } ?>
-                                                            </select>
+                                                            <div class="col-sm-2">
+                                                                <select name="sport_type1" class="form-control"
+                                                                        id="sport_type1">
+                                                                    <!--option value="">Select Class</option-->
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->sport_type1); ?>"
+                                                                        selected><?php echo htmlentities($result->SportName1); ?></option>
+                                                                    <?php $sql1 = "SELECT * from tblsporttype";
+                                                                    $query1 = $dbh->prepare($sql1);
+                                                                    $query1->execute();
+                                                                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                                    if ($query1->rowCount() > 0) {
+                                                                        foreach ($results1 as $result1) { ?>
+                                                                            <option
+                                                                                value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->SportName); ?></option>
+                                                                        <?php }
+                                                                    } ?>
+                                                                </select>
+                                                            </div>
+
+                                                            <label for="default" class="col-sm-2 control-label">ประเภทกีฬา
+                                                                (สำรอง 1)</label>
+
+                                                            <div class="col-sm-2">
+                                                                <select name="sport_type2" class="form-control"
+                                                                        id="sport_type2">
+                                                                    <!--option value="">Select Class</option-->
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->sport_type2); ?>"
+                                                                        selected><?php echo htmlentities($result->SportName2); ?></option>
+                                                                    <?php $sql1 = "SELECT * from tblsporttype";
+                                                                    $query1 = $dbh->prepare($sql1);
+                                                                    $query1->execute();
+                                                                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                                    if ($query1->rowCount() > 0) {
+                                                                        foreach ($results1 as $result1) { ?>
+                                                                            <option
+                                                                                value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->SportName); ?></option>
+                                                                        <?php }
+                                                                    } ?>
+                                                                </select>
+                                                            </div>
+                                                            <label for="default" class="col-sm-2 control-label">ประเภทกีฬา
+                                                                (สำรอง 2)</label>
+
+                                                            <div class="col-sm-2">
+                                                                <select name="sport_type3" class="form-control"
+                                                                        id="sport_type3">
+                                                                    <!--option value="">Select Class</option-->
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->sport_type3); ?>"
+                                                                        selected><?php echo htmlentities($result->SportName3); ?></option>
+                                                                    <?php $sql1 = "SELECT * from tblsporttype";
+                                                                    $query1 = $dbh->prepare($sql1);
+                                                                    $query1->execute();
+                                                                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                                    if ($query1->rowCount() > 0) {
+                                                                        foreach ($results1 as $result1) { ?>
+                                                                            <option
+                                                                                value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->SportName); ?></option>
+                                                                        <?php }
+                                                                    } ?>
+                                                                </select>
+                                                            </div>
+
+
                                                         </div>
-                                                        <label for="default" class="col-sm-2 control-label">ประเภทกีฬา
-                                                            (สำรอง 2)</label>
 
-                                                        <div class="col-sm-2">
-                                                            <select name="sport_type3" class="form-control"
-                                                                    id="sport_type3">
-                                                                <!--option value="">Select Class</option-->
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->sport_type3); ?>"
-                                                                    selected><?php echo htmlentities($result->SportName3); ?></option>
-                                                                <?php $sql1 = "SELECT * from tblsporttype";
-                                                                $query1 = $dbh->prepare($sql1);
-                                                                $query1->execute();
-                                                                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                                                                if ($query1->rowCount() > 0) {
-                                                                    foreach ($results1 as $result1) { ?>
-                                                                        <option
-                                                                            value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->SportName); ?></option>
-                                                                    <?php }
-                                                                } ?>
-                                                            </select>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">โรคประจำตัว</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="Disease" class="form-control"
+                                                                       value="<?php echo htmlentities($result->Disease) ?>"
+                                                                       id="Disease" autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">โทรศีพท์</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="phone" name="phone" class="form-control"
+                                                                       id="phone"
+                                                                       value="<?php echo htmlentities($result->Phone) ?>"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">Email</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="email" name="emailid" class="form-control"
+                                                                       id="email"
+                                                                       value="<?php echo htmlentities($result->StudentEmail) ?>"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">Facebook
+                                                            </label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="facebook" class="form-control"
+                                                                       id="facebook"
+                                                                       value="<?php echo htmlentities($result->facebook) ?>"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                            <label for="default" class="col-sm-2 control-label">Line ID
+                                                            </label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="line" class="form-control"
+                                                                       id="line"
+                                                                       value="<?php echo htmlentities($result->line) ?>"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">คณะ/หน่วยงาน</label>
+
+                                                            <div class="col-sm-6">
+                                                                <select name="class" class="form-control" id="class">
+                                                                    <!--option value="">Select Class</option-->
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->ClassId); ?>"
+                                                                        selected><?php echo htmlentities($result->ClassName); ?></option>
+                                                                    <?php $sql1 = "SELECT * from tblclasses";
+                                                                    $query1 = $dbh->prepare($sql1);
+                                                                    $query1->execute();
+                                                                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                                    if ($query1->rowCount() > 0) {
+                                                                        foreach ($results1 as $result1) { ?>
+                                                                            <option
+                                                                                value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->ClassName); ?></option>
+                                                                        <?php }
+                                                                    } ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">สาขาวิชา/แผนก</label>
+
+                                                            <div class="col-sm-6">
+                                                                <select name="subject" class="form-control"
+                                                                        id="subject">
+                                                                    <!--option value="">Select Class</option-->
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->SubjectId); ?>"
+                                                                        selected><?php echo htmlentities($result->SubjectName); ?></option>
+                                                                    <?php $sql1 = "SELECT * from tblsubjects";
+                                                                    $query1 = $dbh->prepare($sql1);
+                                                                    $query1->execute();
+                                                                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                                    if ($query1->rowCount() > 0) {
+                                                                        foreach ($results1 as $result1) { ?>
+                                                                            <option
+                                                                                value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->SubjectName); ?></option>
+                                                                        <?php }
+                                                                    } ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ระดับการศึกษา</label>
+
+                                                            <div class="col-sm-4">
+                                                                <select id="Class_Education" name="Class_Education"
+                                                                        class="form-control" data-live-search="true"
+                                                                        title="Please select">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->Class_Education); ?>"
+                                                                        selected><?php echo htmlentities($result->Class_Education); ?></option>
+                                                                    <option>ปริญญาตรี</option>
+                                                                    <option>ปริญญาโท</option>
+                                                                    <option>ปริญญาเอก</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ชั้นปีการศึกษา</label>
+
+                                                            <div class="col-sm-4">
+                                                                <select id="Level_Education" name="Level_Education"
+                                                                        class="form-control" data-live-search="true"
+                                                                        title="Please select">
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->Level_Education); ?>"
+                                                                        selected><?php echo htmlentities($result->Level_Education); ?></option>
+                                                                    <option>1</option>
+                                                                    <option>2</option>
+                                                                    <option>3</option>
+                                                                    <option>4</option>
+                                                                    <option>5</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
 
 
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">โรคประจำตัว</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="Disease" class="form-control"
-                                                                   value="<?php echo htmlentities($result->Disease) ?>"
-                                                                   id="Disease" autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">โทรศีพท์</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="phone" name="phone" class="form-control"
-                                                                   id="phone"
-                                                                   value="<?php echo htmlentities($result->Phone) ?>"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">Email</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="email" name="emailid" class="form-control"
-                                                                   id="email"
-                                                                   value="<?php echo htmlentities($result->StudentEmail) ?>"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">Facebook
-                                                        </label>
-
-                                                        <div class="col-sm-4">
-                                                            <input type="text" name="facebook" class="form-control"
-                                                                   id="facebook"
-                                                                   value="<?php echo htmlentities($result->facebook) ?>"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                        <label for="default" class="col-sm-2 control-label">Line ID
-                                                        </label>
-
-                                                        <div class="col-sm-4">
-                                                            <input type="text" name="line" class="form-control"
-                                                                   id="line"
-                                                                   value="<?php echo htmlentities($result->line) ?>"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">คณะ/หน่วยงาน</label>
-
-                                                        <div class="col-sm-6">
-                                                            <select name="class" class="form-control" id="class">
-                                                                <!--option value="">Select Class</option-->
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->ClassId); ?>"
-                                                                    selected><?php echo htmlentities($result->ClassName); ?></option>
-                                                                <?php $sql1 = "SELECT * from tblclasses";
-                                                                $query1 = $dbh->prepare($sql1);
-                                                                $query1->execute();
-                                                                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                                                                if ($query1->rowCount() > 0) {
-                                                                    foreach ($results1 as $result1) { ?>
-                                                                        <option
-                                                                            value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->ClassName); ?></option>
-                                                                    <?php }
-                                                                } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">สาขาวิชา/แผนก</label>
-
-                                                        <div class="col-sm-6">
-                                                            <select name="subject" class="form-control" id="subject">
-                                                                <!--option value="">Select Class</option-->
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->SubjectId); ?>"
-                                                                    selected><?php echo htmlentities($result->SubjectName); ?></option>
-                                                                <?php $sql1 = "SELECT * from tblsubjects";
-                                                                $query1 = $dbh->prepare($sql1);
-                                                                $query1->execute();
-                                                                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                                                                if ($query1->rowCount() > 0) {
-                                                                    foreach ($results1 as $result1) { ?>
-                                                                        <option
-                                                                            value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->SubjectName); ?></option>
-                                                                    <?php }
-                                                                } ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">ระดับการศึกษา</label>
-
-                                                        <div class="col-sm-4">
-                                                            <select id="Class_Education" name="Class_Education"
-                                                                    class="form-control" data-live-search="true"
-                                                                    title="Please select">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->Class_Education); ?>"
-                                                                    selected><?php echo htmlentities($result->Class_Education); ?></option>
-                                                                <option>ปริญญาตรี</option>
-                                                                <option>ปริญญาโท</option>
-                                                                <option>ปริญญาเอก</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">ชั้นปีการศึกษา</label>
-
-                                                        <div class="col-sm-4">
-                                                            <select id="Level_Education" name="Level_Education"
-                                                                    class="form-control" data-live-search="true"
-                                                                    title="Please select">
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->Level_Education); ?>"
-                                                                    selected><?php echo htmlentities($result->Level_Education); ?></option>
-                                                                <option>1</option>
-                                                                <option>2</option>
-                                                                <option>3</option>
-                                                                <option>4</option>
-                                                                <option>5</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <!--div class="form-group">
+                                                        <!--div class="form-group">
                                                         <label for="default"
                                                                class="col-sm-2 control-label">Class</label>
 
@@ -752,65 +781,67 @@ if (strlen($_SESSION['alogin']) == "") {
                                                         </div>
                                                     </div-->
 
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">สถานะ</label>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">สถานะ</label>
 
-                                                        <div class="col-sm-10">
-                                                            <?php $stats = $result->Status;
-                                                            if ($stats == "1") {
-                                                                ?>
-                                                                <input type="radio" name="status" value="1"
-                                                                       required="required" checked>ปกติ <input
-                                                                    type="radio" name="status" value="0"
-                                                                    required="required">หมดอายุสมาชิก/ลาออก/พ้นสภาพ
-                                                            <?php } ?>
-                                                            <?php
-                                                            if ($stats == "0") {
-                                                                ?>
-                                                                <input type="radio" name="status" value="1"
-                                                                       required="required">ปกติ <input type="radio"
-                                                                                                       name="status"
-                                                                                                       value="0"
-                                                                                                       required="required"
-                                                                                                       checked>หมดอายุสมาชิก
-                                                            <?php } ?>
+                                                            <div class="col-sm-10">
+                                                                <?php $stats = $result->Status;
+                                                                if ($stats == "1") {
+                                                                    ?>
+                                                                    <input type="radio" name="status" value="1"
+                                                                           required="required" checked>ปกติ <input
+                                                                        type="radio" name="status" value="0"
+                                                                        required="required">หมดอายุสมาชิก/ลาออก/พ้นสภาพ
+                                                                <?php } ?>
+                                                                <?php
+                                                                if ($stats == "0") {
+                                                                    ?>
+                                                                    <input type="radio" name="status" value="1"
+                                                                           required="required">ปกติ <input type="radio"
+                                                                                                           name="status"
+                                                                                                           value="0"
+                                                                                                           required="required"
+                                                                                                           checked>หมดอายุสมาชิก
+                                                                <?php } ?>
 
 
+                                                            </div>
                                                         </div>
+
+                                                    <?php }
+                                                } ?>
+
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">Reg
+                                                        Date: </label>
+
+                                                    <div class="col-sm-10">
+                                                        <?php echo htmlentities($result->RegDate) ?>
                                                     </div>
-
-                                                <?php }
-                                            } ?>
-
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">Reg
-                                                    Date: </label>
-
-                                                <div class="col-sm-10">
-                                                    <?php echo htmlentities($result->RegDate) ?>
                                                 </div>
-                                            </div>
 
-                                            <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+                                                <button onclick="topFunction()" id="myBtn" title="Go to top">Top
+                                                </button>
 
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Save
-                                                    </button>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="submit" class="btn btn-primary">Save
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                        </form>
+                                            </form>
 
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
                 </div>
                 <!-- /.content-container -->
+                </section>
             </div>
             <!-- /.content-wrapper -->
         </div>
@@ -852,7 +883,9 @@ if (strlen($_SESSION['alogin']) == "") {
             mybutton = document.getElementById("myBtn");
 
             // When the user scrolls down 20px from the top of the document, show the button
-            window.onscroll = function() {scrollFunction()};
+            window.onscroll = function () {
+                scrollFunction()
+            };
 
             function scrollFunction() {
                 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {

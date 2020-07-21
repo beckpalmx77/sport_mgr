@@ -7,32 +7,32 @@ if (strlen($_SESSION['alogin']) == "") {
 } else {
     if (isset($_POST['submit'])) {
 
-            $event_id = $_POST['event_id'];
-            $event_name = $_POST['event_name'];
-            $place = $_POST['place'];
-            $link = $_POST['link'];
-            $doc_date_from = $_POST['doc_date_from'];
-            $doc_date_to = $_POST['doc_date_to'];
+        $event_id = $_POST['event_id'];
+        $event_name = $_POST['event_name'];
+        $place = $_POST['place'];
+        $link = $_POST['link'];
+        $doc_date_from = $_POST['doc_date_from'];
+        $doc_date_to = $_POST['doc_date_to'];
 
-            $sql = "INSERT INTO  tblsport_events(event_id,event_name,place,link,doc_date_from,doc_date_to)
+        $sql = "INSERT INTO  tblsport_events(event_id,event_name,place,link,doc_date_from,doc_date_to)
                     VALUES(:event_id,:event_name,:place,:link,:doc_date_from,:doc_date_to)";
-            $query = $dbh->prepare($sql);
-            $query->bindParam(':event_id', $event_id, PDO::PARAM_STR);
-            $query->bindParam(':event_name', $event_name, PDO::PARAM_STR);
-            $query->bindParam(':place', $place, PDO::PARAM_STR);
-            $query->bindParam(':link', $link, PDO::PARAM_STR);
-            $query->bindParam(':doc_date_from', $doc_date_from, PDO::PARAM_STR);
-            $query->bindParam(':doc_date_to', $doc_date_to, PDO::PARAM_STR);
-            $query->execute();
-            $lastInsertId = $dbh->lastInsertId();
+        $query = $dbh->prepare($sql);
+        $query->bindParam(':event_id', $event_id, PDO::PARAM_STR);
+        $query->bindParam(':event_name', $event_name, PDO::PARAM_STR);
+        $query->bindParam(':place', $place, PDO::PARAM_STR);
+        $query->bindParam(':link', $link, PDO::PARAM_STR);
+        $query->bindParam(':doc_date_from', $doc_date_from, PDO::PARAM_STR);
+        $query->bindParam(':doc_date_to', $doc_date_to, PDO::PARAM_STR);
+        $query->execute();
+        $lastInsertId = $dbh->lastInsertId();
 
-            if ($lastInsertId) {
+        if ($lastInsertId) {
 
-                $msg = "เพิ่มข้อมูลเรียบร้อยแล้ว info added successfully" . $ext_msg;
+            $msg = "เพิ่มข้อมูลเรียบร้อยแล้ว info added successfully" . $ext_msg;
 
-            } else {
-                $error = "Something went wrong. Please try again " . $ext_msg;
-            }
+        } else {
+            $error = "Something went wrong. Please try again " . $ext_msg;
+        }
     }
     ?>
     <!DOCTYPE html>
@@ -115,120 +115,131 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>เพิ่ม รายการแข่งขันกีฬา</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>เพิ่ม รายการแข่งขันกีฬา</h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                            </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                            <div class="panel-heading">
-                                                <div class="panel-title">
-                                                    <a href="manage-sport-events.php"
-                                                       class="btn btn-info btn-labeled">BACK<span
-                                                            class="btn-label btn-label-right"><i
-                                                                class="fa fa-check"></i></span></a>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                                 </div>
-                                            </div>
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        <a href="manage-sport-events.php"
+                                                           class="btn btn-info btn-labeled">BACK<span
+                                                                class="btn-label btn-label-right"><i
+                                                                    class="fa fa-check"></i></span></a>
+                                                    </div>
+                                                </div>
 
-                                            <?php
-                                            $id = intval($_GET['id']);
-                                            $sql = "SELECT * from tblsport_events order by id desc limit 1 ";
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':id', $id, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) {
+                                                <?php
+                                                $id = intval($_GET['id']);
+                                                $sql = "SELECT * from tblsport_events order by id desc limit 1 ";
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) {
 
-                                                    $event_id = "E-" . sprintf("%09d", $result->id + 1);
-                                                }
-                                            } else {
+                                                        $event_id = "E-" . sprintf("%09d", $result->id + 1);
+                                                    }
+                                                } else {
 
                                                     $event_id = "E-" . sprintf("%09d", 1);
-                                            }
+                                                }
 
-                                            ?>
+                                                ?>
 
-                                            <input type="hidden" name="event_id" value="<?php echo htmlentities($event_id)?>">
+                                                <input type="hidden" name="event_id"
+                                                       value="<?php echo htmlentities($event_id) ?>">
 
 
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">
-                                                    รายการแข่งขันกีฬา</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="event_name" class="form-control"
-                                                           id="event_name"
-                                                           value=""
-                                                           required="required" autocomplete="off">
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">
+                                                        รายการแข่งขันกีฬา</label>
+
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="event_name" class="form-control"
+                                                               id="event_name"
+                                                               value=""
+                                                               required="required" autocomplete="off">
+                                                    </div>
                                                 </div>
-                                            </div>
 
 
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">สถานที่จัดการแข่งขัน</label>
 
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">สถานที่จัดการแข่งขัน</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="place" class="form-control"
-                                                           id="place"
-                                                           value=""
-                                                           required="required" autocomplete="off">
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="place" class="form-control"
+                                                               id="place"
+                                                               value=""
+                                                               required="required" autocomplete="off">
+                                                    </div>
                                                 </div>
-                                            </div>
 
 
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">Link URL
-                                                    ที่เกี่ยวข้อง</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="link" class="form-control"
-                                                           id="link"
-                                                           value=""
-                                                           required="required" autocomplete="off">
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">Link URL
+                                                        ที่เกี่ยวข้อง</label>
+
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="link" class="form-control"
+                                                               id="link"
+                                                               value=""
+                                                               required="required" autocomplete="off">
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label for="date" class="col-sm-2 control-label">วันที่การแข่งขัน เริ่มต้น</label>
-                                                <div class="col-sm-4">
-                                                    <input id="doc_date_from" name="doc_date_from" class="form-control"
-                                                           placeholder="วัน/เดือน/ปี" readonly="true">
-                                                </div>
-                                                <label for="date" class="col-sm-2 control-label">วันที่การแข่งขัน สิ้นสุด</label>
-                                                <div class="col-sm-4">
-                                                    <input id="doc_date_to" name="doc_date_to" class="form-control"
-                                                           placeholder="วัน/เดือน/ปี" readonly="true">
-                                                </div>
-                                            </div>
+                                                <div class="form-group">
+                                                    <label for="date" class="col-sm-2 control-label">วันที่การแข่งขัน
+                                                        เริ่มต้น</label>
 
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                                    <div class="col-sm-4">
+                                                        <input id="doc_date_from" name="doc_date_from"
+                                                               class="form-control"
+                                                               placeholder="วัน/เดือน/ปี" readonly="true">
+                                                    </div>
+                                                    <label for="date" class="col-sm-2 control-label">วันที่การแข่งขัน
+                                                        สิ้นสุด</label>
 
+                                                    <div class="col-sm-4">
+                                                        <input id="doc_date_to" name="doc_date_to" class="form-control"
+                                                               placeholder="วัน/เดือน/ปี" readonly="true">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="submit" class="btn btn-primary">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>
@@ -267,7 +278,6 @@ if (strlen($_SESSION['alogin']) == "") {
             picker_date(document.getElementById("doc_date_to"), {year_range: "-100:+1000"});
             /*{year_range:"-12:+10"} คือ กำหนดตัวเลือกปฎิทินให้ แสดงปี ย้อนหลัง 12 ปี และ ไปข้างหน้า 10 ปี*/
         </script>
-
 
 
     </body>

@@ -10,9 +10,9 @@ if (strlen($_SESSION['alogin']) == "") {
 
         $stid = $_POST['stid'];
         $doc_date = $_POST['doc_date'];
-        $doc_date_sort = intval(substr($doc_date,6,4)-543) . "-" . substr($doc_date,3,2) . "-" . substr($doc_date,0,2) ;
+        $doc_date_sort = intval(substr($doc_date, 6, 4) - 543) . "-" . substr($doc_date, 3, 2) . "-" . substr($doc_date, 0, 2);
 
-        $doc_id = "BR-" . GenDocID("tblborrow_doc",substr($doc_date,6));
+        $doc_id = "BR-" . GenDocID("tblborrow_doc", substr($doc_date, 6));
 
         $doc_borrow = $_POST['doc_borrow'];
         $doc_int_borrow = $_POST['doc_int_borrow'];
@@ -40,11 +40,11 @@ if (strlen($_SESSION['alogin']) == "") {
         $lastInsertId = $dbh->lastInsertId();
         if ($lastInsertId) {
 
-                $msg = "เพิ่มข้อมูลเรียบร้อยแล้ว info added successfully " . $doc_id;
+            $msg = "เพิ่มข้อมูลเรียบร้อยแล้ว info added successfully " . $doc_id;
 
-            } else {
-                $error = "Something went wrong. Please try again " ;
-            }
+        } else {
+            $error = "Something went wrong. Please try again ";
+        }
 
     }
 
@@ -149,159 +149,167 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>เพิ่ม เอกสารการยืมอุปกรณ์</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>เพิ่ม เอกสารการยืมอุปกรณ์</h5>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        <a href="manage-borrow-doc.php"
+                                                           class="btn btn-info btn-labeled">BACK<span
+                                                                class="btn-label btn-label-right"><i
+                                                                    class="fa fa-check"></i></span></a>
+                                                    </div>
+                                                </div>
+
+                                                <!--input type="text" name="equipment_id"
+                                                       value=""-->
+
+                                                <div class="form-group">
+                                                    <label for="date"
+                                                           class="col-sm-2 control-label">วันที่เอกสาร</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input id="doc_date" name="doc_date" class="form-control"
+                                                               placeholder="วัน/เดือน/ปี" readonly="true"
+                                                               required="required">
+                                                    </div>
+                                                    <label for="date"
+                                                           class="col-sm-2 control-label">วันที่ยืม</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input id="doc_borrow" name="doc_borrow" class="form-control"
+                                                               placeholder="วัน/เดือน/ปี" readonly="true"
+                                                               required="required">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default"
+                                                           class="col-sm-2 control-label">ชื่อผู้ยืม</label>
+
+                                                    <div class="col-sm-10">
+                                                        <select name="stid" class="form-control" id="stid"
+                                                                data-live-search="true">
+                                                            <option value="">เลือกชื่อผู้ยืม</option>
+                                                            <?php $sql = "SELECT * from tblstudents order by FirstName ";
+                                                            $query = $dbh->prepare($sql);
+                                                            $query->execute();
+                                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                            if ($query->rowCount() > 0) {
+                                                                foreach ($results as $result) { ?>
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->RollId); ?>"><?php echo htmlentities($result->FirstName) . "-" . htmlentities($result->LastName); ?></option>
+                                                                <?php }
+                                                            } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default"
+                                                           class="col-sm-2 control-label">อุปกรณ์ที่ยืม</label>
+
+                                                    <div class="col-sm-10">
+                                                        <select name="equipment_id" class="form-control"
+                                                                id="equipment_id"
+                                                                data-live-search="true">
+                                                            <option value="">เลือกอุปกรณ์ที่ยืม</option>
+                                                            <?php $sql = "SELECT * from tblsport_equipment order by id ";
+                                                            $query = $dbh->prepare($sql);
+                                                            $query->execute();
+                                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                            if ($query->rowCount() > 0) {
+                                                                foreach ($results as $result) { ?>
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->equipment_id); ?>"><?php echo htmlentities($result->equipment_name); ?></option>
+                                                                <?php }
+                                                            } ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">จำนวน</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input type="text" name="quantity" class="form-control"
+                                                               id="quantity"
+                                                               value=""
+                                                               required="required" autocomplete="off">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="date"
+                                                           class="col-sm-2 control-label">วันที่กำหนดคืน</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input id="doc_int_borrow" name="doc_int_borrow"
+                                                               class="form-control"
+                                                               placeholder="วัน/เดือน/ปี" readonly="true">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="date"
+                                                           class="col-sm-2 control-label">วันที่คืน</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input id="doc_return_borrow" name="doc_return_borrow"
+                                                               class="form-control"
+                                                               placeholder="วัน/เดือน/ปี" readonly="true">
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="default"
+                                                           class="col-sm-2 control-label">สถานะการ ยืม/คืน</label>
+
+                                                    <div class="col-sm-4">
+                                                        <select id="borrow_status" name="borrow_status"
+                                                                class="form-control" data-live-search="true"
+                                                                title="Please select">
+                                                            <option>ยืม</option>
+                                                            <option>คืนแล้ว</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="submit" class="btn btn-primary">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
                                         </div>
                                     </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                            </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                            <div class="panel-heading">
-                                                <div class="panel-title">
-                                                    <a href="manage-borrow-doc.php"
-                                                       class="btn btn-info btn-labeled">BACK<span
-                                                            class="btn-label btn-label-right"><i
-                                                                class="fa fa-check"></i></span></a>
-                                                </div>
-                                            </div>
-
-                                            <!--input type="text" name="equipment_id"
-                                                   value=""-->
-
-                                            <div class="form-group">
-                                                <label for="date"
-                                                       class="col-sm-2 control-label">วันที่เอกสาร</label>
-
-                                                <div class="col-sm-4">
-                                                    <input id="doc_date" name="doc_date" class="form-control"
-                                                           placeholder="วัน/เดือน/ปี" readonly="true" required="required">
-                                                </div>
-                                                <label for="date"
-                                                       class="col-sm-2 control-label">วันที่ยืม</label>
-
-                                                <div class="col-sm-4">
-                                                    <input id="doc_borrow" name="doc_borrow" class="form-control"
-                                                           placeholder="วัน/เดือน/ปี" readonly="true" required="required">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default"
-                                                       class="col-sm-2 control-label">ชื่อผู้ยืม</label>
-
-                                                <div class="col-sm-10">
-                                                    <select name="stid" class="form-control" id="stid"
-                                                            data-live-search="true">
-                                                        <option value="">เลือกชื่อผู้ยืม</option>
-                                                        <?php $sql = "SELECT * from tblstudents order by FirstName ";
-                                                        $query = $dbh->prepare($sql);
-                                                        $query->execute();
-                                                        $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                                        if ($query->rowCount() > 0) {
-                                                            foreach ($results as $result) { ?>
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->RollId); ?>"><?php echo htmlentities($result->FirstName) . "-" . htmlentities($result->LastName); ?></option>
-                                                            <?php }
-                                                        } ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default"
-                                                       class="col-sm-2 control-label">อุปกรณ์ที่ยืม</label>
-
-                                                <div class="col-sm-10">
-                                                    <select name="equipment_id" class="form-control" id="equipment_id"
-                                                            data-live-search="true">
-                                                        <option value="">เลือกอุปกรณ์ที่ยืม</option>
-                                                        <?php $sql = "SELECT * from tblsport_equipment order by id ";
-                                                        $query = $dbh->prepare($sql);
-                                                        $query->execute();
-                                                        $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                                        if ($query->rowCount() > 0) {
-                                                            foreach ($results as $result) { ?>
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->equipment_id); ?>"><?php echo htmlentities($result->equipment_name); ?></option>
-                                                            <?php }
-                                                        } ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">จำนวน</label>
-
-                                                <div class="col-sm-4">
-                                                    <input type="text" name="quantity" class="form-control"
-                                                           id="quantity"
-                                                           value=""
-                                                           required="required" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="date"
-                                                       class="col-sm-2 control-label">วันที่กำหนดคืน</label>
-
-                                                <div class="col-sm-4">
-                                                    <input id="doc_int_borrow" name="doc_int_borrow" class="form-control"
-                                                           placeholder="วัน/เดือน/ปี" readonly="true">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="date"
-                                                       class="col-sm-2 control-label">วันที่คืน</label>
-
-                                                <div class="col-sm-4">
-                                                    <input id="doc_return_borrow" name="doc_return_borrow" class="form-control"
-                                                           placeholder="วัน/เดือน/ปี" readonly="true">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <label for="default"
-                                                       class="col-sm-2 control-label">สถานะการ ยืม/คืน</label>
-
-                                                <div class="col-sm-4">
-                                                    <select id="borrow_status" name="borrow_status"
-                                                            class="form-control" data-live-search="true"
-                                                            title="Please select">
-                                                        <option>ยืม</option>
-                                                        <option>คืนแล้ว</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>
@@ -338,29 +346,28 @@ if (strlen($_SESSION['alogin']) == "") {
             /*{year_range:"-12:+10"} คือ กำหนดตัวเลือกปฎิทินให้ แสดงปี ย้อนหลัง 12 ปี และ ไปข้างหน้า 10 ปี*/
         </script>
 
-<script>
+        <script>
 
-    // Setting default configuration here or you can set through configuration object as seen below
-    $.fn.select2.defaults = $.extend($.fn.select2.defaults, {
-        allowClear: true, // Adds X image to clear select
-        closeOnSelect: true, // Only applies to multiple selects. Closes the select upon selection.
-        placeholder: 'Select...',
-        minimumResultsForSearch: 15 // Removes search when there are 15 or fewer options
-    });
+            // Setting default configuration here or you can set through configuration object as seen below
+            $.fn.select2.defaults = $.extend($.fn.select2.defaults, {
+                allowClear: true, // Adds X image to clear select
+                closeOnSelect: true, // Only applies to multiple selects. Closes the select upon selection.
+                placeholder: 'Select...',
+                minimumResultsForSearch: 15 // Removes search when there are 15 or fewer options
+            });
 
-    $(document).ready(
+            $(document).ready(
+                function () {
 
-        function () {
+                    // Single select example if using params obj or configuration seen above
+                    var configParamsObj = {
+                        placeholder: 'Select an option...', // Place holder text to place in the select
+                        minimumResultsForSearch: 3 // Overrides default of 15 set above
+                    };
+                    $("#singleSelectExample").select2(configParamsObj);
+                });
 
-            // Single select example if using params obj or configuration seen above
-            var configParamsObj = {
-                placeholder: 'Select an option...', // Place holder text to place in the select
-                minimumResultsForSearch: 3 // Overrides default of 15 set above
-            };
-            $("#singleSelectExample").select2(configParamsObj);
-        });
-
-</script>
+        </script>
 
 
         <!-- ========== ADD custom.js FILE BELOW WITH YOUR CHANGES ========== -->

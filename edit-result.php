@@ -98,11 +98,11 @@ $msg="Result info updated successfully";
                                             <div class="panel-body">
 <?php if($msg){?>
 <div class="alert alert-success left-icon-alert" role="alert">
- <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+ <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
  </div><?php } 
 else if($error){?>
     <div class="alert alert-danger left-icon-alert" role="alert">
-                                            <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                            <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                         </div>
                                         <?php } ?>
                                                 <form class="form-horizontal" method="post">

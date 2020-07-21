@@ -6,6 +6,9 @@ $password=md5("admin");
 
 echo "Encode Display : " . $password;
 
+//show_source("test_arr.php");
+
+
 ?>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap4/bootstrap.min.css">

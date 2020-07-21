@@ -6,7 +6,7 @@ if (strlen($_SESSION['alogin']) == "") {
     header("Location: index.php");
 } else {
 
-    $cur_date = (substr(date("Y-m-d"),8,2)) . "-" . (substr(date("Y-m-d"),5,2)) . "-" . (substr(date("Y-m-d"),0,4) + 543) ;
+    $cur_date = (substr(date("Y-m-d"), 8, 2)) . "-" . (substr(date("Y-m-d"), 5, 2)) . "-" . (substr(date("Y-m-d"), 0, 4) + 543);
 
     if (isset($_POST['submit'])) {
         $news_id = $_POST['news_id'];
@@ -14,7 +14,7 @@ if (strlen($_SESSION['alogin']) == "") {
         $topic_desc = $_POST['topic_desc'];
         $link = $_POST['link'];
 
-        $doc_date = $_POST['doc_date']=="" ? $cur_date : $_POST['doc_date'] ;
+        $doc_date = $_POST['doc_date'] == "" ? $cur_date : $_POST['doc_date'];
 
 
         $sql = "INSERT INTO  tblnews(news_id,topic,topic_desc,link,doc_date) VALUES(:news_id,:topic,:topic_desc,:link,:doc_date)";
@@ -51,7 +51,7 @@ if (strlen($_SESSION['alogin']) == "") {
                     $success = "N";
                 }
 
-                $loop = 1 ;
+                $loop = 1;
 
                 while (list($key, $value) = each($_FILES['upload_file']['name'])) {
 
@@ -70,18 +70,18 @@ if (strlen($_SESSION['alogin']) == "") {
                         $query2->bindParam(':filesave', $add, PDO::PARAM_STR);
                         $query2->bindParam(':id', $lastInsertId, PDO::PARAM_STR);
                         $query2->execute();
-                        $sql21 = $sql21 . " | " . $sql2 ;
+                        $sql21 = $sql21 . " | " . $sql2;
                     }
-                        $loop++;
+                    $loop++;
                 }
 
             }
 
-            $msg = "เพิ่มข้อมูลเรียบร้อยแล้ว info added successfully" ;
+            $msg = "เพิ่มข้อมูลเรียบร้อยแล้ว info added successfully";
 
         } else {
 
-            $error = "Something went wrong. Please try again " ;
+            $error = "Something went wrong. Please try again ";
 
         }
 
@@ -168,150 +168,154 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>เพิ่ม ประกาศ/ข่าวสาร</h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>เพิ่ม ประกาศ/ข่าวสาร</h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                            </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                            <div class="panel-heading">
-                                                <div class="panel-title">
-                                                    <a href="manage-news-page.php"
-                                                       class="btn btn-info btn-labeled">BACK<span
-                                                            class="btn-label btn-label-right"><i
-                                                                class="fa fa-check"></i></span></a>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                                 </div>
-                                            </div>
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        <a href="manage-news-page.php"
+                                                           class="btn btn-info btn-labeled">BACK<span
+                                                                class="btn-label btn-label-right"><i
+                                                                    class="fa fa-check"></i></span></a>
+                                                    </div>
+                                                </div>
 
-                                            <?php
-                                            $id = intval($_GET['id']);
-                                            $sql = "SELECT * from tblnews order by id desc limit 1 ";
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':id', $id, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) {
+                                                <?php
+                                                $id = intval($_GET['id']);
+                                                $sql = "SELECT * from tblnews order by id desc limit 1 ";
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':id', $id, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) {
 
-                                                    $news_id = "N-" . sprintf("%09d", $result->id + 1);
+                                                        $news_id = "N-" . sprintf("%09d", $result->id + 1);
+                                                    }
+                                                } else {
+
+                                                    $news_id = "N-" . sprintf("%09d", 1);
                                                 }
-                                            } else {
 
-                                                $news_id = "N-" . sprintf("%09d", 1);
-                                            }
+                                                ?>
 
-                                            ?>
-
-                                            <input type="hidden" name="news_id"
-                                                   value="<?php echo htmlentities($news_id) ?>">
+                                                <input type="hidden" name="news_id"
+                                                       value="<?php echo htmlentities($news_id) ?>">
 
 
-                                            <div class="form-group">
-                                                <label for="default"
-                                                       class="col-sm-2 control-label">รูปภาพ</label>
+                                                <div class="form-group">
+                                                    <label for="default"
+                                                           class="col-sm-2 control-label">รูปภาพ</label>
 
-                                                <div class="col-sm-10">
-                                                    <img id="picture" src=""
-                                                         width="100" height="100" alt=""
-                                                         onmouseover="bigImg(this)" onmouseout="normalImg(this)"
-                                                         onclick="window.open(this.src,'_blank')">
-                                                    <input type='file' name="fileUpload" id="fileUpload"
-                                                           multiple="multiple"
-                                                           accept="image/png, image/jpeg ,.pdf"
-                                                           onchange="readURL(this);"/>
-                                                    <label class="custom-file-label" for="chooseFile">เลือกไฟล์
-                                                        (ไฟล์ .jpg , .png เท่านั้น)</label>
+                                                    <div class="col-sm-10">
+                                                        <img id="picture" src=""
+                                                             width="100" height="100" alt=""
+                                                             onmouseover="bigImg(this)" onmouseout="normalImg(this)"
+                                                             onclick="window.open(this.src,'_blank')">
+                                                        <input type='file' name="fileUpload" id="fileUpload"
+                                                               multiple="multiple"
+                                                               accept="image/png, image/jpeg ,.pdf"
+                                                               onchange="readURL(this);"/>
+                                                        <label class="custom-file-label" for="chooseFile">เลือกไฟล์
+                                                            (ไฟล์ .jpg , .png เท่านั้น)</label>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">หัวข้อ
-                                                    ประกาศ/ข่าวสาร</label>
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">หัวข้อ
+                                                        ประกาศ/ข่าวสาร</label>
 
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="topic" class="form-control"
-                                                           id="topic"
-                                                           value=""
-                                                           required="required" autocomplete="off">
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="topic" class="form-control"
+                                                               id="topic"
+                                                               value=""
+                                                               required="required" autocomplete="off">
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">รายละเอียด
-                                                    ประกาศ/ข่าวสาร</label>
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">รายละเอียด
+                                                        ประกาศ/ข่าวสาร</label>
 
-                                                <div class="col-sm-10">
+                                                    <div class="col-sm-10">
                                                     <textarea rows="4" cols="50" name="topic_desc" class="form-control"
                                                               id="topic_desc" value="" required="required"
                                                               autocomplete="off"></textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">Link URL
-                                                    ที่เกี่ยวข้อง</label>
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">Link URL
+                                                        ที่เกี่ยวข้อง</label>
 
-                                                <div class="col-sm-10">
-                                                    <input type="text" name="link" class="form-control"
-                                                           id="link"
-                                                           value="" autocomplete="off">
+                                                    <div class="col-sm-10">
+                                                        <input type="text" name="link" class="form-control"
+                                                               id="link"
+                                                               value="" autocomplete="off">
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">แนบไฟล์เอกสาร
-                                                    รูปภาพ PNG , JPG , PDF,WORD</label>
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">แนบไฟล์เอกสาร
+                                                        รูปภาพ PNG , JPG , PDF,WORD</label>
                                                     <?php
                                                     echo "<div class='col-sm-10'>";
-                                                    $max_no_img=5; // Maximum number of images value to be set here
-                                                    for($i=1; $i<=$max_no_img; $i++){
+                                                    $max_no_img = 5; // Maximum number of images value to be set here
+                                                    for ($i = 1; $i <= $max_no_img; $i++) {
                                                         echo "<input type=file name='upload_file[]' class='bginput' accept='.doc,.docx,.pdf,.jpg,.png'>";
                                                     }
                                                     echo "</div>";
                                                     ?>
 
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="date" class="col-sm-2 control-label">วันที่ประกาศ</label>
-                                                <!--  สร้าง textbox สำหรับสร้างตัวเลือก ปฎิทิน โดยมี id มีค่าเป็น my_date  -->
-                                                <div class="col-sm-4">
-                                                    <input id="doc_date" name="doc_date" class="form-control"
-                                                           required="required"
-                                                           value=""
-                                                           placeholder="วัน/เดือน/ปี" readonly="true">
                                                 </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit
-                                                    </button>
+                                                <div class="form-group">
+                                                    <label for="date"
+                                                           class="col-sm-2 control-label">วันที่ประกาศ</label>
+                                                    <!--  สร้าง textbox สำหรับสร้างตัวเลือก ปฎิทิน โดยมี id มีค่าเป็น my_date  -->
+                                                    <div class="col-sm-4">
+                                                        <input id="doc_date" name="doc_date" class="form-control"
+                                                               required="required"
+                                                               value=""
+                                                               placeholder="วัน/เดือน/ปี" readonly="true">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </form>
 
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="submit" class="btn btn-primary">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>

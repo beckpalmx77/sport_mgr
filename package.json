@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "bootstrap-fileinput": "^5.1.1",
-    "gulp-rename": "^1.2.2"
+    "gulp-rename": "^1.2.2",
+    "sweetalert2": "^9.15.2"
   }
 }

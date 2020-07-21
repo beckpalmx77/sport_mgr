@@ -39,7 +39,7 @@ if (strlen($_SESSION['alogin']) == "") {
 
                 <div class="form-group">
                     <label for="default"
-                           class="input-group my-3">ประเภทเอกสาร/ภาพถ่าย</label>
+                           class="input-group my-4">ประเภทเอกสาร/ภาพถ่าย</label>
 
                     <div class="col-sm-10">
                         <select name="class" class="form-control" id="class">
@@ -56,11 +56,7 @@ if (strlen($_SESSION['alogin']) == "") {
                             } ?>
                         </select>
                     </div>
-                </div>
-
-                <div class="form-group">
                     <input type="file" name="file" class="file">
-
                     <div class="input-group my-3">
                         <input type="text" class="form-control" disabled placeholder="Upload File" id="file">
 

@@ -8,7 +8,7 @@ if ($_SESSION['alogin'] != '') {
 if (isset($_POST['login'])) {
     $uname = $_POST['username'];
     $password = md5($_POST['password']);
-    $sql = "SELECT UserName,Password,account_type,picture FROM admin WHERE UserName=:uname and Password=:password";
+    $sql = "SELECT UserName,Password,account_type,picture,lang FROM tbluser_account  WHERE UserName=:uname and Password=:password";
     $query = $dbh->prepare($sql);
     $query->bindParam(':uname', $uname, PDO::PARAM_STR);
     $query->bindParam(':password', $password, PDO::PARAM_STR);
@@ -21,8 +21,8 @@ if (isset($_POST['login'])) {
             $_SESSION['user_name'] = $result->UserName;
             $_SESSION['account_type'] = $result->account_type;
             $_SESSION['user_picture'] = $result->picture;
+            $_SESSION['lang'] = $result->lang;
         }
-
         echo "<script type='text/javascript'> document.location = 'dashboard.php'; </script>";
     } else {
 

@@ -158,274 +158,293 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>เพิ่ม ข้อมูลทดสอบสมรรถภาพร่างกาย </h5>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>เพิ่ม ข้อมูลทดสอบสมรรถภาพร่างกาย </h5>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
+                                                <div class="panel-heading">
+                                                    <div class="panel-title">
+                                                        <a href="manage-at-performance.php"
+                                                           class="btn btn-info btn-labeled">BACK<span
+                                                                class="btn-label btn-label-right"><i
+                                                                    class="fa fa-check"></i></span></a>
+                                                    </div>
+                                                </div>
+
+                                                <?php
+                                                $sid = intval($_GET['stid']);
+                                                $sql = "SELECT * from tblstudents where StudentId=:sid";
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':sid', $sid, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) {
+                                                        $rollId = $result->RollId;
+                                                        $hight = $result->hight;
+                                                        $weight = $result->weight;
+                                                        ?>
+
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">รูปภาพ</label>
+
+                                                            <div class="col-sm-10">
+                                                                <img id="picture"
+                                                                     src="<?php echo htmlentities($result->picture) ?>"
+                                                                     width="100" height="100" alt=""
+                                                                     onmouseover="bigImg(this)"
+                                                                     onmouseout="normalImg(this)"
+                                                                     onclick="window.open(this.src,'_blank')">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">รหัสประจำตัว</label>
+
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="sid" class="form-control"
+                                                                       id="sid" readonly="true"
+                                                                       value="<?php echo htmlentities($result->RollId) ?>"
+                                                                       maxlength="20" required="required"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">ชื่อ</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="firstname" class="form-control"
+                                                                       id="firstname" readonly="true"
+                                                                       value="<?php echo htmlentities($result->FirstName) ?>"
+                                                                       maxlength="20" required="required"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">นามสกุล</label>
+
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="lastname" class="form-control"
+                                                                       id="lastname" readonly="true"
+                                                                       value="<?php echo htmlentities($result->LastName) ?>"
+                                                                       maxlength="20" required="required"
+                                                                       autocomplete="off">
+                                                            </div>
+                                                        </div>
+
+                                                        <?php
+
+                                                    }
+                                                }
+
+                                                ?>
+
+                                                <?php
+
+                                                $sql1 = "SELECT * from tbl_performance where sid = '" . $rollId . "' order by order_test desc limit 1 ";
+                                                $query1 = $dbh->prepare($sql1);
+                                                $query1->execute();
+                                                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+
+                                                if ($query1->rowCount() > 0) {
+                                                    foreach ($results1 as $result1) {
+                                                        $order_test = $result1->order_test + 1;
+                                                        $ms = "true";
+                                                    }
+                                                } else {
+                                                    $order_test = 1;
+                                                    $ms = "false";
+                                                }
+                                                ?>
+
+                                                <!--input type="text" value="<?php echo htmlentities($ms) . $sql1 ?>"-->
+
+                                                <div class="form-group">
+                                                    <label for="order_test"
+                                                           class="col-sm-2 control-label">ครั้งที่ทดสอบ</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input id="order_test" name="order_test" class="form-control"
+                                                               value="<?php echo htmlentities($order_test) ?>"
+                                                               placeholder="" readonly="true">
+                                                    </div>
+
+                                                    <label for="date" class="col-sm-2 control-label">วันที่ทดสอบ</label>
+                                                    <!--  สร้าง textbox สำหรับสร้างตัวเลือก ปฎิทิน โดยมี id มีค่าเป็น my_date  -->
+                                                    <div class="col-sm-4">
+                                                        <input id="date_test" name="date_test" class="form-control"
+                                                               placeholder="วัน/เดือน/ปี">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">ส่วนสูง</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input type="number" name="hight" class="form-control"
+                                                               value="<?php echo htmlentities($hight) ?>"
+                                                               id="hight" autocomplete="off">
+                                                    </div>
+
+                                                    <label for="default" class="col-sm-2 control-label">น้ำหนัก</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input type="number" name="weight" class="form-control"
+                                                               value="<?php echo htmlentities($weight) ?>"
+                                                               id="weight" autocomplete="off">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">เปอร์เซ็นต์ไขมัน
+                                                        Body fat Percentage </label>
+
+                                                    <div class="col-sm-4">
+                                                        <input type="number" name="bfp" class="form-control"
+                                                               value=""
+                                                               id="bfp" autocomplete="off">
+                                                    </div>
+
+                                                    <label for="default" class="col-sm-2 control-label">วิ่งเร็ว 50 เมตร
+                                                        (50MeterSprint)</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input type="number" name="fms" class="form-control"
+                                                               value=""
+                                                               id="fms" autocomplete="off">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">ยืนกระโดดไกล
+                                                        (StandJump)</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input type="number" name="sj" class="form-control"
+                                                               value=""
+                                                               id="sj" autocomplete="off">
+                                                    </div>
+
+                                                    <label for="default" class="col-sm-2 control-label">แรงบีบมือ
+                                                        (GripStrength) </label>
+
+                                                    <div class="col-sm-4">
+                                                        <input type="number" name="gs" class="form-control"
+                                                               value=""
+                                                               id="gs" autocomplete="off">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">ลุก-นั่ง 30
+                                                        วินาที (30SecondSit-up)</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input type="number" name="tss" class="form-control"
+                                                               value=""
+                                                               id="tss" autocomplete="off">
+                                                    </div>
+
+                                                    <label for="default" class="col-sm-2 control-label">วิ่งเก็บของ (
+                                                        Shuttle Run)</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input type="number" name="sr" class="form-control"
+                                                               value=""
+                                                               id="sr" autocomplete="off">
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="default" class="col-sm-2 control-label">นั่งงอตัวไปข้างหน้า
+                                                        (Trunk Forward Flexion)</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input type="number" name="tff" class="form-control"
+                                                               value=""
+                                                               id="tff" autocomplete="off">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <label for="default"
+                                                           class="col-sm-2 control-label">วิ่งระยะไกล (Distance
+                                                        Run) </label>
+
+                                                    <div class="col-sm-4">
+                                                        <select id="dr_type" name="dr_type"
+                                                                class="form-control" data-live-search="true"
+                                                                title="Please select">
+                                                            <option value=""></option>
+                                                            <option>วิ่ง 1,000 เมตร นักกีฬาชาย</option>
+                                                            <option>วิ่ง 800 เมตร นักกีฬาหญิง</option>
+                                                        </select>
+                                                    </div>
+                                                    <label for="default"
+                                                    <label for="date" class="col-sm-2 control-label">ผลทดสอบ</label>
+
+                                                    <div class="col-sm-4">
+                                                        <input id="dr_result" name="dr_result" class="form-control"
+                                                               placeholder="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="default"
+                                                           class="col-sm-2 control-label">ผลการทดสอบ</label>
+
+                                                    <div class="col-sm-10">
+                                                        <select id="test_result" name="test_result"
+                                                                class="form-control" data-live-search="true"
+                                                                title="Please select">
+                                                            <option value=""></option>
+                                                            <option>ผ่าน</option>
+                                                            <option>ไม่ผ่าน</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="submit" class="btn btn-primary">
+                                                            Submit
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+
                                         </div>
                                     </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
-                                            </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                                            <div class="panel-heading">
-                                                <div class="panel-title">
-                                                    <a href="manage-at-performance.php"
-                                                       class="btn btn-info btn-labeled">BACK<span
-                                                            class="btn-label btn-label-right"><i
-                                                                class="fa fa-check"></i></span></a>
-                                                </div>
-                                            </div>
-
-                                            <?php
-                                            $sid = intval($_GET['stid']);
-                                            $sql = "SELECT * from tblstudents where StudentId=:sid";
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':sid', $sid, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) {
-                                                    $rollId = $result->RollId;
-                                                    $hight = $result->hight;
-                                                    $weight = $result->weight;
-                                                    ?>
-
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">รูปภาพ</label>
-
-                                                        <div class="col-sm-10">
-                                                            <img id="picture"
-                                                                 src="<?php echo htmlentities($result->picture) ?>"
-                                                                 width="100" height="100" alt=""
-                                                                 onmouseover="bigImg(this)" onmouseout="normalImg(this)"
-                                                                 onclick="window.open(this.src,'_blank')">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">รหัสประจำตัว</label>
-
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="sid" class="form-control"
-                                                                   id="sid" readonly="true"
-                                                                   value="<?php echo htmlentities($result->RollId) ?>"
-                                                                   maxlength="20" required="required"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">ชื่อ</label>
-
-                                                        <div class="col-sm-4">
-                                                            <input type="text" name="firstname" class="form-control"
-                                                                   id="firstname" readonly="true"
-                                                                   value="<?php echo htmlentities($result->FirstName) ?>"
-                                                                   maxlength="20" required="required"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">นามสกุล</label>
-
-                                                        <div class="col-sm-4">
-                                                            <input type="text" name="lastname" class="form-control"
-                                                                   id="lastname" readonly="true"
-                                                                   value="<?php echo htmlentities($result->LastName) ?>"
-                                                                   maxlength="20" required="required"
-                                                                   autocomplete="off">
-                                                        </div>
-                                                    </div>
-
-                                                    <?php
-
-                                                }
-                                            }
-
-                                            ?>
-
-                                            <?php
-
-                                            $sql1 = "SELECT * from tbl_performance where sid = '" . $rollId . "' order by order_test desc limit 1 ";
-                                            $query1 = $dbh->prepare($sql1);
-                                            $query1->execute();
-                                            $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-
-                                            if ($query1->rowCount() > 0) {
-                                                foreach ($results1 as $result1) {
-                                                    $order_test = $result1->order_test + 1;
-                                                    $ms = "true" ;
-                                                }
-                                            } else {
-                                                $order_test = 1;
-                                                $ms = "false" ;
-                                            }
-                                            ?>
-
-                                            <!--input type="text" value="<?php echo htmlentities($ms) . $sql1?>"-->
-
-                                            <div class="form-group">
-                                                <label for="order_test"
-                                                       class="col-sm-2 control-label">ครั้งที่ทดสอบ</label>
-
-                                                <div class="col-sm-4">
-                                                    <input id="order_test" name="order_test" class="form-control"
-                                                           value="<?php echo htmlentities($order_test)?>"
-                                                           placeholder="" readonly="true">
-                                                </div>
-
-                                                <label for="date" class="col-sm-2 control-label">วันที่ทดสอบ</label>
-                                                <!--  สร้าง textbox สำหรับสร้างตัวเลือก ปฎิทิน โดยมี id มีค่าเป็น my_date  -->
-                                                <div class="col-sm-4">
-                                                    <input id="date_test" name="date_test" class="form-control"
-                                                           placeholder="วัน/เดือน/ปี">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">ส่วนสูง</label>
-                                                <div class="col-sm-4">
-                                                    <input type="number" name="hight" class="form-control"
-                                                           value="<?php echo htmlentities($hight) ?>"
-                                                           id="hight" autocomplete="off">
-                                                </div>
-
-                                                <label for="default" class="col-sm-2 control-label">น้ำหนัก</label>
-
-                                                <div class="col-sm-4">
-                                                    <input type="number" name="weight" class="form-control"
-                                                           value="<?php echo htmlentities($weight) ?>"
-                                                           id="weight" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">เปอร์เซ็นต์ไขมัน Body fat Percentage </label>
-                                                <div class="col-sm-4">
-                                                    <input type="number" name="bfp" class="form-control"
-                                                           value=""
-                                                           id="bfp" autocomplete="off">
-                                                </div>
-
-                                                <label for="default" class="col-sm-2 control-label">วิ่งเร็ว 50 เมตร (50MeterSprint)</label>
-
-                                                <div class="col-sm-4">
-                                                    <input type="number" name="fms" class="form-control"
-                                                           value=""
-                                                           id="fms" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">ยืนกระโดดไกล (StandJump)</label>
-                                                <div class="col-sm-4">
-                                                    <input type="number" name="sj" class="form-control"
-                                                           value=""
-                                                           id="sj" autocomplete="off">
-                                                </div>
-
-                                                <label for="default" class="col-sm-2 control-label">แรงบีบมือ (GripStrength) </label>
-
-                                                <div class="col-sm-4">
-                                                    <input type="number" name="gs" class="form-control"
-                                                           value=""
-                                                           id="gs" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">ลุก-นั่ง 30 วินาที (30SecondSit-up)</label>
-                                                <div class="col-sm-4">
-                                                    <input type="number" name="tss" class="form-control"
-                                                           value=""
-                                                           id="tss" autocomplete="off">
-                                                </div>
-
-                                                <label for="default" class="col-sm-2 control-label">วิ่งเก็บของ ( Shuttle Run)</label>
-
-                                                <div class="col-sm-4">
-                                                    <input type="number" name="sr" class="form-control"
-                                                           value=""
-                                                           id="sr" autocomplete="off">
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <label for="default" class="col-sm-2 control-label">นั่งงอตัวไปข้างหน้า (Trunk Forward Flexion)</label>
-                                                <div class="col-sm-4">
-                                                    <input type="number" name="tff" class="form-control"
-                                                           value=""
-                                                           id="tff" autocomplete="off">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label for="default"
-                                                       class="col-sm-2 control-label">วิ่งระยะไกล (Distance Run) </label>
-
-                                                <div class="col-sm-4">
-                                                    <select id="dr_type" name="dr_type"
-                                                            class="form-control" data-live-search="true"
-                                                            title="Please select">
-                                                        <option value=""></option>
-                                                        <option>วิ่ง 1,000 เมตร นักกีฬาชาย</option>
-                                                        <option>วิ่ง   800 เมตร นักกีฬาหญิง</option>
-                                                    </select>
-                                                </div>
-                                                <label for="default"
-                                                <label for="date" class="col-sm-2 control-label">ผลทดสอบ</label>
-                                                <div class="col-sm-4">
-                                                    <input id="dr_result" name="dr_result" class="form-control"
-                                                           placeholder="">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="default"
-                                                       class="col-sm-2 control-label">ผลการทดสอบ</label>
-                                                <div class="col-sm-10">
-                                                    <select id="test_result" name="test_result"
-                                                            class="form-control" data-live-search="true"
-                                                            title="Please select">
-                                                        <option value=""></option>
-                                                        <option>ผ่าน</option>
-                                                        <option>ไม่ผ่าน</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Submit
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </form>
-
-                                    </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>

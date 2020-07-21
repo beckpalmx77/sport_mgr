@@ -74,101 +74,105 @@ if (strlen($_SESSION['alogin']) == "") {
                         </div>
                         <!-- /.row -->
                     </div>
-                    <div class="container-fluid">
+                    <section class="section">
+                        <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="panel">
-                                    <div class="panel-heading">
-                                        <div class="panel-title">
-                                            <h5>Update สาขาวิชา/แผนก</h5>
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <?php if ($msg) { ?>
-                                            <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
-                                            </div><?php } else if ($error) { ?>
-                                            <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <h5>Update สาขาวิชา/แผนก</h5>
                                             </div>
-                                        <?php } ?>
-                                        <form class="form-horizontal" method="post">
+                                        </div>
+                                        <div class="panel-body">
+                                            <?php if ($msg) { ?>
+                                                <div class="alert alert-success left-icon-alert" role="alert">
+                                                <strong>ดำเนินการสำเร็จ : </strong><?php echo htmlentities($msg); ?>
+                                                </div><?php } else if ($error) { ?>
+                                                <div class="alert alert-danger left-icon-alert" role="alert">
+                                                    <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <form class="form-horizontal" method="post">
 
-                                            <?php
-                                            $sid = intval($_GET['subjectid']);
-                                            $sql = "SELECT tblsubjects.*
+                                                <?php
+                                                $sid = intval($_GET['subjectid']);
+                                                $sql = "SELECT tblsubjects.*
                                                     ,(select tblclasses.ClassName from tblclasses where tblclasses.id = tblsubjects.class_id) as ClassName
                                                     from tblsubjects where id=:sid";
-                                            $query = $dbh->prepare($sql);
-                                            $query->bindParam(':sid', $sid, PDO::PARAM_STR);
-                                            $query->execute();
-                                            $results = $query->fetchAll(PDO::FETCH_OBJ);
-                                            $cnt = 1;
-                                            if ($query->rowCount() > 0) {
-                                                foreach ($results as $result) { ?>
+                                                $query = $dbh->prepare($sql);
+                                                $query->bindParam(':sid', $sid, PDO::PARAM_STR);
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                                $cnt = 1;
+                                                if ($query->rowCount() > 0) {
+                                                    foreach ($results as $result) { ?>
 
-                                                    <div class="panel-heading">
-                                                        <div class="panel-title">
-                                                            <a href="manage-subjects.php"
-                                                               class="btn btn-info btn-labeled">BACK<span
-                                                                    class="btn-label btn-label-right"><i
-                                                                        class="fa fa-check"></i></span></a>
+                                                        <div class="panel-heading">
+                                                            <div class="panel-title">
+                                                                <a href="manage-subjects.php"
+                                                                   class="btn btn-info btn-labeled">BACK<span
+                                                                        class="btn-label btn-label-right"><i
+                                                                            class="fa fa-check"></i></span></a>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="form-group">
-                                                        <label for="default" class="col-sm-2 control-label">สาขาวิชา/แผนก
+                                                        <div class="form-group">
+                                                            <label for="default" class="col-sm-2 control-label">สาขาวิชา/แผนก
                                                             </label>
 
-                                                        <div class="col-sm-10">
-                                                            <input type="text" name="subjectname"
-                                                                   value="<?php echo htmlentities($result->SubjectName); ?>"
-                                                                   class="form-control" id="default"
-                                                                   placeholder="Subject Name" required="required">
+                                                            <div class="col-sm-10">
+                                                                <input type="text" name="subjectname"
+                                                                       value="<?php echo htmlentities($result->SubjectName); ?>"
+                                                                       class="form-control" id="default"
+                                                                       placeholder="Subject Name" required="required">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="default"
-                                                               class="col-sm-2 control-label">คณะ/หน่วยงาน</label>
+                                                        <div class="form-group">
+                                                            <label for="default"
+                                                                   class="col-sm-2 control-label">คณะ/หน่วยงาน</label>
 
-                                                        <div class="col-sm-6">
-                                                            <select name="class_id" class="form-control" id="class_id">
-                                                                <!--option value="">Select Class</option-->
-                                                                <option
-                                                                    value="<?php echo htmlentities($result->class_id); ?>"
-                                                                    selected><?php echo htmlentities($result->ClassName); ?></option>
-                                                                <?php $sql1 = "SELECT * from tblclasses";
-                                                                $query1 = $dbh->prepare($sql1);
-                                                                $query1->execute();
-                                                                $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
-                                                                if ($query1->rowCount() > 0) {
-                                                                    foreach ($results1 as $result1) { ?>
-                                                                        <option
-                                                                            value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->ClassName); ?></option>
-                                                                    <?php }
-                                                                } ?>
-                                                            </select>
+                                                            <div class="col-sm-6">
+                                                                <select name="class_id" class="form-control"
+                                                                        id="class_id">
+                                                                    <!--option value="">Select Class</option-->
+                                                                    <option
+                                                                        value="<?php echo htmlentities($result->class_id); ?>"
+                                                                        selected><?php echo htmlentities($result->ClassName); ?></option>
+                                                                    <?php $sql1 = "SELECT * from tblclasses";
+                                                                    $query1 = $dbh->prepare($sql1);
+                                                                    $query1->execute();
+                                                                    $results1 = $query1->fetchAll(PDO::FETCH_OBJ);
+                                                                    if ($query1->rowCount() > 0) {
+                                                                        foreach ($results1 as $result1) { ?>
+                                                                            <option
+                                                                                value="<?php echo htmlentities($result1->id); ?>"><?php echo htmlentities($result1->ClassName); ?></option>
+                                                                        <?php }
+                                                                    } ?>
+                                                                </select>
+                                                            </div>
                                                         </div>
+                                                    <?php }
+                                                } ?>
+
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                        <button type="submit" name="Update" class="btn btn-primary">
+                                                            Update
+                                                        </button>
                                                     </div>
-                                                <?php }
-                                            } ?>
-
-
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-2 col-sm-10">
-                                                    <button type="submit" name="Update" class="btn btn-primary">Update
-                                                    </button>
                                                 </div>
-                                            </div>
-                                        </form>
+                                            </form>
 
+                                        </div>
                                     </div>
                                 </div>
+                                <!-- /.col-md-12 -->
                             </div>
-                            <!-- /.col-md-12 -->
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <!-- /.content-container -->
             </div>

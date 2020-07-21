@@ -6,13 +6,23 @@ include('includes/config.php');
 if (isset($_GET['id'])) {
     try {
         $id = $_GET['id'];
-        $sql = "Delete from tblsport_equipment where id=:id";
-        $query = $dbh->prepare($sql);
-        $query->bindParam(':id', $id, PDO::PARAM_STR);
-        $query->execute();
-        $msg = "ลบข้อมูลเรียบร้อยแล้ว Delete Dasta Successfully";
+
+        $sql1 = "select * from tblborrow_doc where equipment_id=:id";
+        $query1 = $dbh->prepare($sql1);
+        $query1->bindParam(':id', $id, PDO::PARAM_STR);
+        $query1->execute();
+        if ($query1->rowCount() > 0) {
+            $error = "ไม่สามารถลบข้อมูลได้ เนื่องจากมีการใช้ข้อมูลนี้อยู่ Can't Delete Data " . $id;
+        } else {
+            $sql = "Delete from tblsport_equipment where equipment_id=:id";
+            $query = $dbh->prepare($sql);
+            $query->bindParam(':id', $id, PDO::PARAM_STR);
+            $query->execute();
+            $msg = "ลบข้อมูลเรียบร้อยแล้ว Delete Data Successfully " . $id;
+        }
     } catch (PDOException $e) {
-        echo "ข้อผิดพลาด : " . $e->getMessage();
+        //echo "ข้อผิดพลาด : " . $e->getMessage();
+        $error = "ข้อผิดพลาด : " . $e->getMessage();
     }
 }
 
@@ -115,10 +125,12 @@ if (strlen($_SESSION['alogin']) == "") {
                                         </div>
                                         <?php if ($msg) { ?>
                                             <div class="alert alert-success left-icon-alert" role="alert">
-                                            <strong>Well done!</strong><?php echo htmlentities($msg); ?>
+                                            <strong>ดำเนินการสำเร็จ :  </strong><?php echo htmlentities($msg); ?>
+                                            <a href="#" class="close" data-dismiss="alert"
+                                               aria-label="close">&times;</a>
                                             </div><?php } else if ($error) { ?>
                                             <div class="alert alert-danger left-icon-alert" role="alert">
-                                                <strong>Oh snap!</strong> <?php echo htmlentities($error); ?>
+                                                <strong>ข้อผิดพลาด !!! </strong> <?php echo htmlentities($error); ?>
                                             </div>
                                         <?php } ?>
                                         <div class="panel-body p-20">
@@ -148,6 +160,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                                 $query->execute();
                                                 $results = $query->fetchAll(PDO::FETCH_OBJ);
                                                 $cnt = 1;
+
                                                 if ($query->rowCount() > 0) {
                                                     foreach ($results as $result) { ?>
                                                         <tr>
@@ -159,7 +172,7 @@ if (strlen($_SESSION['alogin']) == "") {
                                                                 <a href="edit-sport-equipment.php?id=<?php echo htmlentities($result->id); ?>"><i
                                                                         class="fa fa-edit" title="Edit Record"></i> </a>
                                                                 &nbsp;
-                                                                <a href="javascript: delete_id(<?php echo htmlentities($result->id); ?>)"><i
+                                                                <a href="javascript: delete_id(<?php echo "'" . $result->equipment_id . "'" ?>)"><i
                                                                         class="fa fa-times"
                                                                         title="Delete Record"></i></a>
 
@@ -168,8 +181,6 @@ if (strlen($_SESSION['alogin']) == "") {
                                                         <?php $cnt = $cnt + 1;
                                                     }
                                                 } ?>
-
-
                                                 </tbody>
                                             </table>
 
@@ -240,12 +251,17 @@ if (strlen($_SESSION['alogin']) == "") {
 
     <script type="text/javascript">
         function delete_id(id) {
-            if (confirm('ต้องการลบรายการนี้ออกจากระบบ?') + id) {
-                window.location.href = 'manage-sport-equipment.php?id=' + id;
-            }
+
+            alertify.confirm('Confirm Delete !!!', 'ต้องการลบรายการนี้ออกจากระบบ?',
+                function () {
+                    window.location.href = 'manage-sport-equipment.php?id=' + id;
+                }
+                , function () {
+                    alertify.error('Cancel - ยกเลิก')
+                });
+
         }
     </script>
-
 
     </body>
     </html>
