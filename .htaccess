@@ -1,0 +1,10 @@
+# Set the default handler.
+
+Options -Indexes
+
+DirectoryIndex index.php
+
+AddType application/x-httpd-php .html .htm
+
+
+

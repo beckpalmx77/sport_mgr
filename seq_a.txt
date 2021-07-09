@@ -1,0 +1,14 @@
+-- SEQUENCE: public.seq_tmp_data
+
+-- DROP SEQUENCE public.seq_tmp_data;
+
+CREATE SEQUENCE public.seq_tmp_data
+    CYCLE
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 999999999999999999
+    CACHE 1;
+
+ALTER SEQUENCE public.seq_tmp_data
+    OWNER TO postgres;
