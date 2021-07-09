@@ -1,2 +1,2 @@
 # sport_mgr
-Sport Management
+Sport Management Web Application  
